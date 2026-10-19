@@ -50,6 +50,27 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - Ramp's AI flags duplicate subscription charges, but recovery is manual. Ramp has no disputes endpoint in its developer API.
 - Ramp developer API sandbox: `demo-api.ramp.com`, pre-seeded transactions, access by request form ([Ramp Help](https://support.ramp.com/hc/en-us/articles/46681939909907-Accessing-the-Developer-API)).
 
+### Ramp Intelligence: what Ramp already ships, and where Part 260 fits
+
+Checked Oct 18, 2026 against [ramp.com/intelligence](https://ramp.com/intelligence) and the [Policy Agent help article](https://support.ramp.com/policy-agent-overview).
+
+- **What it is:** Ramp Intelligence is the AI layer across Ramp's products. Its agents flag fraud, code expenses and invoices, enforce policy (they approve low-risk spend and escalate the rest), answer "is this in policy?" by text, compare software quotes against 85,000+ businesses, pay card-eligible vendors through their payment portals, and collect and match receipts.
+- **Closest precedent to Part 260:** "If the price drops, we'll catch it." Ramp watches booked hotels and rebooks when the price drops by $50 or more. So Ramp already watches a booking after purchase to save money. Part 260 does the same for airfare after an airline cancels or significantly changes a flight.
+- **Same trust pattern:** Policy Agent shows its recommendation with its reasoning and the policy text it cites. Part 260's claims cite the 14 CFR 260 clause and the flight data in the same way, so judges will recognize the pattern.
+- **The gap:** the Ramp Intelligence page mentions no refunds, disputes, airline credits or recovering money. Ramp's agents stop bad spend before it happens. Nothing gets money back after an airline owes it.
+- **Ramp Travel today** ([Ramp blog FAQ, June 2024](https://ramp.com/blog/10-frequently-asked-questions-about-ramp-travel)): cancelling a standard fare gives an airline credit, fully refundable fares go back to the Ramp card, unused airline credits can't yet be applied in Ramp, and Priceline handles booking support. That FAQ covers cancellations the traveler starts, not airline cancellations that owe a refund under §260.6. **Unverified:** whether Priceline is the merchant of record for Ramp Travel tickets (it decides who owes the refund).
+- **Pitch line:** "Ramp Intelligence already catches a hotel price drop after you book. Part 260 catches the airfare refund after the airline cancels."
+
+How Part 260 plugs into Ramp:
+
+| Part 260 step | Ramp piece it uses |
+|---|---|
+| Find trips and card charges | Developer API or demo MCP (`transactions`, `travel bookings`) |
+| Decide and cite entitlement | Our rules engine, in Policy Agent's cite-the-rule format |
+| Attach proof to the charge | `receipts upload` / `receipts attach` (refund confirmation, flight-status record) |
+| Confirm the money came back | The refund posts to the original Ramp card; match it to the original charge |
+| Dispute if refused | Ramp has no disputes API, so the demo uses Stripe Issuing test mode. In production the packet would go into Ramp's dispute form. |
+
 ### Ramp tooling (from github.com/ramp-public)
 
 - **Demo MCP server with sample data, no production account needed:** `https://demo-mcp.ramp.com/mcp`. Production is `https://mcp.ramp.com/mcp`. Source: [ramp-public/skills](https://github.com/ramp-public/skills).
@@ -67,6 +88,35 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - **A flight-status API** for independent proof. FlightAware AeroAPI has historical data; compare cost and free tiers before choosing.
 - **Stripe Issuing test mode** for the dispute step. It can create test cards, authorizations and disputes with evidence, and forcing `winning_evidence` or `losing_evidence` settles the outcome in seconds ([docs](https://docs.stripe.com/issuing/purchases/disputes/how-to-submit)).
 - **A seeded Gmail test account** as the inbox.
+
+## Risks and how we answer them
+
+Researched Oct 18, 2026. Not legal advice.
+
+**Product**
+
+- **Business travelers usually fly the rebooked flight.** Flying it counts as accepting the alternative, so no refund is owed. The refunds we can claim are narrower: the trip is called off, the traveler switches to another airline, or the change is significant and the traveler doesn't fly. Put these cases in the 50 seeded trips.
+- **The 2024 rule already makes many refunds automatic** when the traveler doesn't respond, so the unclaimed pool is smaller than it looks. The main value is the real-time "don't accept the credit" alert. Recovering past refunds is secondary.
+- **Consumer competitors** (add to the AirHelp answer): [Service](https://www.producthunt.com/p/service/service-6) scans a personal inbox and files delay claims, mostly for vouchers or miles. [Gyro Autopilot](https://toolradar.com/tools/gyro-autopilot) claims EU261 and US DOT compensation for a 30% fee. Neither mentions company cards or company-paid travel.
+
+**Law and compliance**
+
+- **No double recovery.** Airlines name chargebacks filed while a refund is pending as a top concern ([Chargebacks911](https://chargebacks911.com/airline-chargeback-data/), vendor survey). Rule for the build: never prepare a dispute while a refund is pending, and log the refund request first.
+- **Inbox access.** Travelers opt in, and Part 260 reads only messages from airline senders and stores nothing else. California's privacy law covers employee data, so a company needs a notice at collection ([Baker McKenzie](https://insightplus.bakermckenzie.com/bm/data-technology/united-states-employers-must-prepare-now-for-new-california-employee-privacy-rights)). Airline emails often go to personal inboxes, which the company has no right to read without consent.
+- **Gmail access in production.** Unverified: Gmail's read-only access is a Google "restricted" scope, which needs app verification and a yearly security assessment. Fine for the demo. Have an answer ready.
+- **Act through email and official refund forms**, not bots on airline websites, which airline terms usually prohibit.
+- **If a voice call ever comes back,** the agent must say it is an AI.
+
+**Ethics**
+
+- Some travelers keep credits in personal airline accounts and use them for personal trips. Present Part 260 as helping travelers protect company money, with the traveler copied on everything, not as monitoring them.
+- Part 260 alerts and recommends. It never moves or redeems a credit in the traveler's name.
+
+**Patents and IP**
+
+- A light search found no patent on this workflow. "Match records, apply rules, file claims" is hard to patent under *Alice*, which also means we couldn't easily patent it.
+- The Round 1 video is a public disclosure: one-year US grace period to file a patent, none in most other countries.
+- Unverified: the hackathon's terms on IP ownership. Check before treating Part 260 as a startup.
 
 ## Why this idea (the research)
 
@@ -127,7 +177,10 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 - Can Part 260 act for the company when the ticket is in an employee's name? Who files the DOT complaint?
 - Which flight-status API, and what does historical data cost?
 - How do we get Ramp sandbox access as students?
-- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Part 260 claims US cash refunds owed to the company, found from card data.
+- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Part 260 claims US cash refunds owed to the company, found from card data. The same answer covers Service and Gyro Autopilot.
+- "Doesn't Ramp already do this?" Answer: Ramp Intelligence prevents bad spend and catches hotel price drops, but nothing in Ramp recovers money an airline owes (see **Ramp Intelligence** above).
+- How many corporate trips are called off or rebooked on another airline, rather than flown on the rebooked flight? That is the real size of the refund pool.
+- Should the brief mention Ramp Intelligence? It is at 248 of 250 words, so a line would have to replace one.
 
 ## Writing rules for copy (brief, slides, UI)
 
@@ -138,3 +191,5 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 ## Ongoing
 
 _Use this section for handoffs: who is working on what, what's in flight, blockers, next steps._
+
+- Oct 18 (Claude, session for siddrrsh): added **Ramp Intelligence** and **Risks** sections and Q&A answers. The brief text is unchanged. Next: decide whether a Ramp Intelligence line should replace one in the brief, and add rebooked-flight cases to the seeded trips.

@@ -36,5 +36,8 @@ The board and eval numbers in the 1:05 beat are placeholders. Replace them with 
 - The rule's thresholds come from 14 CFR 260.2: arrival 3+ hours late for domestic itineraries, 6+ for international, a changed airport, added connections or a downgrade. https://www.law.cornell.edu/cfr/text/14/260.2
 - A refund is owed when the traveler declines the rebooking or credit, or doesn't respond before departure. Accepting a credit generally gives up the refund. https://www.law.cornell.edu/cfr/text/14/260.6
 - The rule binds the airline when it is the merchant of record. A ticket bought through a travel agency or a booking site may refund through that seller instead.
-- Expect "isn't this AirHelp?" AirHelp claims EU compensation for individual travelers. Part 260 claims US cash refunds owed to the company, found from card data.
+- Expect "isn't this AirHelp?" AirHelp claims EU compensation for individual travelers. Part 260 claims US cash refunds owed to the company, found from card data. Service and Gyro Autopilot get the same answer.
+- Expect "doesn't Ramp already do this?" Ramp Intelligence catches fraud, codes spend and rebooks hotels when the price drops, but it doesn't recover money an airline owes. Line: "Ramp Intelligence already catches a hotel price drop after you book. Part 260 catches the airfare refund after the airline cancels." Details in AGENTS.md.
+- Expect "most travelers just fly the rebooked flight." That's true, and flying it means no refund. Part 260 targets trips that get called off or rebooked on another airline, and the alert stops a credit from being accepted.
+- Never file a card dispute while a refund is pending. Double recovery is the first thing a payments engineer will ask about.
 - Ramp's dispute window is 60 days from the statement date: https://support.ramp.com/hc/en-us/articles/9325138502547-Disputes-at-Ramp
