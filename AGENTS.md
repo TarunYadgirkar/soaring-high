@@ -97,7 +97,7 @@ Researched Oct 18, 2026. Not legal advice.
 
 - **Business travelers usually fly the rebooked flight.** Flying it counts as accepting the alternative, so no refund is owed. The refunds we can claim are narrower: the trip is called off, the traveler switches to another airline, or the change is significant and the traveler doesn't fly. Put these cases in the 50 seeded trips.
 - **The 2024 rule already makes many refunds automatic** when the traveler doesn't respond, so the unclaimed pool is smaller than it looks. The main value is the real-time "don't accept the credit" alert. Recovering past refunds is secondary.
-- **Consumer competitors** (add to the AirHelp answer): [Service](https://www.producthunt.com/p/service/service-6) scans a personal inbox and files delay claims, mostly for vouchers or miles. [Gyro Autopilot](https://toolradar.com/tools/gyro-autopilot) claims EU261 and US DOT compensation for a 30% fee. Neither mentions company cards or company-paid travel.
+- **Competitors (corrected Oct 18):** Service (getservice.com) shut down in March 2020 ([TechCrunch](https://techcrunch.com/2020/03/16/travel-savings-tool-service-shuts-down-citing-covid-19-downturn/)). **Gyro for Business is the closest competitor:** it reads inboxes, files EU261 and US DOT claims, has a **Brex/Ramp transaction-sync integration available now**, and charges 40% of what it recovers ([heygyro.com/for-business](https://heygyro.com/for-business)). It doesn't advertise intercepting vouchers before acceptance, DOT complaints or card disputes. AirHelp has a Concur app that emails employees about EU-style compensation. Navan, Spotnana, Perk and Concur track and reuse unused credits but don't claim involuntary refunds.
 
 **Law and compliance**
 
@@ -117,6 +117,28 @@ Researched Oct 18, 2026. Not legal advice.
 - A light search found no patent on this workflow. "Match records, apply rules, file claims" is hard to patent under *Alice*, which also means we couldn't easily patent it.
 - The Round 1 video is a public disclosure: one-year US grace period to file a patent, none in most other countries.
 - Unverified: the hackathon's terms on IP ownership. Check before treating Soaring Away as a startup.
+
+## Fact-check (Oct 18, 2026)
+
+Three independent adversarial checks. Primary sources where available.
+
+**Law ([Part 260 on eCFR](https://www.ecfr.gov/current/title-14/part-260), [49 U.S.C. 42305](https://www.law.cornell.edu/uscode/text/49/42305), [July 2026 DOT notice](https://www.federalregister.gov/documents/2026/07/07/2026-13675/airline-refunds-and-other-consumer-protections))**
+- Verified: cancellations and arrivals 3+ hours late (6+ international) trigger a full refund of fare, taxes and fees to the original form of payment when the traveler declines the alternative or doesn't respond. Accepting a voucher counts only if the traveler affirmatively agrees (§260.7). 7 business days for card purchases, counted from the refund request. Cause doesn't matter (89 FR 32769). Applies to nonrefundable tickets.
+- **Only cancellations and 3h+ late arrivals are in the statute.** Earlier departures, airport changes, added connections, downgrades, and bag and ancillary refunds exist only in the regulation, and "Refund III" (RIN 2105-AF36, deregulatory, proposed rule targeted Aug 2026, not yet published) covers those definitions. Pitch the statutory triggers first.
+- **Merchant of record decides who pays.** If a travel agency charged the card, the agency owes the refund "upon request" (14 CFR 399.80(l)) and may keep a service fee. Bag and ancillary refunds always come from the operating airline.
+- **Corporate coverage is inferred, not stated.** Neither the rule nor the statute excludes business purchases, but none expressly covers them. There is no private right of action, and Reg Z dispute protections don't apply to business cards (12 CFR 1026.3(a)).
+- DOT complaints: the airline must acknowledge within 30 days and respond within 60 (14 CFR 259.7(c)).
+- Wording to use: "When an airline cancels or significantly changes a flight and the traveler declines the alternative, the merchant of record must refund the fare, taxes and fees to the original card." Avoid "guaranteed", "always" and "however you booked".
+
+**Money (BTS/DOT data)**
+- About 1.4–1.5% of US domestic flights are cancelled and about 1.6% arrive 3+ hours late. Most travelers fly the rebooked flight, which means no refund.
+- **The refund pool alone is small.** Estimate for a company with $2M/yr air spend: about $1.5k / $7k / $20k a year (low / mid / high) of refunds owed but missed, under 1% of air spend. DOT's own estimate for bag and ancillary refunds is $16M/yr nationwide.
+- **"5–10% of air spend is unused tickets" is vendor marketing** (Cornerstone 2019, Perk, ITILITE). "$482 average credit" is 2021 Navan pandemic data. Unused credits are mostly from voluntary cancellations, which don't qualify for refunds.
+
+**Ramp's own gap**
+- Ramp Travel (powered by Priceline): standard fares "result in a credit for the specific airline" ([Ramp FAQ](https://ramp.com/blog/10-frequently-asked-questions-about-ramp-travel)). "Flight credits are managed by airlines, not Ramp," so "finance teams must track unused credits outside the ledger" ([Ramp](https://ramp.com/answers/airline-transactions/how-are-flight-credits-or-vouchers-reflected-in-financial-records)). Credits can't be applied when booking on Ramp ([Ramp Help](https://support.ramp.com/booking-travel-on-ramp-employee-guide)).
+
+**Verdict:** the law is real and mostly as pitched. The refund-only problem is small and partly served by Gyro for Business. The stronger, honest version is airline money the company owns but can't see in Ramp: refunds owed plus the company's unused credit inventory, reconciled against card data.
 
 ## Why this idea (the research)
 
