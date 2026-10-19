@@ -1,6 +1,6 @@
-# Soaring High
+# Soaring Away
 
-Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights, but travelers accept credits instead. Soaring High checks every flight on a company's Ramp cards against real flight data and the DOT refund rule, then claims each refund with the proof attached.
+Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights, but travelers accept credits instead. Soaring Away checks every flight on a company's Ramp cards against real flight data and the DOT refund rule, then claims each refund with the proof attached.
 
 Built for the BBS × Ramp Hackathon. Full context, sources and status are in [AGENTS.md](AGENTS.md). The Round 1 brief and video script are in [round1-brief.md](round1-brief.md).
 
