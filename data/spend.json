@@ -1,0 +1,62 @@
+{
+  "runs": {
+    "pilot": {
+      "batch_id": "msgbatch_01HpPfZNKtVum8RLyGgnJSVC",
+      "calls": 160,
+      "projected": 23.2,
+      "by_model": {
+        "claude-opus-5-5": {
+          "calls": 80,
+          "cost": 3.5304451000000006
+        },
+        "claude-fable-5-1": {
+          "calls": 80,
+          "cost": 7.644996374999998
+        }
+      },
+      "cost": 11.175441475
+    },
+    "full": {
+      "batch_id": "msgbatch_01JMvKeFiRridPGMsgT7hCZk",
+      "calls": 2340,
+      "projected": 163.44083157187498,
+      "by_model": {
+        "claude-fable-5-1": {
+          "calls": 1170,
+          "cost": 92.29593837500003
+        },
+        "claude-opus-5-5": {
+          "calls": 1170,
+          "cost": 37.128214899999975
+        }
+      },
+      "cost": 129.424153275
+    },
+    "pilot-extract-XRMoYP": {
+      "batch_id": "msgbatch_013xJ8nYfzyWZFJJuNXRMoYP",
+      "calls": 160,
+      "cost": 0.07402005000000002
+    },
+    "full-extract-mSpoN9": {
+      "batch_id": "msgbatch_01UzUwFAggQ3pqWLxemSpoN9",
+      "calls": 2340,
+      "cost": 1.0661581999999983
+    },
+    "judge": {
+      "calls": 20,
+      "cost": 2.28687
+    },
+    "judge-v2": {
+      "calls": 30,
+      "cost": 2.95589
+    },
+    "judge-v3": {
+      "calls": 24,
+      "cost": 1.809642
+    },
+    "judge-v4": {
+      "calls": 20,
+      "cost": 1.48677
+    }
+  }
+}

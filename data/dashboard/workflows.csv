@@ -1,0 +1,145 @@
+id,area,workflow,session_share,ideas,top_picks,opus_share,fable_share,status
+ctl_audit_pbc,Controls & Audit,External audit requests (PBC lists) and sample support,0.5485,1363,133,0.653,0.4441,Crowded
+proc_contract_compliance,Procurement,Invoice vs. contract price compliance and overbilling recovery,0.3775,939,357,0.4895,0.2655,Crowded
+gl_accruals,Accounting & Close,Accruals and prepaid amortization schedules,0.3489,868,127,0.529,0.1689,Crowded
+exp_policy,AP & Expenses,Expense policy enforcement and audit,0.2543,633,25,0.0676,0.4409,Crowded
+ar_cash_application,Revenue & AR,Cash application: matching incoming payments and remittances to invoices,0.2161,538,131,0.2971,0.1352,Crowded
+ap_duplicate_fraud,AP & Expenses,"Duplicate payment and vendor fraud detection (BEC, bank change scams)",0.206,513,112,0.2721,0.14,Crowded
+proc_renewals,Procurement,SaaS renewals and subscription management,0.206,512,32,0.1047,0.3073,Crowded
+fpa_variance,FP&A,Budget vs. actual variance analysis and commentary,0.2004,498,96,0.1876,0.2132,Crowded
+ap_invoice_capture,AP & Expenses,Capturing and keying vendor invoices,0.2,500,53,0.1651,0.2349,Crowded
+gl_close,Accounting & Close,Month-end close checklist and coordination,0.1867,464,106,0.0346,0.3387,Crowded
+gl_bank_rec,Accounting & Close,Bank and credit card reconciliation,0.1819,459,77,0.0974,0.2663,Crowded
+tax_1099,Tax,1099 preparation and TIN validation,0.1759,437,8,0.2254,0.1263,Crowded
+edu_student_orgs,Nonprofit & Public,Student organization budgets and reimbursements,0.1751,436,75,0.2488,0.1014,Crowded
+gl_flux,Accounting & Close,Flux analysis explaining account changes,0.1718,427,148,0.2802,0.0636,Crowded
+ap_three_way_match,AP & Expenses,"Three-way match of PO, receipt and invoice",0.1718,427,55,0.0821,0.2615,Crowded
+ap_vendor_onboarding,AP & Expenses,"Vendor onboarding, W-9 and bank detail collection",0.1686,419,14,0.161,0.1762,Crowded
+exp_receipts,AP & Expenses,Receipt collection and expense report submission,0.1521,398,89,0.0556,0.2486,Crowded
+ar_collections,Revenue & AR,Collections and dunning on overdue invoices,0.1207,300,12,0.1312,0.1102,Crowded
+np_grant_accounting,Nonprofit & Public,Grant accounting and restricted funds tracking,0.0527,131,3,0.0483,0.0571,Common
+tr_cash_forecast,Treasury,13-week cash flow forecasting,0.0451,112,4,0.0523,0.0378,Common
+proc_intake,Procurement,Purchase request intake and approval,0.0439,109,1,0.0145,0.0732,Common
+tax_vat,Tax,VAT reclaim and international indirect tax,0.0374,93,2,0.0676,0.0072,Common
+tax_sales_tax,Tax,"Sales tax nexus, calculation and filing",0.033,82,7,0.0443,0.0217,Common
+ap_vendor_inquiries,AP & Expenses,Answering vendor payment status inquiries,0.0254,63,9,0.0258,0.0249,Common
+tax_rd_credit,Tax,R&D tax credit documentation,0.0225,56,12,0.0443,0.0008,Common
+ar_invoicing,Revenue & AR,Creating and sending customer invoices,0.0181,45,14,0.0322,0.004,Common
+ar_rev_rec,Revenue & AR,Revenue recognition (ASC 606) and deferred revenue schedules,0.0157,39,1,0.0153,0.0161,Common
+gl_journal_entries,Accounting & Close,Preparing and posting journal entries,0.0157,39,8,0.0048,0.0265,Common
+ar_disputes,Revenue & AR,"Customer billing disputes, deductions and chargebacks",0.0153,38,0,0.0048,0.0257,Common
+tax_notices,Tax,Responding to tax notices and agency letters,0.0153,38,0,0.0258,0.0048,Common
+gl_bookkeeping_smb,Accounting & Close,Small business bookkeeping and categorization,0.0141,35,1,0.0072,0.0209,Common
+exp_travel,AP & Expenses,"Travel booking, per diem and travel policy",0.0133,33,0,0.0081,0.0185,Common
+np_grant_reporting,Nonprofit & Public,Grant reporting to funders,0.0133,33,0,0.0129,0.0137,Common
+ap_statement_rec,AP & Expenses,Vendor statement reconciliation,0.0113,28,6,0.0072,0.0153,Common
+fpa_forecast,FP&A,Rolling forecasts and reforecasting,0.0105,26,1,0.0137,0.0072,Common
+proc_contract_review,Procurement,Vendor contract review and redlining,0.0101,25,0,0.0008,0.0193,Common
+ctl_internal_audit,Controls & Audit,Internal audit and continuous controls monitoring,0.0089,22,1,0.0121,0.0056,Rare
+con_freelancer,Personal Finance,Freelancer invoicing and quarterly estimated taxes,0.0085,21,0,0.0129,0.004,Rare
+proc_spend_analytics,Procurement,Spend analysis and savings opportunities,0.008,20,1,0.0024,0.0137,Rare
+other,Other,Doesn't fit any listed workflow,0.0076,19,0,0.004,0.0113,Rare
+ap_payment_runs,AP & Expenses,"Payment runs, check printing and payment method choice",0.0064,16,2,0.0064,0.0064,Rare
+gl_leases,Accounting & Close,Lease accounting (ASC 842),0.006,15,0,0.0064,0.0056,Rare
+ap_coding,AP & Expenses,GL coding of bills and transactions,0.0056,14,0,0.0,0.0113,Rare
+con_roommate_split,Personal Finance,Splitting shared bills and IOUs,0.0056,14,0,0.0032,0.008,Rare
+gl_fixed_assets,Accounting & Close,Fixed asset register and depreciation,0.0052,13,0,0.004,0.0064,Rare
+proc_negotiation,Procurement,Vendor price negotiation,0.0052,13,2,0.0024,0.008,Rare
+tr_debt_covenants,Treasury,Debt covenant compliance reporting,0.0052,13,2,0.0032,0.0072,Rare
+con_lien_waivers,Real Estate & Construction,Lien waiver collection,0.0048,12,0,0.0089,0.0008,Rare
+gl_account_rec,Accounting & Close,Balance sheet account reconciliations,0.0044,11,0,0.0032,0.0056,Rare
+tr_bank_admin,Treasury,Bank account administration and signer management,0.0044,11,1,0.0048,0.004,Rare
+com_restaurant_ops,Commerce,"Restaurant and retail back-office finance (tips, cash counts, inventory)",0.0044,11,1,0.004,0.0048,Rare
+con_pay_apps,Real Estate & Construction,Construction pay applications and retainage,0.004,10,0,0.0048,0.0032,Rare
+np_donations,Nonprofit & Public,Donation receipts and donor acknowledgment,0.004,10,0,0.0064,0.0016,Rare
+edu_financial_aid,Nonprofit & Public,Student financial aid and FAFSA,0.004,10,0,0.0048,0.0032,Rare
+fpa_budgeting,FP&A,Annual budgeting and budget collection from department heads,0.0036,9,0,0.004,0.0032,Rare
+proc_sourcing,Procurement,"RFPs, vendor sourcing and quote comparison",0.0036,9,0,0.0056,0.0016,Rare
+trade_customs,Global Trade,"Customs classification, duties and tariff management",0.0036,9,2,0.0064,0.0008,Rare
+bank_disputes,Banking & Lending,Card dispute and chargeback handling (issuer side),0.0036,9,1,0.0,0.0072,Rare
+re_rent_roll,Real Estate & Construction,Rent collection and rent roll management,0.0036,9,0,0.0024,0.0048,Rare
+ap_approvals,AP & Expenses,Invoice approval routing,0.0028,7,0,0.0,0.0056,Rare
+trade_freight_audit,Global Trade,Freight invoice audit,0.0028,7,0,0.0032,0.0024,Rare
+tax_exemption_certs,Tax,Sales tax exemption certificate collection,0.0024,6,0,0.0,0.0048,Rare
+trade_letters_of_credit,Global Trade,Letters of credit and trade finance documents,0.0024,6,0,0.0,0.0048,Rare
+fpa_scenario,FP&A,Scenario modeling and what-if analysis,0.002,5,0,0.0016,0.0024,Rare
+gl_chart_of_accounts,Accounting & Close,Chart of accounts design and ERP migration mapping,0.002,5,0,0.0,0.004,Rare
+ar_quote_to_cash,Revenue & AR,Quote-to-cash: contracts to billing setup,0.0016,4,1,0.0024,0.0008,Rare
+exp_mileage,AP & Expenses,Mileage and reimbursement claims,0.0016,4,0,0.0,0.0032,Rare
+tr_payments_ops,Treasury,"Wire, ACH and cross-border payment operations",0.0016,5,0,0.0,0.0032,Rare
+tax_property,Tax,Property tax and business license renewals,0.0016,4,0,0.0032,0.0,Rare
+hc_patient_bills,Healthcare Finance,Patient bill disputes and payment plans,0.0016,4,0,0.0008,0.0024,Rare
+fund_capital_calls,Fund Operations,Capital calls and distributions,0.0016,4,0,0.0,0.0032,Rare
+ar_sales_commissions,Revenue & AR,Sales commission calculation and ASC 340 capitalization,0.0012,3,0,0.0008,0.0016,Rare
+pay_run,Payroll,Running payroll and validating payroll changes,0.0012,3,0,0.0,0.0024,Rare
+pay_contractors,Payroll,Contractor onboarding and payments,0.0012,3,0,0.0008,0.0016,Rare
+ctl_sox,Controls & Audit,SOX control testing and documentation,0.0012,3,0,0.0,0.0024,Rare
+bank_loan_underwriting,Banking & Lending,Small business loan underwriting,0.0012,3,0,0.0024,0.0,Rare
+ins_coi,Insurance,Certificates of insurance tracking,0.0012,3,0,0.0016,0.0008,Rare
+hc_denials,Healthcare Finance,Claim denial management and appeals,0.0012,3,0,0.0,0.0024,Rare
+re_cam,Real Estate & Construction,CAM reconciliations for commercial leases,0.0012,3,0,0.0008,0.0016,Rare
+com_merchant_fees,Commerce,Merchant card fees and payment acceptance costs,0.0012,3,0,0.0008,0.0016,Rare
+ar_credit,Revenue & AR,Customer credit checks and credit limit decisions,0.0008,2,0,0.0016,0.0,Rare
+gl_intercompany,Accounting & Close,Intercompany transactions and eliminations,0.0008,2,0,0.0008,0.0008,Rare
+pay_multistate,Payroll,Multi-state and international payroll tax compliance,0.0008,2,0,0.0008,0.0008,Rare
+exp_card_issuance,AP & Expenses,Corporate card issuance and spend limits,0.0008,2,0,0.0,0.0016,Rare
+bank_kyc,Banking & Lending,KYC/KYB onboarding and document verification,0.0008,2,1,0.0016,0.0,Rare
+con_job_costing,Real Estate & Construction,Construction job costing and change orders,0.0008,2,0,0.0016,0.0,Rare
+con_bill_negotiation,Personal Finance,Bill negotiation and subscription cancellation,0.0008,2,0,0.0008,0.0008,Rare
+fpa_cost_allocation,FP&A,Cost allocation and chargebacks across departments,0.0004,1,0,0.0,0.0008,Rare
+ar_usage_billing,Revenue & AR,Usage-based and contract billing calculations,0.0004,1,0,0.0,0.0008,Rare
+gl_consolidation,Accounting & Close,Multi-entity consolidation and currency translation,0.0004,1,0,0.0,0.0008,Rare
+pay_timesheets,Payroll,Timesheet collection and approval for hourly workers,0.0004,1,0,0.0,0.0008,Rare
+pay_benefits_rec,Payroll,Benefits invoice reconciliation against enrollment,0.0004,1,0,0.0,0.0008,Rare
+ctl_fraud_internal,Controls & Audit,Internal fraud and embezzlement detection,0.0004,1,0,0.0008,0.0,Rare
+tax_income_provision,Tax,Income tax provision,0.0004,1,0,0.0,0.0008,Rare
+tax_transfer_pricing,Tax,Transfer pricing documentation,0.0004,1,0,0.0008,0.0,Rare
+hc_medical_billing,Healthcare Finance,Medical billing and coding,0.0004,1,0,0.0,0.0008,Rare
+re_lease_abstraction,Real Estate & Construction,Lease abstraction,0.0004,1,0,0.0,0.0008,Rare
+pub_procurement,Nonprofit & Public,Government procurement and public bids,0.0004,1,0,0.0,0.0008,Rare
+pub_benefits,Nonprofit & Public,Public benefits and grant applications,0.0004,1,0,0.0,0.0008,Rare
+ps_client_onboarding,Professional Services,Accounting firm client onboarding and document collection,0.0004,1,0,0.0,0.0008,Rare
+com_payouts_rec,Commerce,Marketplace and payment processor payout reconciliation,0.0004,1,0,0.0008,0.0,Rare
+con_budgeting,Personal Finance,Personal budgeting and spending tracking,0.0004,1,0,0.0,0.0008,Rare
+fpa_board_reporting,FP&A,"Board decks, investor updates and management reporting",0.0,0,0,0.0,0.0,Never pitched
+fpa_headcount,FP&A,Headcount planning and compensation modeling,0.0,0,0,0.0,0.0,Never pitched
+fpa_unit_economics,FP&A,"Unit economics, cohort and profitability analysis",0.0,0,0,0.0,0.0,Never pitched
+fpa_saas_metrics,FP&A,"SaaS metrics: ARR, churn, CAC, LTV reporting",0.0,0,0,0.0,0.0,Never pitched
+gl_financial_statements,Accounting & Close,Preparing financial statements and footnotes,0.0,0,0,0.0,0.0,Never pitched
+gl_stock_comp,Accounting & Close,Stock-based compensation accounting,0.0,0,0,0.0,0.0,Never pitched
+gl_inventory_costing,Accounting & Close,Inventory valuation and COGS,0.0,0,0,0.0,0.0,Never pitched
+pay_equity_admin,Payroll,"Equity grants, vesting and 409A administration",0.0,0,0,0.0,0.0,Never pitched
+proc_vendor_risk,Procurement,Vendor risk and security questionnaires,0.0,0,0,0.0,0.0,Never pitched
+proc_ai_token_spend,Procurement,Managing AI/cloud usage spend,0.0,0,0,0.0,0.0,Never pitched
+tr_cash_position,Treasury,Daily cash positioning across bank accounts,0.0,0,0,0.0,0.0,Never pitched
+tr_idle_cash,Treasury,Idle cash investment and yield,0.0,0,0,0.0,0.0,Never pitched
+tr_fx,Treasury,FX exposure and hedging,0.0,0,0,0.0,0.0,Never pitched
+tr_stablecoin,Treasury,Stablecoin and crypto treasury operations,0.0,0,0,0.0,0.0,Never pitched
+ctl_sod,Controls & Audit,Segregation of duties and access reviews,0.0,0,0,0.0,0.0,Never pitched
+ctl_policy_docs,Controls & Audit,Accounting policy memos and technical accounting research,0.0,0,0,0.0,0.0,Never pitched
+bank_aml,Banking & Lending,AML transaction monitoring and SAR narratives,0.0,0,0,0.0,0.0,Never pitched
+bank_mortgage,Banking & Lending,Mortgage processing and document checks,0.0,0,0,0.0,0.0,Never pitched
+bank_merchant_onboarding,Banking & Lending,Merchant underwriting and onboarding,0.0,0,0,0.0,0.0,Never pitched
+bank_collateral,Banking & Lending,Borrowing base and collateral reporting,0.0,0,0,0.0,0.0,Never pitched
+bank_sba,Banking & Lending,SBA loan applications and forgiveness paperwork,0.0,0,0,0.0,0.0,Never pitched
+ins_claims,Insurance,Insurance claims intake and adjudication,0.0,0,0,0.0,0.0,Never pitched
+ins_underwriting,Insurance,Commercial insurance underwriting submissions,0.0,0,0,0.0,0.0,Never pitched
+ins_premium_audit,Insurance,Workers comp and premium audits,0.0,0,0,0.0,0.0,Never pitched
+hc_prior_auth,Healthcare Finance,Prior authorization,0.0,0,0,0.0,0.0,Never pitched
+fund_admin,Fund Operations,Fund administration and NAV calculation,0.0,0,0,0.0,0.0,Never pitched
+fund_lp_reporting,Fund Operations,LP reporting and portfolio company data collection,0.0,0,0,0.0,0.0,Never pitched
+fund_cap_table,Fund Operations,Cap table management and 409A,0.0,0,0,0.0,0.0,Never pitched
+fund_due_diligence,Fund Operations,Financial due diligence,0.0,0,0,0.0,0.0,Never pitched
+fund_earnings_research,Fund Operations,Equity research and earnings analysis,0.0,0,0,0.0,0.0,Never pitched
+np_990,Nonprofit & Public,Form 990 preparation,0.0,0,0,0.0,0.0,Never pitched
+ps_time_billing,Professional Services,Time tracking and client billing for firms,0.0,0,0,0.0,0.0,Never pitched
+ps_trust_accounting,Professional Services,Legal trust (IOLTA) accounting,0.0,0,0,0.0,0.0,Never pitched
+ps_tax_prep_firm,Professional Services,Tax return preparation at CPA firms,0.0,0,0,0.0,0.0,Never pitched
+com_agentic_checkout,Commerce,AI agents buying and paying on behalf of users,0.0,0,0,0.0,0.0,Never pitched
+com_pricing,Commerce,Pricing and discount approvals,0.0,0,0,0.0,0.0,Never pitched
+con_tax_filing,Personal Finance,Personal tax filing,0.0,0,0,0.0,0.0,Never pitched
+con_credit,Personal Finance,Credit building and credit report disputes,0.0,0,0,0.0,0.0,Never pitched
+con_investing,Personal Finance,Personal investing and retirement planning,0.0,0,0,0.0,0.0,Never pitched
+con_estate,Personal Finance,Estate settlement and inheritance paperwork,0.0,0,0,0.0,0.0,Never pitched
+con_immigrant,Personal Finance,Remittances and finances for immigrants,0.0,0,0,0.0,0.0,Never pitched
+con_elder,Personal Finance,Managing finances for elderly parents,0.0,0,0,0.0,0.0,Never pitched

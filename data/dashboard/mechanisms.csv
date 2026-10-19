@@ -1,0 +1,14 @@
+mechanism,label,idea_share
+document_extraction,Reads documents,0.5365
+matching_reconciliation,Matches records,0.2327
+classification_coding,Categorizes transactions,0.0922
+autonomous_agent,Multi-step agent,0.2158
+browser_computer_use,Drives legacy UIs,0.0431
+conversational_qa,Chat over data,0.0519
+voice_phone,Voice or phone,0.0372
+email_inbox,Works an email inbox,0.097
+anomaly_detection,Flags anomalies or fraud,0.3274
+forecasting,Forecasts,0.0616
+generation_drafting,Drafts reports or messages,0.2621
+negotiation,Negotiates,0.0144
+payments_execution,Moves money,0.0016

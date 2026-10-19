@@ -1,0 +1,160 @@
+{"id": "s00000", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "come up with ideas for this hackathon that would be feasible in 2 weeks"}
+{"id": "s00001", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "can you give me some ideas that would impress ramp engineers"}
+{"id": "s00002", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're econ + data science. what idea would stand out for this"}
+{"id": "s00003", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is entering this, what should we build"}
+{"id": "s00004", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "give me some creative ideas for this hackathon prompt"}
+{"id": "s00005", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. give me ideas for this hackathon"}
+{"id": "s00006", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "what are the best ideas for automating an outdated financial workflow with AI"}
+{"id": "s00007", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're 3 cs majors. what should we build for this"}
+{"id": "s00008", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me ideas for this that use the newest AI tools"}
+{"id": "s00009", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. im applying to this hackathon what should my idea be"}
+{"id": "s00010", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're both EECS. what should we build for this"}
+{"id": "s00011", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're econ + data science. need hackathon ideas for this asap"}
+{"id": "s00012", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're 3 cs majors. what are the best ideas for automating an outdated financial workflow with AI"}
+{"id": "s00013", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're econ + data science. we're doing this hackathon. ideas?"}
+{"id": "s00014", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "my team is 2 business majors and 1 cs. I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00015", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're doing this hackathon. ideas?"}
+{"id": "s00016", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're both EECS. what outdated financial workflows could we automate for this"}
+{"id": "s00017", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. ideas for this?"}
+{"id": "s00018", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "rank the best ideas for this hackathon"}
+{"id": "s00019", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. what's an idea for this that's technically impressive"}
+{"id": "s00020", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're econ + data science. help us pick an idea for the bbs x ramp hackathon"}
+{"id": "s00021", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. what's a winning idea for this"}
+{"id": "s00022", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're freshmen, not super technical. help me think of a project for this"}
+{"id": "s00023", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're econ + data science. list some project ideas for this hackathon"}
+{"id": "s00024", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "what's the best thing to build for this"}
+{"id": "s00025", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're 3 cs majors. need hackathon ideas for this asap"}
+{"id": "s00026", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're econ + data science. top 5 ideas for this hackathon?"}
+{"id": "s00027", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're both EECS. ideas pls"}
+{"id": "s00028", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we have one strong engineer and one designer. give me 5 hackathon ideas based on this"}
+{"id": "s00029", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. what are the best ideas for automating an outdated financial workflow with AI"}
+{"id": "s00030", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me ideas for this that use the newest AI tools"}
+{"id": "s00031", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. list some project ideas for this hackathon"}
+{"id": "s00032", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. we want to win this, what should we build"}
+{"id": "s00033", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00034", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "my team is 2 business majors and 1 cs. list some project ideas for this hackathon"}
+{"id": "s00035", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00036", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. help me come up with an idea for this hackathon"}
+{"id": "s00037", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're 3 cs majors. come up with ideas for this hackathon that would be feasible in 2 weeks"}
+{"id": "s00038", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. what should a team of 3 build for this"}
+{"id": "s00039", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're 3 cs majors. what should a team of 3 build for this"}
+{"id": "s00040", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "give me ideas for this that use the newest AI tools"}
+{"id": "s00041", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're econ + data science. what should my team pitch for this"}
+{"id": "s00042", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "what's a winning idea for this"}
+{"id": "s00043", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00044", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "brainstorm some project ideas for this"}
+{"id": "s00045", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "can u help me with ideas for this"}
+{"id": "s00046", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "help us pick an idea for the bbs x ramp hackathon"}
+{"id": "s00047", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "ideas pls"}
+{"id": "s00048", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're 3 cs majors. we're doing this hackathon. ideas?"}
+{"id": "s00049", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "give me 5 hackathon ideas based on this"}
+{"id": "s00050", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. give me 5 hackathon ideas based on this"}
+{"id": "s00051", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we have one strong engineer and one designer. we're doing this hackathon. ideas?"}
+{"id": "s00052", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're both EECS. give me your top ideas for this challenge"}
+{"id": "s00053", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're econ + data science. can you give me some ideas that would impress ramp engineers"}
+{"id": "s00054", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "give me some creative ideas for this hackathon prompt"}
+{"id": "s00055", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. ideas for this?"}
+{"id": "s00056", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me unique ideas for this, nothing generic"}
+{"id": "s00057", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. suggest ideas for this hackathon, we want something original"}
+{"id": "s00058", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "what should we build for this"}
+{"id": "s00059", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "top 5 ideas for this hackathon?"}
+{"id": "s00060", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're econ + data science. list some project ideas for this hackathon"}
+{"id": "s00061", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. what are the best ideas for automating an outdated financial workflow with AI"}
+{"id": "s00062", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "what's the best thing to build for this"}
+{"id": "s00063", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. come up with ideas for this hackathon that would be feasible in 2 weeks"}
+{"id": "s00064", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we have one strong engineer and one designer. suggest ideas for this hackathon, we want something original"}
+{"id": "s00065", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're both EECS. brainstorm ideas that could actually win this"}
+{"id": "s00066", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "help me come up with an idea for this hackathon"}
+{"id": "s00067", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "brainstorm some project ideas for this"}
+{"id": "s00068", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "give me 5 hackathon ideas based on this"}
+{"id": "s00069", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. give me unique ideas for this, nothing generic"}
+{"id": "s00070", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00071", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. im applying to this hackathon what should my idea be"}
+{"id": "s00072", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "ideas pls"}
+{"id": "s00073", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. ideas for this?"}
+{"id": "s00074", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "im applying to this hackathon what should my idea be"}
+{"id": "s00075", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. ideas for this?"}
+{"id": "s00076", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "give me some creative ideas for this hackathon prompt"}
+{"id": "s00077", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. need hackathon ideas for this asap"}
+{"id": "s00078", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're 3 cs majors. ideas pls"}
+{"id": "s00079", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "what should we build for this"}
+{"id": "s00080", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me your top ideas for this challenge"}
+{"id": "s00081", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're 3 cs majors. suggest ideas for this hackathon, we want something original"}
+{"id": "s00082", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "my team is entering this, what should we build"}
+{"id": "s00083", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. we want to win this, what should we build"}
+{"id": "s00084", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're freshmen, not super technical. help us pick an idea for the bbs x ramp hackathon"}
+{"id": "s00085", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're both EECS. top 5 ideas for this hackathon?"}
+{"id": "s00086", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me 5 hackathon ideas based on this"}
+{"id": "s00087", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. im applying to this hackathon what should my idea be"}
+{"id": "s00088", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're 3 cs majors. what should my team pitch for this"}
+{"id": "s00089", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're 3 cs majors. what outdated financial workflows could we automate for this"}
+{"id": "s00090", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're doing this hackathon. ideas?"}
+{"id": "s00091", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. need hackathon ideas for this asap"}
+{"id": "s00092", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00093", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're 3 cs majors. top 5 ideas for this hackathon?"}
+{"id": "s00094", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me some creative ideas for this hackathon prompt"}
+{"id": "s00095", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "what outdated financial workflows could we automate for this"}
+{"id": "s00096", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. rank the best ideas for this hackathon"}
+{"id": "s00097", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "come up with ideas for this hackathon that would be feasible in 2 weeks"}
+{"id": "s00098", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. what would win this hackathon"}
+{"id": "s00099", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're 3 cs majors. we're doing this hackathon. ideas?"}
+{"id": "s00100", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're econ + data science. what would ramp want to see for this"}
+{"id": "s00101", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're doing this hackathon. ideas?"}
+{"id": "s00102", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. give me ideas for this hackathon"}
+{"id": "s00103", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "my team is 2 business majors and 1 cs. can you give me some ideas that would impress ramp engineers"}
+{"id": "s00104", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "help us pick an idea for the bbs x ramp hackathon"}
+{"id": "s00105", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "can you give me some ideas that would impress ramp engineers"}
+{"id": "s00106", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "help us pick an idea for the bbs x ramp hackathon"}
+{"id": "s00107", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're both EECS. my team is entering this, what should we build"}
+{"id": "s00108", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "my team is 2 business majors and 1 cs. give me ideas for this that use the newest AI tools"}
+{"id": "s00109", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. give me unique ideas for this, nothing generic"}
+{"id": "s00110", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're 3 cs majors. my team is entering this, what should we build"}
+{"id": "s00111", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we have one strong engineer and one designer. give me your top ideas for this challenge"}
+{"id": "s00112", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "give me ideas for this hackathon"}
+{"id": "s00113", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're both EECS. what should my team pitch for this"}
+{"id": "s00114", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're econ + data science. what's an idea for this that's technically impressive"}
+{"id": "s00115", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "my team is 2 business majors and 1 cs. brainstorm some project ideas for this"}
+{"id": "s00116", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're 3 cs majors. what should my team pitch for this"}
+{"id": "s00117", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "give me unique ideas for this, nothing generic"}
+{"id": "s00118", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "i'm cs, my teammate is haas. give me ideas for this that use the newest AI tools"}
+{"id": "s00119", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we have one strong engineer and one designer. we want to win this, what should we build"}
+{"id": "s00120", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me ideas for this that use the newest AI tools"}
+{"id": "s00121", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "ideas for this?"}
+{"id": "s00122", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're 3 cs majors. what would win this hackathon"}
+{"id": "s00123", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "can u help me with ideas for this"}
+{"id": "s00124", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we have one strong engineer and one designer. come up with ideas for this hackathon that would be feasible in 2 weeks"}
+{"id": "s00125", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "give me some creative ideas for this hackathon prompt"}
+{"id": "s00126", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "give me your top ideas for this challenge"}
+{"id": "s00127", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're 3 cs majors. rank the best ideas for this hackathon"}
+{"id": "s00128", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "what outdated financial workflows could we automate for this"}
+{"id": "s00129", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. ideas pls"}
+{"id": "s00130", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "what are the best ideas for automating an outdated financial workflow with AI"}
+{"id": "s00131", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "what's an idea for this that's technically impressive"}
+{"id": "s00132", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00133", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're both EECS. brainstorm some project ideas for this"}
+{"id": "s00134", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we have one strong engineer and one designer. give me ideas for this hackathon"}
+{"id": "s00135", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're 3 cs majors. need hackathon ideas for this asap"}
+{"id": "s00136", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "my team is entering this, what should we build"}
+{"id": "s00137", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "list some project ideas for this hackathon"}
+{"id": "s00138", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "what are some good ideas for this prompt"}
+{"id": "s00139", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're 3 cs majors. brainstorm ideas that could actually win this"}
+{"id": "s00140", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're both EECS. list some project ideas for this hackathon"}
+{"id": "s00141", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "im applying to this hackathon what should my idea be"}
+{"id": "s00142", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. top 5 ideas for this hackathon?"}
+{"id": "s00143", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. I want to get the guaranteed ramp interview, what should we build"}
+{"id": "s00144", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "brainstorm ideas that could actually win this"}
+{"id": "s00145", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. give me 5 hackathon ideas based on this"}
+{"id": "s00146", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're both EECS. help us pick an idea for the bbs x ramp hackathon"}
+{"id": "s00147", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "can u help me with ideas for this"}
+{"id": "s00148", "model": "claude-opus-5-5", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. give me unique ideas for this, nothing generic"}
+{"id": "s00149", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we're freshmen, not super technical. what are 5 ideas we could pitch for this"}
+{"id": "s00150", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "my team is 2 business majors and 1 cs. what outdated financial workflows could we automate for this"}
+{"id": "s00151", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "need hackathon ideas for this asap"}
+{"id": "s00152", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we have one strong engineer and one designer. what should a team of 3 build for this"}
+{"id": "s00153", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "we want to win this, what should we build"}
+{"id": "s00154", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. we need an idea for this by oct 22, help"}
+{"id": "s00155", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "what would ramp want to see for this"}
+{"id": "s00156", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. what's an idea for this that's technically impressive"}
+{"id": "s00157", "model": "claude-fable-5-1", "arm": "image_only", "prompt": "i'm cs, my teammate is haas. what would win this hackathon"}
+{"id": "s00158", "model": "claude-opus-5-5", "arm": "image_only", "prompt": "we're econ + data science. give me ideas for this hackathon"}
+{"id": "s00159", "model": "claude-fable-5-1", "arm": "image_pdf", "prompt": "we're freshmen, not super technical. give me your top ideas for this challenge"}

@@ -1,0 +1,484 @@
+<style>
+.ic { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.ic-head { display: grid; gap: var(--cds-gap-sm); }
+.ic-title { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); text-wrap: balance; }
+.ic-lede { margin: 0; max-width: 65ch; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); line-height: 1.5; }
+.ic .ic-strong { font-weight: 500; color: var(--color-fg); }
+.ic-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+.ic-tile, .ic-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.ic-tile { display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.ic-tile-label, .ic-tile-note, .ic-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ic-tile-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.1; font-variant-numeric: tabular-nums; min-height: 1.1em; }
+.ic-card { display: grid; gap: var(--cds-gap-md); align-content: start; }
+.ic-card-head { display: grid; gap: var(--cds-gap-xs); }
+.ic-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); text-wrap: balance; }
+.ic-note { margin: 0; max-width: 70ch; line-height: 1.5; }
+.ic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--cds-gap-md); }
+.ic-bars { position: relative; display: grid; gap: var(--cds-gap-sm); min-height: 12rem; }
+.ic-bar { display: grid; gap: 3px; cursor: default; }
+.ic-bar-top { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); }
+.ic-bar-name { min-width: 0; overflow-wrap: anywhere; }
+.ic-bar-val { white-space: nowrap; color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.ic-track { height: 10px; border-radius: 999px; background: var(--cds-chart-grid); }
+.ic-fill { height: 100%; border-radius: 999px; transition: opacity var(--cds-dur-slow); }
+.ic-bars:hover .ic-fill { opacity: .45; }
+.ic-bars .ic-bar:hover .ic-fill { opacity: 1; }
+.ic-chart { position: relative; min-height: 220px; }
+.ic-chart svg { display: block; overflow: visible; }
+.ic-tip { position: absolute; z-index: 2; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); max-width: 16rem; display: grid; gap: 2px; }
+.ic-tip-head { color: var(--cds-text-secondary); }
+.ic-tip-row { font-variant-numeric: tabular-nums; }
+.ic-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; }
+.ic-chip { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-radius: 999px; border: 0; background: var(--cds-chart-grid); color: var(--color-fg); cursor: pointer; }
+.ic-chip[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
+.ic-chip:focus-visible, .ic-sort:focus-visible, .ic-search:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.ic-search { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); background: var(--color-bg); color: var(--color-fg); min-width: 0; flex: 1 1 12rem; max-width: 20rem; }
+.ic-table-box { max-height: 34rem; overflow: auto; }
+.ic-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.ic-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); border-bottom: 1px solid var(--color-border-line); padding: 0; z-index: 1; }
+.ic-table th.ic-num, .ic-table td.ic-num { text-align: right; }
+.ic-sort { font: inherit; color: inherit; background: none; border: 0; padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; width: 100%; text-align: inherit; white-space: nowrap; }
+.ic-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.ic-table td:first-child { min-width: 14rem; }
+.ic-status { white-space: nowrap; }
+.ic-status::before { content: ""; display: inline-block; width: .5rem; height: .5rem; border-radius: 999px; margin-right: .4rem; vertical-align: .05em; background: var(--cds-chart-muted); }
+.ic-status-never::before { background: var(--color-ok); }
+.ic-status-rare::before { background: transparent; box-shadow: inset 0 0 0 2px var(--color-ok); }
+.ic-status-common::before { background: var(--color-warn); }
+.ic-status-crowded::before { background: var(--color-bad); }
+.ic-empty { color: var(--color-fg-muted); padding: var(--cds-pad-md) var(--cds-pad-sm); }
+.ic-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); min-height: inherit; }
+.ic-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 999px; background: var(--color-bad); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+@media (max-width: 40rem) { .ic-hide-narrow { display: none; } }
+</style>
+
+<div class="ic">
+  <header class="ic-head" id="summary">
+    <h1 class="ic-title">Ramp idea crowding</h1>
+    <p class="ic-lede">
+      <span class="ic-strong" data-source="workflows" data-field="session_share" data-where="id=ctl_audit_pbc">—</span>
+      of simulated Claude brainstorms pitch automating auditor document requests, and
+      <span class="ic-strong" data-source="coverage" data-field="never" data-row="0">—</span> of
+      <span class="ic-strong" data-source="coverage" data-field="listed" data-row="0">—</span>
+      listed finance workflows never come up. Pick from the never-pitched and rare rows at the bottom.
+    </p>
+  </header>
+
+  <section class="ic-tiles" aria-label="Headline figures">
+    <div class="ic-tile">
+      <span class="ic-tile-label">Simulated sessions</span>
+      <span class="ic-tile-value dash-skeleton" data-source="run" data-field="sessions" data-row="0"></span>
+      <span class="ic-tile-note"><span data-source="run" data-field="ideas" data-row="0">—</span> ideas, half from Opus 5.5 and half from Fable 5.1</span>
+    </div>
+    <div class="ic-tile">
+      <span class="ic-tile-label">Pitch auditor requests</span>
+      <span class="ic-tile-value dash-skeleton" data-source="workflows" data-field="session_share" data-where="id=ctl_audit_pbc"></span>
+      <span class="ic-tile-note">Share of sessions whose top five include it, the most common idea</span>
+    </div>
+    <div class="ic-tile">
+      <span class="ic-tile-label">Top picks in five workflows</span>
+      <span class="ic-tile-value dash-skeleton" data-source="pick_concentration" data-field="top5_share" data-row="0"></span>
+      <span class="ic-tile-note">Of the ideas each reply recommended most</span>
+    </div>
+    <div class="ic-tile">
+      <span class="ic-tile-label">Workflows never pitched</span>
+      <span class="ic-tile-value dash-skeleton" data-source="coverage" data-field="never" data-row="0"></span>
+      <span class="ic-tile-note"><span data-source="coverage" data-field="rare" data-row="0">—</span> more appear in under 1% of sessions</span>
+    </div>
+  </section>
+
+  <section class="ic-card" id="crowded">
+    <div class="ic-card-head">
+      <h2>Most-pitched workflows</h2>
+      <p class="ic-note">Share of sessions whose top five ideas include each workflow. These are the ideas judges will see over and over.</p>
+    </div>
+    <div class="ic-bars dash-skeleton" id="crowded-bars" data-source="workflows"></div>
+  </section>
+
+  <div class="ic-grid">
+    <section class="ic-card" id="saturation">
+      <div class="ic-card-head">
+        <h2>New workflows stop appearing</h2>
+        <p class="ic-note">Distinct workflows pitched as sessions accumulate. More sessions would not have found much else.</p>
+      </div>
+      <div class="ic-chart dash-skeleton" id="saturation-chart" data-source="saturation coverage"></div>
+    </section>
+    <section class="ic-card" id="mechanisms">
+      <div class="ic-card-head">
+        <h2>How the ideas use AI</h2>
+        <p class="ic-note">Share of ideas whose core depends on each method, up to two per idea. Reading documents dominates.</p>
+      </div>
+      <div class="ic-bars dash-skeleton" id="mechanism-bars" data-source="mechanisms"></div>
+    </section>
+  </div>
+
+  <section class="ic-card" id="open-space">
+    <div class="ic-card-head">
+      <h2>Every workflow</h2>
+      <p class="ic-note">Never pitched means no simulated reply suggested it. Rare means under 1% of sessions. Opus and Fable columns show how often each model pitched it.</p>
+    </div>
+    <div class="ic-controls">
+      <div class="ic-controls" role="group" aria-label="Filter by status" id="status-chips">
+        <button type="button" class="ic-chip" data-filter="open" aria-pressed="true">Open space</button>
+        <button type="button" class="ic-chip" data-filter="Never pitched" aria-pressed="false">Never pitched</button>
+        <button type="button" class="ic-chip" data-filter="Rare" aria-pressed="false">Rare</button>
+        <button type="button" class="ic-chip" data-filter="Common" aria-pressed="false">Common</button>
+        <button type="button" class="ic-chip" data-filter="Crowded" aria-pressed="false">Crowded</button>
+        <button type="button" class="ic-chip" data-filter="all" aria-pressed="false">All</button>
+      </div>
+      <input class="ic-search" id="workflow-search" type="search" placeholder="Search workflows or areas" aria-label="Search workflows or areas">
+    </div>
+    <div class="ic-table-box">
+      <table class="ic-table" id="workflow-table" data-source="workflows" data-row-key="workflow">
+        <thead>
+          <tr>
+            <th data-field="workflow"><button type="button" class="ic-sort" data-sort="workflow">Workflow</button></th>
+            <th data-field="area"><button type="button" class="ic-sort" data-sort="area">Area</button></th>
+            <th data-field="status"><button type="button" class="ic-sort" data-sort="status">Status</button></th>
+            <th data-field="session_share" class="ic-num"><button type="button" class="ic-sort" data-sort="session_share">Sessions</button></th>
+            <th data-field="ideas" class="ic-num ic-hide-narrow"><button type="button" class="ic-sort" data-sort="ideas">Ideas</button></th>
+            <th data-field="top_picks" class="ic-num ic-hide-narrow"><button type="button" class="ic-sort" data-sort="top_picks">Top picks</button></th>
+            <th data-field="opus_share" class="ic-num ic-hide-narrow"><button type="button" class="ic-sort" data-sort="opus_share">Opus</button></th>
+            <th data-field="fable_share" class="ic-num ic-hide-narrow"><button type="button" class="ic-sort" data-sort="fable_share">Fable</button></th>
+          </tr>
+        </thead>
+        <tbody id="workflow-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ic-card" id="method">
+    <div class="ic-card-head">
+      <h2>How this was made</h2>
+      <p class="ic-note">
+        Each session is one fresh call to Claude Opus 5.5 or Fable 5.1 with the hackathon email screenshot, sometimes the info-session deck, and one of 40 student-style requests such as "give me ideas for this hackathon". Haiku 5.5 pulled each reply's top five ideas and mapped each onto
+        <span data-source="run" data-field="listed_workflows" data-row="0">—</span>
+        finance workflows, structured after APQC's Process Classification Framework for financial resources plus industry and consumer finance. It also flagged ideas that overlap a product Ramp already sells:
+        <span data-source="run" data-field="ramp_overlap_share" data-row="0">—</span> of them. The full run cost
+        <span data-source="run" data-field="cost_usd" data-row="0">—</span>.
+        The API runs without the claude.ai app's system prompt, memory and web search, so real students' answers may differ somewhat.
+      </p>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const pct = d3.format('.1%');
+  const int = d3.format(',');
+  const usd = d3.format('$,.2f');
+  const TOP_N = 20;
+  const NUMERIC = new Set(['session_share', 'ideas', 'top_picks', 'opus_share', 'fable_share']);
+  const STATUS_CLASS = { 'Never pitched': 'never', Rare: 'rare', Common: 'common', Crowded: 'crowded' };
+  const root = document.getElementById('dash-root') || document;
+  const table = { filter: 'open', query: '', sort: 'session_share', dir: -1 };
+
+  dash.calc('pick_concentration', {
+    title: 'Top picks in five workflows',
+    description: 'Share of the ideas each reply recommended most that fall in the five most-picked workflows.',
+    inputs: ['workflows'],
+    fn: (workflows) => {
+      const picks = workflows.map((r) => Number(r.top_picks)).sort((a, b) => b - a);
+      const total = picks.reduce((s, p) => s + p, 0);
+      return [{ top5_share: picks.slice(0, 5).reduce((s, p) => s + p, 0) / total }];
+    },
+  });
+
+  dash.calc('coverage', {
+    title: 'Workflows never pitched',
+    description: 'Listed finance workflows no reply pitched, and those pitched in under 1% of sessions.',
+    inputs: ['workflows'],
+    fn: (workflows) => {
+      const listed = workflows.filter((r) => r.id !== 'other');
+      const never = listed.filter((r) => Number(r.ideas) === 0).length;
+      const underOne = listed.filter((r) => Number(r.session_share) < 0.01).length;
+      return [{ never, rare: underOne - never, listed: listed.length }];
+    },
+  });
+
+  const fmtField = { session_share: pct, top5_share: pct, ramp_overlap_share: pct, cost_usd: usd };
+  const format = (field, value) => (fmtField[field] || int)(Number(value));
+
+  function cellFor(el, rows) {
+    if (el.dataset.where) {
+      const [col, val] = el.dataset.where.split('=');
+      return rows.find((r) => String(r[col]) === decodeURIComponent(val));
+    }
+    return rows[Number(el.dataset.row || 0)];
+  }
+
+  function fillValues() {
+    root.querySelectorAll('[data-field][data-source]:not(th)').forEach((el) => {
+      const ds = dash.data(el.dataset.source);
+      el.classList.toggle('dash-skeleton', ds.status === 'loading' && el.classList.contains('ic-tile-value'));
+      if (ds.status !== 'ok') { el.textContent = ds.status === 'loading' ? '' : '—'; return; }
+      const row = cellFor(el, ds.data);
+      el.textContent = row ? format(el.dataset.field, row[el.dataset.field]) : '—';
+    });
+  }
+
+  function failed(el) {
+    el.classList.remove('dash-skeleton');
+    const line = document.createElement('div');
+    line.className = 'ic-fail';
+    line.textContent = 'Failed to load';
+    el.replaceChildren(line);
+  }
+
+  function guard(el, ...ids) {
+    const statuses = ids.map((id) => dash.data(id).status);
+    if (statuses.every((s) => s === 'ok')) { el.classList.remove('dash-skeleton'); return true; }
+    if (statuses.some((s) => s === 'error' || s === 'connect' || s === 'declined' || s === 'missing')) failed(el);
+    else { el.classList.add('dash-skeleton'); el.replaceChildren(); }
+    return false;
+  }
+
+  function placeTip(box, tip, x, y) {
+    const maxLeft = box.clientWidth - tip.offsetWidth;
+    tip.style.left = `${Math.max(0, Math.min(x - tip.offsetWidth / 2, maxLeft))}px`;
+    tip.style.top = `${Math.max(0, y - tip.offsetHeight - 8)}px`;
+  }
+
+  function makeTip(box) {
+    const tip = document.createElement('div');
+    tip.className = 'ic-tip';
+    tip.hidden = true;
+    box.appendChild(tip);
+    return tip;
+  }
+
+  function tipLines(tip, head, lines) {
+    const h = document.createElement('div');
+    h.className = 'ic-tip-head';
+    h.textContent = head;
+    tip.replaceChildren(h, ...lines.map((text) => {
+      const d = document.createElement('div');
+      d.className = 'ic-tip-row';
+      d.textContent = text;
+      return d;
+    }));
+  }
+
+  function drawBars(el, rows, { value, label, color, describe }) {
+    el.replaceChildren();
+    const tip = makeTip(el);
+    const max = d3.max(rows, value) || 1;
+    rows.forEach((r) => {
+      const bar = document.createElement('div');
+      bar.className = 'ic-bar';
+      const top = document.createElement('div');
+      top.className = 'ic-bar-top';
+      const name = document.createElement('span');
+      name.className = 'ic-bar-name';
+      name.textContent = label(r);
+      const val = document.createElement('span');
+      val.className = 'ic-bar-val';
+      val.textContent = pct(value(r));
+      top.append(name, val);
+      const track = document.createElement('div');
+      track.className = 'ic-track';
+      const fill = document.createElement('div');
+      fill.className = 'ic-fill';
+      fill.style.width = `${(value(r) / max) * 100}%`;
+      fill.style.background = color;
+      track.appendChild(fill);
+      bar.append(top, track);
+      bar.addEventListener('pointerenter', () => {
+        const [head, lines] = describe(r);
+        tipLines(tip, head, lines);
+        tip.hidden = false;
+        placeTip(el, tip, bar.offsetLeft + (track.offsetWidth * value(r)) / max, bar.offsetTop);
+      });
+      bar.addEventListener('pointerleave', () => { tip.hidden = true; });
+      el.insertBefore(bar, tip);
+    });
+  }
+
+  function drawCrowded() {
+    const el = document.getElementById('crowded-bars');
+    if (!guard(el, 'workflows')) return;
+    const rows = dash.data('workflows').data
+      .filter((r) => r.id !== 'other')
+      .sort((a, b) => Number(b.session_share) - Number(a.session_share))
+      .slice(0, TOP_N);
+    drawBars(el, rows, {
+      value: (r) => Number(r.session_share),
+      label: (r) => r.workflow,
+      color: dash.colors[0],
+      describe: (r) => [r.area, [
+        `${pct(Number(r.session_share))} of sessions`,
+        `${int(Number(r.ideas))} ideas, ${int(Number(r.top_picks))} top picks`,
+        `Opus ${pct(Number(r.opus_share))} · Fable ${pct(Number(r.fable_share))}`,
+      ]],
+    });
+  }
+
+  function drawMechanisms() {
+    const el = document.getElementById('mechanism-bars');
+    if (!guard(el, 'mechanisms')) return;
+    const rows = dash.data('mechanisms').data.slice().sort((a, b) => Number(b.idea_share) - Number(a.idea_share));
+    drawBars(el, rows, {
+      value: (r) => Number(r.idea_share),
+      label: (r) => r.label,
+      color: dash.colors[1],
+      describe: (r) => [r.label, [`${pct(Number(r.idea_share))} of ideas`]],
+    });
+  }
+
+  function textWidth(svg, text) {
+    const t = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(text);
+    const w = t.node().getComputedTextLength();
+    t.remove();
+    return w;
+  }
+
+  function drawSaturation() {
+    const el = document.getElementById('saturation-chart');
+    if (!guard(el, 'saturation', 'coverage')) return;
+    el.replaceChildren();
+    const rows = dash.data('saturation').data.map((r) => ({ n: Number(r.sessions), k: Number(r.distinct_workflows) }));
+    const listed = dash.data('coverage').data[0].listed;
+    const w = Math.max(el.clientWidth, 260);
+    const h = 220;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', h).attr('viewBox', `0 0 ${w} ${h}`);
+    const yTicks = d3.ticks(0, listed, 4);
+    const left = d3.max(yTicks, (t) => textWidth(svg, int(t))) + 10;
+    const m = { t: 18, r: 12, b: 26, l: left };
+    const x = d3.scaleLinear([0, d3.max(rows, (d) => d.n)], [m.l, w - m.r]);
+    const y = d3.scaleLinear([0, listed], [h - m.b, m.t]);
+    const muted = 'var(--color-fg-muted)';
+
+    svg.append('g').selectAll('line').data(yTicks).join('line')
+      .attr('x1', m.l).attr('x2', w - m.r).attr('y1', (d) => y(d)).attr('y2', (d) => y(d))
+      .style('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
+    svg.append('g').selectAll('text').data(yTicks).join('text')
+      .attr('x', m.l - 8).attr('y', (d) => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end')
+      .style('fill', muted).style('font-size', 'var(--cds-font-size-caption)').text((d) => int(d));
+    const xTicks = x.ticks(Math.max(2, Math.floor((w - m.l) / 90)));
+    svg.append('g').selectAll('text').data(xTicks).join('text')
+      .attr('x', (d) => x(d)).attr('y', h - 6).attr('text-anchor', 'middle')
+      .style('fill', muted).style('font-size', 'var(--cds-font-size-caption)').text((d) => int(d));
+    svg.append('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', h - m.b).attr('y2', h - m.b)
+      .style('stroke', 'var(--cds-chart-axis)');
+
+    svg.append('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y(listed)).attr('y2', y(listed))
+      .style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 4');
+    svg.append('text').attr('x', w - m.r).attr('y', y(listed) - 6).attr('text-anchor', 'end')
+      .style('fill', muted).style('font-size', 'var(--cds-font-size-caption)').text(`${int(listed)} listed workflows`);
+
+    svg.append('path').datum(rows)
+      .attr('d', d3.line((d) => x(d.n), (d) => y(d.k)))
+      .style('fill', 'none').style('stroke', dash.colors[0]).attr('stroke-width', 2)
+      .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round');
+    const last = rows[rows.length - 1];
+    svg.append('circle').attr('cx', x(last.n)).attr('cy', y(last.k)).attr('r', 4).style('fill', dash.colors[0]);
+    svg.append('text').attr('x', x(last.n)).attr('y', y(last.k) + 18).attr('text-anchor', 'end')
+      .style('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(`${int(last.k)} pitched`);
+
+    const tip = makeTip(el);
+    const dot = svg.append('circle').attr('r', 4).style('fill', dash.colors[0]).style('stroke', 'var(--color-panel)').attr('stroke-width', 2).attr('visibility', 'hidden');
+    const bisect = d3.bisector((d) => d.n).center;
+    svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', w - m.l - m.r).attr('height', h - m.t - m.b)
+      .style('fill', 'transparent')
+      .on('pointermove', (event) => {
+        const [px] = d3.pointer(event);
+        const d = rows[bisect(rows, x.invert(px))];
+        dot.attr('cx', x(d.n)).attr('cy', y(d.k)).attr('visibility', 'visible');
+        tipLines(tip, `After ${int(d.n)} sessions`, [`${int(d.k)} distinct workflows`]);
+        tip.hidden = false;
+        const scale = el.clientWidth / w;
+        placeTip(el, tip, x(d.n) * scale, y(d.k));
+      })
+      .on('pointerleave', () => { tip.hidden = true; dot.attr('visibility', 'hidden'); });
+  }
+
+  function matches(r) {
+    const byStatus = table.filter === 'all'
+      || (table.filter === 'open' ? r.status === 'Never pitched' || r.status === 'Rare' : r.status === table.filter);
+    const q = table.query.trim().toLowerCase();
+    return byStatus && (!q || `${r.workflow} ${r.area}`.toLowerCase().includes(q));
+  }
+
+  function compare(a, b) {
+    const f = table.sort;
+    const av = NUMERIC.has(f) ? Number(a[f]) : String(a[f]);
+    const bv = NUMERIC.has(f) ? Number(b[f]) : String(b[f]);
+    return (av < bv ? -1 : av > bv ? 1 : 0) * table.dir;
+  }
+
+  function cell(text, cls) {
+    const td = document.createElement('td');
+    if (cls) td.className = cls;
+    td.textContent = text;
+    return td;
+  }
+
+  function drawTable() {
+    const body = document.getElementById('workflow-rows');
+    const ds = dash.data('workflows');
+    root.querySelectorAll('#workflow-table th').forEach((th) => {
+      const f = th.dataset.field;
+      th.setAttribute('aria-sort', f === table.sort ? (table.dir === 1 ? 'ascending' : 'descending') : 'none');
+    });
+    if (ds.status !== 'ok') {
+      const tr = document.createElement('tr');
+      const td = cell(ds.status === 'loading' ? '' : 'Failed to load', ds.status === 'loading' ? 'dash-skeleton' : 'ic-empty');
+      td.colSpan = 8;
+      tr.appendChild(td);
+      body.replaceChildren(tr);
+      return;
+    }
+    const rows = ds.data.filter(matches).sort(compare);
+    if (!rows.length) {
+      const tr = document.createElement('tr');
+      const td = cell('No workflows match this filter and search.', 'ic-empty');
+      td.colSpan = 8;
+      tr.appendChild(td);
+      body.replaceChildren(tr);
+      return;
+    }
+    body.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr');
+      tr.append(
+        cell(r.workflow),
+        cell(r.area),
+        cell(r.status, `ic-status ic-status-${STATUS_CLASS[r.status]}`),
+        cell(pct(Number(r.session_share)), 'ic-num'),
+        cell(int(Number(r.ideas)), 'ic-num ic-hide-narrow'),
+        cell(int(Number(r.top_picks)), 'ic-num ic-hide-narrow'),
+        cell(pct(Number(r.opus_share)), 'ic-num ic-hide-narrow'),
+        cell(pct(Number(r.fable_share)), 'ic-num ic-hide-narrow'),
+      );
+      return tr;
+    }));
+  }
+
+  document.getElementById('status-chips').addEventListener('click', (event) => {
+    const chip = event.target.closest('.ic-chip');
+    if (!chip) return;
+    table.filter = chip.dataset.filter;
+    root.querySelectorAll('#status-chips .ic-chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    drawTable();
+  });
+  document.getElementById('workflow-search').addEventListener('input', (event) => {
+    table.query = event.target.value;
+    drawTable();
+  });
+  root.querySelectorAll('.ic-sort').forEach((btn) => btn.addEventListener('click', () => {
+    const f = btn.dataset.sort;
+    table.dir = table.sort === f ? -table.dir : (NUMERIC.has(f) ? -1 : 1);
+    table.sort = f;
+    drawTable();
+  }));
+
+  dash.onData(() => {
+    fillValues();
+    drawCrowded();
+    drawMechanisms();
+    drawSaturation();
+    drawTable();
+  });
+})();
+</script>
