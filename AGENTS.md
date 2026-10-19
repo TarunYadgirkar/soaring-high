@@ -1,4 +1,4 @@
-# Part 260: BBS × Ramp hackathon
+# Soaring: BBS × Ramp hackathon
 
 Context for any agent or teammate working in this repo. Read this first. Keep it current: update **Status**, **Decisions** and **Open questions** at the end of every work session.
 
@@ -18,11 +18,11 @@ Context for any agent or teammate working in this repo. Read this first. Keep it
 
 Source files: [inputs/info.pdf](inputs/info.pdf) (info-session deck), [inputs/email.png](inputs/email.png) (announcement email).
 
-## The idea: Part 260
+## The idea: Soaring
 
-Team **Middle Seat**, technical track (working code and demo). The project is named after the regulation, 14 CFR Part 260.
+Team and project name: **Soaring**. Technical track (working code and demo).
 
-**Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights. Travelers accept credits instead, so the company's cash is lost. Part 260 finds every refund a company's Ramp cards are owed, proves each one, and gets the cash back.**
+**Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights. Travelers accept credits instead, so the company's cash is lost. Soaring finds every refund a company's Ramp cards are owed, proves each one, and gets the cash back.**
 
 How it works:
 
@@ -40,7 +40,7 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - **14 CFR 260.6 ([text](https://www.law.cornell.edu/cfr/text/14/260.6)):** the carrier owes a full refund (fare, taxes and ancillary fees) when the consumer rejects the changed flight, the rebooking or the credit, or doesn't respond before departure. Credits must be offered as an explicit alternative, with notice of the refund right, and must stay valid for at least 5 years. **Accepting a credit generally forfeits the refund.**
 - Refunds go to the original form of payment within 7 business days for card purchases (§260.10).
 - Parts of the rule are in statute: 49 U.S.C. 42305, from the FAA Reauthorization Act of 2024.
-- **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Part 260 doesn't claim.
+- **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Soaring doesn't claim.
 - **Exclude:** cancelled-and-renumbered flights that operate without a significant change. DOT is not enforcing refunds for those until July 7, 2027 ([Eckert Seamans](https://www.eckertseamans.com/stay-informed/blogs/aviation/enforcement-discretion-extended-as-applied-to-specific-refund-regulations)).
 - The US has no cash compensation for delays. DOT withdrew that proposal in Nov 2025.
 
@@ -111,7 +111,7 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 ## Decisions
 
-- Names: project **Part 260**, team **Middle Seat**. Earlier working name "Owed" was dropped as too generic.
+- Name: **Soaring** for both the team and the project (chosen by the team). Earlier working names "Owed" and "Part 260" were dropped.
 - Submit in the **technical** track. The rules engine, data join and eval are the differentiators, and technical execution is 35% of the score.
 - Keep the repo **private until Round 1 closes (Oct 22)** so other teams can't copy the idea. Then make it public and remove `inputs/` (the organizers' deck and email) first, including from git history.
 - Lead with airline refunds. SaaS renewals after cancellation and duplicate charges are secondary detectors.
@@ -122,12 +122,12 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 ## Open questions
 
-- Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Part 260 handle each case?
+- Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Soaring handle each case?
 - DOT's "Refund III" may narrow the definition of a cancelled flight. Recheck before the Nov 19 final.
-- Can Part 260 act for the company when the ticket is in an employee's name? Who files the DOT complaint?
+- Can Soaring act for the company when the ticket is in an employee's name? Who files the DOT complaint?
 - Which flight-status API, and what does historical data cost?
 - How do we get Ramp sandbox access as students?
-- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Part 260 claims US cash refunds owed to the company, found from card data.
+- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Soaring claims US cash refunds owed to the company, found from card data.
 
 ## Writing rules for copy (brief, slides, UI)
 
