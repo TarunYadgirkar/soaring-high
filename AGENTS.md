@@ -192,4 +192,14 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 _Use this section for handoffs: who is working on what, what's in flight, blockers, next steps._
 
+### Work split (proposed, owners not yet assigned)
+
+Put your name next to a part to claim it.
+
+| Part | Owner | Owns | Round 1 job (by Oct 22) | Build sprint (Oct 28 – Nov 7) |
+|---|---|---|---|---|
+| 1. Data | _open_ | Ramp sandbox and demo MCP, a seeded Gmail inbox, Claude reading airline emails into trip records, the flight-status API | Request Ramp sandbox access today (it may take days). Pick the flight-status API. | Card charge, email and flight record joined into one trip |
+| 2. Rules engine | _open_ | The 14 CFR 260 rules engine with cited clauses, and the eval on 50 seeded trips | Write the seeded trip cases, including near misses, rebooked flights and renumbered flights | The engine, plus precision and recall numbers to replace the placeholders in the video |
+| 3. Product and pitch | _open_ | Traveler alert, claim cards, admin approval screen, the escalation flow (refund request, DOT complaint, Stripe test-mode dispute), and the pitch | Record the video, fill in the roster, submit the form | UI, demo script and Q&A prep for the live final |
+
 - Oct 18 (Claude, session for siddrrsh): added **Ramp Intelligence** and **Risks** sections and Q&A answers. The brief text is unchanged. Next: decide whether a Ramp Intelligence line should replace one in the brief, and add rebooked-flight cases to the seeded trips.
