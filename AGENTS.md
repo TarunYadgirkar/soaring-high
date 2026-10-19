@@ -1,4 +1,4 @@
-# Owed: BBS × Ramp hackathon
+# Part 260: BBS × Ramp hackathon
 
 Context for any agent or teammate working in this repo. Read this first. Keep it current: update **Status**, **Decisions** and **Open questions** at the end of every work session.
 
@@ -18,9 +18,11 @@ Context for any agent or teammate working in this repo. Read this first. Keep it
 
 Source files: [inputs/info.pdf](inputs/info.pdf) (info-session deck), [inputs/email.png](inputs/email.png) (announcement email).
 
-## The idea: Owed
+## The idea: Part 260
 
-**Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights. Travelers accept credits instead, so the company's cash is lost. Owed finds every refund a company's Ramp cards are owed, proves each one, and gets the cash back.**
+Team **Middle Seat**, technical track (working code and demo). The project is named after the regulation, 14 CFR Part 260.
+
+**Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights. Travelers accept credits instead, so the company's cash is lost. Part 260 finds every refund a company's Ramp cards are owed, proves each one, and gets the cash back.**
 
 How it works:
 
@@ -38,7 +40,7 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - **14 CFR 260.6 ([text](https://www.law.cornell.edu/cfr/text/14/260.6)):** the carrier owes a full refund (fare, taxes and ancillary fees) when the consumer rejects the changed flight, the rebooking or the credit, or doesn't respond before departure. Credits must be offered as an explicit alternative, with notice of the refund right, and must stay valid for at least 5 years. **Accepting a credit generally forfeits the refund.**
 - Refunds go to the original form of payment within 7 business days for card purchases (§260.10).
 - Parts of the rule are in statute: 49 U.S.C. 42305, from the FAA Reauthorization Act of 2024.
-- **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Owed doesn't claim.
+- **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Part 260 doesn't claim.
 - **Exclude:** cancelled-and-renumbered flights that operate without a significant change. DOT is not enforcing refunds for those until July 7, 2027 ([Eckert Seamans](https://www.eckertseamans.com/stay-informed/blogs/aviation/enforcement-discretion-extended-as-applied-to-specific-refund-regulations)).
 - The US has no cash compensation for delays. DOT withdrew that proposal in Nov 2025.
 
@@ -48,9 +50,19 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - Ramp's AI flags duplicate subscription charges, but recovery is manual. Ramp has no disputes endpoint in its developer API.
 - Ramp developer API sandbox: `demo-api.ramp.com`, pre-seeded transactions, access by request form ([Ramp Help](https://support.ramp.com/hc/en-us/articles/46681939909907-Accessing-the-Developer-API)).
 
+### Ramp tooling (from github.com/ramp-public)
+
+- **Demo MCP server with sample data, no production account needed:** `https://demo-mcp.ramp.com/mcp`. Production is `https://mcp.ramp.com/mcp`. Source: [ramp-public/skills](https://github.com/ramp-public/skills).
+- **`ramp` CLI** ([ramp-public/ramp-cli](https://github.com/ramp-public/ramp-cli)) defaults to the sandbox. Install with `brew install ramp-public/ramp/ramp-cli`. Relevant commands: `transactions list|get|trips|memo-suggestions`, `travel list|bookings`, `receipts upload|attach`. Use `--agent` for JSON output.
+- **Python SDK** ([ramp-public/ramp-python](https://github.com/ramp-public/ramp-python)) defaults to the sandbox and uses `RAMP_CLIENT_ID` / `RAMP_CLIENT_SECRET`. It isn't on PyPI yet, so install it from the repo.
+- **Older MCP server** ([ramp-public/ramp_mcp](https://github.com/ramp-public/ramp_mcp)) has `load_transactions` (`transactions:read`) with `RAMP_ENV=demo`.
+- **Agent skills catalog:** [ramp-public/skills](https://github.com/ramp-public/skills). `npx skills add ramp-public/skills`.
+- **Sandbox access docs:** https://docs.ramp.com/developer-api/v1/sandbox-access
+- **Open:** trips booked through Ramp Travel (`travel bookings`) may give flight numbers directly with no email parsing. Check what the sandbox returns. Also check who is the merchant of record for Ramp Travel tickets, since that decides who owes the refund.
+
 ### Build stack (planned)
 
-- **Ramp developer API sandbox** for card transactions.
+- **Ramp sandbox API / demo MCP** for trips and card transactions.
 - **Claude** for reading airline emails into structured trip records.
 - **A flight-status API** for independent proof. FlightAware AeroAPI has historical data; compare cost and free tiers before choosing.
 - **Stripe Issuing test mode** for the dispute step. It can create test cards, authorizations and disputes with evidence, and forcing `winning_evidence` or `losing_evidence` settles the outcome in seconds ([docs](https://docs.stripe.com/issuing/purchases/disputes/how-to-submit)).
@@ -92,12 +104,16 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 - [x] Round 1 brief and video script drafted
 - [ ] Record the video (script in round1-brief.md; replace or cut the placeholder numbers in the 1:05 beat)
 - [ ] Submit Round 1 by Oct 22, 11:59 p.m. PT: https://forms.gle/oEb9ZhXFterxfr9d6
-- [ ] Request Ramp developer API sandbox access now; it may take days
+- [ ] Request Ramp developer API sandbox access now; it may take days. The demo MCP server works without it.
+- [ ] After Oct 22: remove `inputs/` from history, then make the repo public
 - [ ] Pick a flight-status API
 - [ ] Plan the build sprint (Oct 28 – Nov 7)
 
 ## Decisions
 
+- Names: project **Part 260**, team **Middle Seat**. Earlier working name "Owed" was dropped as too generic.
+- Submit in the **technical** track. The rules engine, data join and eval are the differentiators, and technical execution is 35% of the score.
+- Keep the repo **private until Round 1 closes (Oct 22)** so other teams can't copy the idea. Then make it public and remove `inputs/` (the organizers' deck and email) first, including from git history.
 - Lead with airline refunds. SaaS renewals after cancellation and duplicate charges are secondary detectors.
 - Entitlement comes from a rules engine with cited clauses, not an LLM judgment.
 - No voice call in the core pitch. It read as a gimmick.
@@ -106,12 +122,12 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 ## Open questions
 
-- Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Owed handle each case?
+- Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Part 260 handle each case?
 - DOT's "Refund III" may narrow the definition of a cancelled flight. Recheck before the Nov 19 final.
-- Can Owed act for the company when the ticket is in an employee's name? Who files the DOT complaint?
+- Can Part 260 act for the company when the ticket is in an employee's name? Who files the DOT complaint?
 - Which flight-status API, and what does historical data cost?
 - How do we get Ramp sandbox access as students?
-- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Owed claims US cash refunds owed to the company, found from card data.
+- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Part 260 claims US cash refunds owed to the company, found from card data.
 
 ## Writing rules for copy (brief, slides, UI)
 
