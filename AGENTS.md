@@ -1,4 +1,4 @@
-# Soaring Away: BBS × Ramp hackathon
+# Soaring High: BBS × Ramp hackathon
 
 Context for any agent or teammate working in this repo. Read this first. Keep it current: update **Status**, **Decisions** and **Open questions** at the end of every work session.
 
@@ -18,11 +18,11 @@ Context for any agent or teammate working in this repo. Read this first. Keep it
 
 Source files: [inputs/info.pdf](inputs/info.pdf) (info-session deck), [inputs/email.png](inputs/email.png) (announcement email).
 
-## The idea: Soaring Away
+## The idea: Soaring High
 
-Project: **Soaring Away**. Team: **Soaring**. Technical track (working code and demo).
+Project: **Soaring High**. Team: **Soaring**. Technical track (working code and demo).
 
-**Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights. Travelers accept credits instead, so the company's cash is lost. Soaring Away finds every refund a company's Ramp cards are owed, proves each one, and gets the cash back.**
+**Airlines legally owe cash refunds to the original card for cancelled and significantly changed flights. Travelers accept credits instead, so the company's cash is lost. Soaring High finds every refund a company's Ramp cards are owed, proves each one, and gets the cash back.**
 
 How it works:
 
@@ -40,7 +40,7 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - **14 CFR 260.6 ([text](https://www.law.cornell.edu/cfr/text/14/260.6)):** the carrier owes a full refund (fare, taxes and ancillary fees) when the consumer rejects the changed flight, the rebooking or the credit, or doesn't respond before departure. Credits must be offered as an explicit alternative, with notice of the refund right, and must stay valid for at least 5 years. **Accepting a credit generally forfeits the refund.**
 - Refunds go to the original form of payment within 7 business days for card purchases (§260.10).
 - Parts of the rule are in statute: 49 U.S.C. 42305, from the FAA Reauthorization Act of 2024.
-- **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Soaring Away doesn't claim.
+- **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Soaring High doesn't claim.
 - **Exclude:** cancelled-and-renumbered flights that operate without a significant change. DOT is not enforcing refunds for those until July 7, 2027 ([Eckert Seamans](https://www.eckertseamans.com/stay-informed/blogs/aviation/enforcement-discretion-extended-as-applied-to-specific-refund-regulations)).
 - The US has no cash compensation for delays. DOT withdrew that proposal in Nov 2025.
 
@@ -50,20 +50,20 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 - Ramp's AI flags duplicate subscription charges, but recovery is manual. Ramp has no disputes endpoint in its developer API.
 - Ramp developer API sandbox: `demo-api.ramp.com`, pre-seeded transactions, access by request form ([Ramp Help](https://support.ramp.com/hc/en-us/articles/46681939909907-Accessing-the-Developer-API)).
 
-### Ramp Intelligence: what Ramp already ships, and where Soaring Away fits
+### Ramp Intelligence: what Ramp already ships, and where Soaring High fits
 
 Checked Oct 18, 2026 against [ramp.com/intelligence](https://ramp.com/intelligence) and the [Policy Agent help article](https://support.ramp.com/policy-agent-overview).
 
 - **What it is:** Ramp Intelligence is the AI layer across Ramp's products. Its agents flag fraud, code expenses and invoices, enforce policy (they approve low-risk spend and escalate the rest), answer "is this in policy?" by text, compare software quotes against 85,000+ businesses, pay card-eligible vendors through their payment portals, and collect and match receipts.
-- **Closest precedent to Soaring Away:** "If the price drops, we'll catch it." Ramp watches booked hotels and rebooks when the price drops by $50 or more. So Ramp already watches a booking after purchase to save money. Soaring Away does the same for airfare after an airline cancels or significantly changes a flight.
-- **Same trust pattern:** Policy Agent shows its recommendation with its reasoning and the policy text it cites. Soaring Away's claims cite the 14 CFR 260 clause and the flight data in the same way, so judges will recognize the pattern.
+- **Closest precedent to Soaring High:** "If the price drops, we'll catch it." Ramp watches booked hotels and rebooks when the price drops by $50 or more. So Ramp already watches a booking after purchase to save money. Soaring High does the same for airfare after an airline cancels or significantly changes a flight.
+- **Same trust pattern:** Policy Agent shows its recommendation with its reasoning and the policy text it cites. Soaring High's claims cite the 14 CFR 260 clause and the flight data in the same way, so judges will recognize the pattern.
 - **The gap:** the Ramp Intelligence page mentions no refunds, disputes, airline credits or recovering money. Ramp's agents stop bad spend before it happens. Nothing gets money back after an airline owes it.
 - **Ramp Travel today** ([Ramp blog FAQ, June 2024](https://ramp.com/blog/10-frequently-asked-questions-about-ramp-travel)): cancelling a standard fare gives an airline credit, fully refundable fares go back to the Ramp card, unused airline credits can't yet be applied in Ramp, and Priceline handles booking support. That FAQ covers cancellations the traveler starts, not airline cancellations that owe a refund under §260.6. **Unverified:** whether Priceline is the merchant of record for Ramp Travel tickets (it decides who owes the refund).
-- **Pitch line:** "Ramp Intelligence already catches a hotel price drop after you book. Soaring Away catches the airfare refund after the airline cancels."
+- **Pitch line:** "Ramp Intelligence already catches a hotel price drop after you book. Soaring High catches the airfare refund after the airline cancels."
 
-How Soaring Away plugs into Ramp:
+How Soaring High plugs into Ramp:
 
-| Soaring Away step | Ramp piece it uses |
+| Soaring High step | Ramp piece it uses |
 |---|---|
 | Find trips and card charges | Developer API or demo MCP (`transactions`, `travel bookings`) |
 | Decide and cite entitlement | Our rules engine, in Policy Agent's cite-the-rule format |
@@ -102,21 +102,21 @@ Researched Oct 18, 2026. Not legal advice.
 **Law and compliance**
 
 - **No double recovery.** Airlines name chargebacks filed while a refund is pending as a top concern ([Chargebacks911](https://chargebacks911.com/airline-chargeback-data/), vendor survey). Rule for the build: never prepare a dispute while a refund is pending, and log the refund request first.
-- **Inbox access.** Travelers opt in, and Soaring Away reads only messages from airline senders and stores nothing else. California's privacy law covers employee data, so a company needs a notice at collection ([Baker McKenzie](https://insightplus.bakermckenzie.com/bm/data-technology/united-states-employers-must-prepare-now-for-new-california-employee-privacy-rights)). Airline emails often go to personal inboxes, which the company has no right to read without consent.
+- **Inbox access.** Travelers opt in, and Soaring High reads only messages from airline senders and stores nothing else. California's privacy law covers employee data, so a company needs a notice at collection ([Baker McKenzie](https://insightplus.bakermckenzie.com/bm/data-technology/united-states-employers-must-prepare-now-for-new-california-employee-privacy-rights)). Airline emails often go to personal inboxes, which the company has no right to read without consent.
 - **Gmail access in production.** Unverified: Gmail's read-only access is a Google "restricted" scope, which needs app verification and a yearly security assessment. Fine for the demo. Have an answer ready.
 - **Act through email and official refund forms**, not bots on airline websites, which airline terms usually prohibit.
 - **If a voice call ever comes back,** the agent must say it is an AI.
 
 **Ethics**
 
-- Some travelers keep credits in personal airline accounts and use them for personal trips. Present Soaring Away as helping travelers protect company money, with the traveler copied on everything, not as monitoring them.
-- Soaring Away alerts and recommends. It never moves or redeems a credit in the traveler's name.
+- Some travelers keep credits in personal airline accounts and use them for personal trips. Present Soaring High as helping travelers protect company money, with the traveler copied on everything, not as monitoring them.
+- Soaring High alerts and recommends. It never moves or redeems a credit in the traveler's name.
 
 **Patents and IP**
 
 - A light search found no patent on this workflow. "Match records, apply rules, file claims" is hard to patent under *Alice*, which also means we couldn't easily patent it.
 - The Round 1 video is a public disclosure: one-year US grace period to file a patent, none in most other countries.
-- Unverified: the hackathon's terms on IP ownership. Check before treating Soaring Away as a startup.
+- Unverified: the hackathon's terms on IP ownership. Check before treating Soaring High as a startup.
 
 ## Why this idea (the research)
 
@@ -162,7 +162,7 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 ## Decisions
 
-- Names: project **Soaring Away**, team **Soaring** (chosen by the team). Earlier working names "Owed", "Part 260" and "Soaring High" were dropped.
+- Names: project **Soaring High**, team **Soaring** (chosen by the team, Oct 21). Earlier working names "Owed", "Part 260" and "Soaring Away" were dropped.
 - Submit in the **technical** track. The rules engine, data join and eval are the differentiators, and technical execution is 35% of the score.
 - Keep the repo **private until Round 1 closes (Oct 22)** so other teams can't copy the idea. Then make it public and remove `inputs/` (the organizers' deck and email) first, including from git history.
 - Lead with airline refunds. SaaS renewals after cancellation and duplicate charges are secondary detectors.
@@ -173,12 +173,12 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 ## Open questions
 
-- Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Soaring Away handle each case?
+- Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Soaring High handle each case?
 - DOT's "Refund III" may narrow the definition of a cancelled flight. Recheck before the Nov 19 final.
-- Can Soaring Away act for the company when the ticket is in an employee's name? Who files the DOT complaint?
+- Can Soaring High act for the company when the ticket is in an employee's name? Who files the DOT complaint?
 - Which flight-status API, and what does historical data cost?
 - How do we get Ramp sandbox access as students?
-- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Soaring Away claims US cash refunds owed to the company, found from card data. The same answer covers Service and Gyro Autopilot.
+- "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Soaring High claims US cash refunds owed to the company, found from card data. The same answer covers Service and Gyro Autopilot.
 - "Doesn't Ramp already do this?" Answer: Ramp Intelligence prevents bad spend and catches hotel price drops, but nothing in Ramp recovers money an airline owes (see **Ramp Intelligence** above).
 - How many corporate trips are called off or rebooked on another airline, rather than flown on the rebooked flight? That is the real size of the refund pool.
 - Should the brief mention Ramp Intelligence? It is at 248 of 250 words, so a line would have to replace one.
