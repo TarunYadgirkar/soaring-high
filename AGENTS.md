@@ -152,7 +152,8 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 
 - [x] Simulation, dashboard and idea selection
 - [x] Round 1 brief and video script drafted
-- [ ] Record the video (script in round1-brief.md; replace or cut the placeholder numbers in the 1:05 beat)
+- [x] Rewrite the video script so it can be recorded before anything is built (two people on camera, four text cards, no made-up numbers)
+- [ ] Record the video (script and recording checklist in round1-brief.md)
 - [ ] Submit Round 1 by Oct 22, 11:59 p.m. PT: https://forms.gle/oEb9ZhXFterxfr9d6
 - [ ] Request Ramp developer API sandbox access now; it may take days. The demo MCP server works without it.
 - [ ] After Oct 22: remove `inputs/` from history, then make the repo public

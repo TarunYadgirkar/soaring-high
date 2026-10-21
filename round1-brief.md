@@ -12,19 +12,35 @@ Soaring Away joins all three. It pulls trips and card transactions from Ramp's A
 
 We will build on Ramp's sandbox API and MCP server, Claude, a flight-status API and Stripe Issuing test-mode disputes, and measure accuracy on 50 seeded trips.
 
-## Video pitch (about 100 seconds)
+## Other form answers
 
-| Time | On screen | Voiceover |
-|---|---|---|
-| 0:00 | A traveler's phone: "Your flight UA 1482 has been cancelled. Accept a $612 travel credit?" The thumb hovers over Accept. | "Your traveler's flight just got cancelled. The airline is offering a credit. One tap, and your company's $612 cash refund is gone." |
-| 0:12 | Text: "14 CFR 260: cancelled or 3+ hours late means a full refund to the original card." | "Federal rules say that money belongs back on your company card. Almost nobody claims it, because the proof is scattered." |
-| 0:25 | Three panels appear side by side: the Ramp charge, the airline email, a flight-status record showing CANCELLED. | "The charge is in Ramp. The cancellation is in an inbox. The flight record is public. Nobody puts them together." |
-| 0:38 | Soaring Away's alert on the traveler's phone: "Don't accept the credit. You're owed a refund. We've requested it." | "Soaring Away does. It catches the disruption as it happens and asks for the refund before the credit gets accepted." |
-| 0:52 | A claim card: amount, flight, the cited clause, the flight-data proof. | "Every claim cites the exact rule and the flight data behind it, so you can check every dollar." |
-| 1:05 | The board for past trips: "$9,840 owed across 19 trips." Then an eval panel: "50 seeded trips, 18 of 19 owed found, 1 false positive." | "It also finds refunds you're already owed, and we measure how often it's right." |
-| 1:20 | A refused claim turning into a dispute packet; the admin clicks Approve. Then the team on camera. | "If an airline says no, Soaring Away prepares the dispute for your approval. We're team Soaring, and we're building Soaring Away on Ramp's API." |
+**Workflow area:** Expense management and payments: recovering cash refunds that airlines owe on corporate card travel spend, including card disputes when an airline refuses.
 
-The board and eval numbers in the 1:05 beat are placeholders. Replace them with the real results from the build, or cut that beat for Round 1.
+**How we use AI tools:** Claude reads messy airline emails and receipts into structured trip records and drafts refund requests and DOT complaints. A Claude agent works with Ramp's data through Ramp's MCP server and developer API, pulling card transactions and travel bookings. A deterministic rules engine handles the legal decision, so the AI extracts and drafts but doesn't decide entitlement. Flight-status data supplies independent proof. Stripe Issuing test mode handles card disputes, and an evaluation harness measures precision and recall on seeded trips.
+
+## Video pitch (recordable today, about 1:45)
+
+The organizers ask only for "a 1–2 minute video pitch." Nothing is built yet, so this version needs no product screens: two people on camera, plus four text cards added in editing (CapCut, iMovie or Canva). Speaker A and Speaker B are whoever is on camera; a third teammate can take the last beat.
+
+| Time | Who | On screen | Say |
+|---|---|---|---|
+| 0:00 | A | A to camera, holding a phone | "Your coworker's flight just got cancelled. The airline offers a travel credit. They tap Accept, and your company's cash refund is gone for good." |
+| 0:12 | B | Card 1: **Cancelled, or 3+ hours late = full cash refund to the card that paid.** 14 CFR Part 260 | "That money belonged to the company. Under federal rules, a cancelled or badly delayed flight owes a full cash refund to the card that paid for it. Accept the credit and the refund is gone, and the credit sits in the traveler's personal airline account." |
+| 0:32 | A | Card 2: three boxes, **Ramp charge · Airline email · Flight record** | "Nobody catches this because the proof lives in three places. The charge is in Ramp. The cancellation email is in someone's inbox. The flight record is public data. Nobody puts them together." |
+| 0:47 | B | B to camera | "We're building Soaring Away to do that. It pulls trips and card charges from Ramp's API, reads the airline email with Claude, and checks the flight against real flight-status data. A rules engine decides what's owed, not a chatbot guess, and every claim cites the exact clause and the flight data behind it." |
+| 1:07 | A | Card 3: **Hold the credit. Request the refund. Escalate only with approval.** | "When a flight gets cancelled, it tells the traveler to hold off on the credit and requests the refund to the card. If the airline refuses, it drafts a DOT complaint, then a card dispute, each with the evidence attached and one click of admin approval." |
+| 1:25 | B | Card 4: **Ramp catches a hotel price drop after you book. We catch the airfare refund after the airline cancels.** | "Ramp already catches a hotel price drop after you book. Soaring Away catches the airfare refund after the airline cancels." |
+| 1:33 | A and B (or C) | Both on camera | "We'll build it on Ramp's sandbox and measure its accuracy on fifty test trips, including the near misses. We're team Soaring." |
+
+About 270 words. At a natural pace that lands between 1:40 and 1:50. If it runs over 2:00, cut the second sentence of the 0:12 beat first.
+
+### Recording checklist
+
+- Landscape, phone at eye level, window light on your faces, a quiet room. Do one take per beat; cuts between beats are fine.
+- Read from a laptop placed just behind the phone. Talk slower than feels natural.
+- Add the four cards as full-screen text in editing. Black text on white is fine.
+- Watch the cut once with the sound off. Each card should make sense on its own.
+- Export at 1080p, check the length is under 2:00, and upload where the form asks (if it wants a link, use YouTube "Unlisted" or a Google Drive link set to "Anyone with the link").
 
 ## Check before submitting
 
