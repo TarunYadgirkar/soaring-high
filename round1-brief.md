@@ -35,7 +35,7 @@ The form asks for a video "introducing your team, explaining the problem, and de
 | Time | Who | On screen | Say |
 |---|---|---|---|
 | 0:00 | A | A to camera, holding a phone | "Your coworker's flight just got cancelled. The airline offers a travel credit. They tap Accept, and your company's cash refund is gone for good." |
-| 0:10 | A and B | Both on camera, name captions | A: "I'm [name], [major]." B: "I'm [name], [major]. We're team Soaring from Berkeley." |
+| 0:10 | All three | All on camera, name captions | Tarun: "I'm Tarun, [major]." Aadi: "I'm Aadi, [major]." Dhruv: "I'm Dhruv, [major]. We're team Soaring from Berkeley." |
 | 0:18 | B | Card 1: **Cancelled, or 3+ hours late = full cash refund to the card that paid.** 14 CFR Part 260 | "That money belonged to the company. Under federal rules, a cancelled or badly delayed flight owes a full cash refund to the card that paid for it. Accept the credit and the refund is gone, and the credit sits in the traveler's personal airline account." |
 | 0:36 | A | Card 2: three boxes, **Ramp charge · Airline email · Flight record** | "Nobody catches this because the proof lives in three places. The charge is in Ramp. The cancellation email is in someone's inbox. The flight record is public data. Nobody puts them together." |
 | 0:50 | B | B to camera | "We're building Soaring Away to do that. It pulls trips and card charges from Ramp's API, reads the airline email with Claude, and checks the flight against real flight-status data. A rules engine decides what's owed, not a chatbot guess, and every claim cites the exact clause and the flight data behind it." |
