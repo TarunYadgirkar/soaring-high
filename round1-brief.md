@@ -30,20 +30,17 @@ Five pages. Required unless marked optional.
 
 ## Video pitch (recordable today, about 1:45)
 
-The form asks for a video "introducing your team, explaining the problem, and describing your proposed solution," as a Google Drive, Loom or unlisted YouTube link that anyone with the link can view. Nothing is built yet, so this version needs no product screens: two people on camera, plus four text cards added in editing (CapCut, iMovie or Canva). Speaker A and Speaker B are whoever is on camera; fill in the brackets.
+The form asks for a video "introducing your team, explaining the problem, and describing your proposed solution," as a Google Drive, Loom or unlisted YouTube link that anyone with the link can view. The team does its own intros in the first 30 seconds. The script below covers the problem and the solution in about 90 seconds, split by what each person plans to build. The cards are optional full-screen text added in editing.
 
-| Time | Who | On screen | Say |
+| Time | Who | Card (optional) | Say |
 |---|---|---|---|
-| 0:00 | A | A to camera, holding a phone | "Your coworker's flight just got cancelled. The airline offers a travel credit. They tap Accept, and your company's cash refund is gone for good." |
-| 0:10 | All three | All on camera, name captions | Tarun: "I'm Tarun, [major]." Aadi: "I'm Aadi, [major]." Dhruv: "I'm Dhruv, [major]. We're team Soaring from Berkeley." |
-| 0:18 | B | Card 1: **Cancelled, or 3+ hours late = full cash refund to the card that paid.** 14 CFR Part 260 | "That money belonged to the company. Under federal rules, a cancelled or badly delayed flight owes a full cash refund to the card that paid for it. Accept the credit and the refund is gone, and the credit sits in the traveler's personal airline account." |
-| 0:36 | A | Card 2: three boxes, **Ramp charge · Airline email · Flight record** | "Nobody catches this because the proof lives in three places. The charge is in Ramp. The cancellation email is in someone's inbox. The flight record is public data. Nobody puts them together." |
-| 0:50 | B | B to camera | "We're building Soaring High to do that. It pulls trips and card charges from Ramp's API, reads the airline email with Claude, and checks the flight against real flight-status data. A rules engine decides what's owed, not a chatbot guess, and every claim cites the exact clause and the flight data behind it." |
-| 1:10 | A | Card 3: **Hold the credit. Request the refund. Escalate only with approval.** | "When a flight gets cancelled, it tells the traveler to hold off on the credit and requests the refund to the card. If the airline refuses, it drafts a DOT complaint, then a card dispute, each with the evidence attached and one click of admin approval." |
-| 1:28 | B | Card 4: **Ramp catches a hotel price drop after you book. We catch the airfare refund after the airline cancels.** | "Ramp already catches a hotel price drop after you book. Soaring High catches the airfare refund after the airline cancels." |
-| 1:36 | A and B | Both on camera | "We'll build it on Ramp's sandbox and measure its accuracy on fifty test trips. Thanks for watching." |
+| 0:30 | Aadi | **Cancelled, or 3+ hours late = full cash refund to the card that paid.** 14 CFR Part 260 | "Here's the problem. When an airline cancels a flight, or it lands three or more hours late, federal rules say the airline owes a full cash refund to the card that paid. But airlines offer a travel credit instead, and travelers tap Accept. That one tap gives up the company's refund, and the credit lands in the employee's personal airline account, where finance can't use it." |
+| 0:52 | Dhruv | **Ramp charge · Airline email · Flight record** | "Nobody catches it because the proof is split three ways. The charge is in Ramp. The cancellation email is in someone's inbox. The flight record is public data. Nobody connects them." |
+| 1:03 | Tarun | | "Soaring High connects them. It pulls trips and card charges from Ramp's API, uses Claude to read the airline emails, and checks every flight against real flight-status data. Then a rules engine, not the AI, decides what's owed. Every claim cites the exact clause of the DOT rule and the flight data that proves it, so finance can check every dollar." |
+| 1:26 | Aadi | **Hold the credit. Request the refund. Escalate only with approval.** | "When a flight is disrupted, Soaring High tells the traveler to hold off on the credit and requests the refund to the company card. If the airline refuses, it drafts a DOT complaint, then a card dispute. Nothing gets sent until an admin approves it in one click." |
+| 1:43 | Dhruv | **Ramp catches a hotel price drop after you book. We catch the airfare refund after the airline cancels.** | "Ramp already catches a hotel price drop after you book. Soaring High catches the airfare refund after the airline cancels." |
 
-About 260 words. At a natural pace that lands between 1:45 and 1:55. If it runs over 2:00, cut the second sentence of the 0:18 beat first.
+About 215 words, which runs about 90 seconds at a natural pace. With 30 seconds of intros the video ends near 2:00, so keep the intros tight. If it runs long, cut "so finance can check every dollar" and "where finance can't use it."
 
 ### Recording checklist
 
