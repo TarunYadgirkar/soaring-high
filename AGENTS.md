@@ -155,7 +155,8 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 - [x] Rewrite the video script so it can be recorded before anything is built (two people on camera, four text cards, no made-up numbers)
 - [x] Record the video (script and recording checklist in round1-brief.md)
 - [x] Edit the video: Remotion project in `video/` (split-flap title, lower thirds, word captions, timed callouts). Render with `pnpm render` in `video/`; source clips and renders are gitignored, output copied to `assets/generated/video/`
-- [ ] Upload the video (Drive, Loom or unlisted YouTube, anyone with the link) and paste the link into the form
+- [x] Upload the video (Drive, anyone with the link) and paste the link into the form
+- [x] Form checked page by page on Oct 21; ready to submit
 - [ ] Submit Round 1 by Oct 22, 11:59 p.m. PT: https://forms.gle/oEb9ZhXFterxfr9d6
 - [ ] Request Ramp developer API sandbox access now; it may take days. The demo MCP server works without it.
 - [ ] After Oct 22: remove `inputs/` from history, then make the repo public
