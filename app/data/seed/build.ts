@@ -12,7 +12,7 @@ import type {
   TravelerResponse,
   Verdict,
 } from "../../lib/types";
-import { HOUR, MIN, human, isoAt, localMs } from "./time";
+import { HOUR, MIN, human, isoAt, localMs } from "../../lib/time";
 
 export const AS_OF = "2026-10-22T19:00:00Z";
 

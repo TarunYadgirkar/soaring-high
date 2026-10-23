@@ -1,5 +1,6 @@
 {
   "dataset": "seed",
+  "facts": "gold",
   "note": "Seeded, author-labeled cases. Not real-world accuracy.",
   "as_of": "2026-10-22T19:00:00Z",
   "trips": 50,

@@ -1,4 +1,4 @@
-import { airport } from "../../lib/airports";
+import { airport } from "./airports";
 
 function offsetMinutes(ms: number, tz: string): number {
   const name = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "longOffset" })

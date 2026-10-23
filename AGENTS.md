@@ -153,9 +153,12 @@ Repo: https://github.com/TarunYadgirkar/BBS-RAMP-Hack (private). Default branch 
 | [app/lib/types.ts](app/lib/types.ts) | Trip record: Ramp-shaped charges, airline emails, flight-status records, structured facts, and the engine's `Decision` |
 | [app/lib/rules/](app/lib/rules/) | The 14 CFR 260 rules engine (`engine.ts`), verbatim clause excerpts (`clauses.ts`), business days and federal holidays (`dates.ts`), unit tests |
 | [app/data/seed/](app/data/seed/) | The 50 seeded trips: case specs and labels (`cases.ts`), generator (`build.ts`), output (`trips.json`) |
+| [app/lib/ramp/](app/lib/ramp/) | Ramp demo MCP client and OAuth provider |
+| [app/lib/extract/](app/lib/extract/) | Claude email extraction: schema, call, merge into a trip, field comparison |
+| [app/lib/eval/score.ts](app/lib/eval/score.ts) | Shared precision, recall and report for both evals |
 | [app/scripts/](app/scripts/) | `pnpm seed` regenerates `trips.json`; `pnpm eval` prints precision and recall and writes `app/data/eval/latest.json` |
 
-In `app/`: `pnpm install`, then `pnpm test`, `pnpm seed`, `pnpm eval`, `pnpm typecheck`. None of these call a paid API.
+In `app/`: `pnpm install`, then `pnpm test`, `pnpm seed`, `pnpm eval`, `pnpm typecheck`. None of these call a paid API. `pnpm ramp:login` logs in to the Ramp demo MCP. `pnpm extract [--model M] [--limit N] [--max-usd 2]` calls the Anthropic API (costs money; reads `app/.env`), then `pnpm eval:e2e` scores the extracted facts.
 
 Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropic API key in a `.env` file (copy `.env.example`). Run them from the repo root, for example `uv run sim/report.py --tags pilot full`. Every script that calls the API spends real money; check `uv run sim/generate.py spend` first.
 
@@ -176,7 +179,13 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - [x] Piece 1: 50 seeded trips (26 positive, 24 negative) with near misses: 2h50m and 2h59m late, 2h59m earlier, 5h and 5h59m international, cabin upgrade, voluntary changes, renumbered flights (with and without a significant change), flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
 - [x] Piece 2: rules engine with cited clauses and proof, unit tests (boundaries, holidays, the July 7, 2027 date), and `pnpm eval`. On the seeded set: precision 100%, recall 100%, verdict and cited-clause match 100% (seeded, author-labeled; see Decisions). An independent agent re-labeled all 50 cases from the regulation text without seeing the engine: it agreed with every verdict, and its four basis corrections (T04, T05, T46, T49) and four missing near misses are applied. A mutation check (threshold 180 to 181 minutes) makes the eval fail on T08, so the eval does catch boundary bugs.
 - [ ] Teammate review of the 50 labels in `app/data/seed/cases.ts`
-- [ ] Piece 3: Ramp demo MCP client (needs OAuth login), Claude email extraction with an end-to-end eval, flight-status API
+- [ ] Piece 3: data join
+  - [x] Ramp demo MCP OAuth client (`pnpm ramp:login`): dynamic client registration, PKCE, tokens in `app/.ramp/` (gitignored), read-only scopes
+  - [ ] Tarun approves the Ramp login in a browser on taruns-macbook, then pull real demo transactions and bookings and align `RampTransaction` with them
+  - [x] Claude email extraction (`pnpm extract`, cached per trip, budget cap) and end-to-end eval (`pnpm eval:e2e`). The merge is unit-tested: a perfect extraction reproduces every gold fact and decision
+  - [ ] Add `ANTHROPIC_API_KEY` to `app/.env`, check spend, run the extraction, record the end-to-end numbers
+  - [x] Flight-status API compared (see Decisions): AeroDataBox via RapidAPI Basic
+  - [ ] Tarun signs up for AeroDataBox Basic and adds `AERODATABOX_RAPIDAPI_KEY` to `app/.env`; then build the adapter that maps it to `FlightStatus`
 - [ ] Piece 4: claim cards, traveler alert, admin approval, escalation drafts, Stripe Issuing test-mode dispute
 
 ## Decisions
@@ -198,6 +207,18 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - A traveler who buys another airline's ticket hasn't told the carrier anything, so the engine treats it as no response (§260.6(a)(2)(iii)), not as a rejection under (a)(2)(ii). The second Ramp charge is the proof they didn't fly.
 - An in-flight diversion is not a scheduled airport change under §260.2 ("scheduled to ... arrive at a different destination airport"), so it isn't a trigger by itself.
 - `not_owed` covers trips outside Part 260 (for example a London to Paris flight). `excluded` means only DOT enforcement discretion (renumbered flights).
+- **Flight-status API: AeroDataBox on RapidAPI, Basic plan** (compared Oct 22 against FlightAware AeroAPI, Aviationstack, FlightLabs, Cirium, OAG, AirLabs, OpenSky and BTS; sources in the session report). It's the only free plan with both 365 days of history and future schedules. Limits:
+  - 400 units a month at 2 units per flight lookup, so about 200 lookups. Cache every response.
+  - Free plan is non-commercial and needs a visible "AeroDataBox" credit with a link that does not use `noreferrer`.
+  - Endpoint: `GET https://aerodatabox.p.rapidapi.com/flights/number/{flightNumber}/{dateLocal}`.
+  - Statuses include `Canceled` and `Diverted`; times come as `scheduledTime` and `revisedTime`.
+  - Unverified: whether the arrival airport changes on a diversion.
+  - Pro is $8 a month if we outgrow the free plan; Tarun must approve that.
+  - FlightAware's free Personal tier only reaches 10 days back.
+- Ramp demo MCP login asks for read-only scopes only (`transactions:read trips:read users:read`). The MCP SDK by default requests every scope the server advertises, including `funds:write` and `bank_accounts:write`, so `FileOAuthProvider` narrows the authorization URL.
+- Email extraction defaults to `claude-opus-5-5` at effort `low`, with Zod structured outputs. `--model claude-haiku-5-5` is about 40 times cheaper per token; Tarun picks.
+  - Claude returns local wall-clock times and code converts them to offsets using the airport table, so the model never does timezone arithmetic.
+  - Facts that come from outside the inbox stay as joined: card charge ids, a traveler's reply, a second airline charge.
 - Out of scope for now: disability-specific changes (§260.6(b)), bag and ancillary-only refunds (§260.4, §260.5), refundable fares, multi-ticket round trips (one trip record is one direction of one ticket).
 
 ## Open questions
