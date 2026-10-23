@@ -497,8 +497,8 @@
     },
     "label": {
       "verdict": "refund_owed",
-      "basis": "260.6(a)(2)(ii)",
-      "why": "Booking a different airline instead of the offered rebooking rejects it. The second card charge proves it.",
+      "basis": "260.6(a)(2)(iii)(A)",
+      "why": "The airline was never told no, so this is no response to the rebooking, which then left without the traveler. The second card charge shows they flew another airline.",
       "title": "Cancelled, traveler flew another airline",
       "category": "cancelled"
     }
@@ -639,8 +639,8 @@
     },
     "label": {
       "verdict": "refund_owed",
-      "basis": "260.6(a)(2)(ii)",
-      "why": "Rejected a 10-hour-later rebooking by buying a Delta ticket.",
+      "basis": "260.6(a)(2)(iii)(A)",
+      "why": "No response to a 10-hour-later rebooking, which left without the traveler; they bought a Delta ticket instead.",
       "title": "Cancelled, traveler flew another airline",
       "category": "cancelled"
     }
@@ -2823,11 +2823,11 @@
     "charges": [
       {
         "transaction_uuid": "tx-T25-ticket",
-        "amount": "168.40",
-        "merchant_name": "United Airlines",
+        "amount": "231.60",
+        "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
-        "transaction_time": "2026-08-12T11:00:00.000Z",
+        "transaction_time": "2026-08-20T06:00:00.000Z",
         "spent_by_user": "Sofia Alvarez",
         "card": {
           "card_uuid": "card-sofia.alvarez",
@@ -2837,41 +2837,57 @@
           "is_physical_card": false
         },
         "trip_uuid": "trip-T25",
-        "trip_name": "Seattle trip"
+        "trip_name": "New York trip"
       }
     ],
     "emails": [
       {
         "id": "em-T25-purchase",
-        "from": "United Airlines <notifications@united.com>",
+        "from": "American Airlines <notifications@aa.com>",
         "to": "sofia.alvarez@northwind-labs.com",
-        "subject": "Your trip confirmation: SFO to SEA | ZCQYVW",
-        "received_at": "2026-08-12T11:02:00.000Z",
-        "body": "Thanks for booking with United Airlines, Sofia Alvarez.\n\nConfirmation: ZCQYVW\nTicket type: Main fare, nonrefundable\n\n  UA 455  SFO (San Francisco) Wed, Sep 2, 9:00 AM  ->  SEA (Seattle) Wed, Sep 2, 11:05 AM  economy\n\nAirfare and taxes: $168.40\nCharged to card ending 1460."
+        "subject": "Your trip confirmation: ORD to LGA | ZCQYVW",
+        "received_at": "2026-08-20T06:02:00.000Z",
+        "body": "Thanks for booking with American Airlines, Sofia Alvarez.\n\nConfirmation: ZCQYVW\nTicket type: Main fare, nonrefundable\n\n  AA 1612  ORD (Chicago) Thu, Sep 10, 6:00 AM  ->  LGA (New York) Thu, Sep 10, 9:15 AM  economy\n\nAirfare and taxes: $231.60\nCharged to card ending 1460."
       },
       {
-        "id": "em-T25-flown",
-        "from": "United Airlines <notifications@united.com>",
+        "id": "em-T25-change",
+        "from": "American Airlines <notifications@aa.com>",
         "to": "sofia.alvarez@northwind-labs.com",
-        "subject": "How was your flight to Seattle?",
-        "received_at": "2026-09-02T20:05:00.000Z",
-        "body": "Thanks for flying with us on trip ZCQYVW, Sofia Alvarez. Tell us about your experience."
+        "subject": "Your flight number has changed to AA 3140 | ZCQYVW",
+        "received_at": "2026-09-02T03:00:00.000Z",
+        "body": "AMERICAN AIRLINES TRIP UPDATE\nRecord locator ZCQYVW | Passenger SOFIA ALVAREZ\n\nYour flight number has changed to AA 3140.\nYour flight now operates under a new flight number.\n\nFlights booked:\n  AA 1612  ORD (Chicago) Thu, Sep 10, 6:00 AM  ->  LGA (New York) Thu, Sep 10, 9:15 AM  economy\n\nYour new itinerary:\n  AA 3140  ORD (Chicago) Thu, Sep 10, 9:20 AM  ->  LGA (New York) Thu, Sep 10, 12:35 PM  economy\n\nThis is an automated message. Do not reply."
       }
     ],
     "flight_status": [
       {
-        "id": "fs-UA455-2026-09-02",
-        "flight_number": "UA 455",
-        "date": "2026-09-02",
-        "origin": "SFO",
-        "destination": "SEA",
-        "status": "landed",
-        "scheduled_departure": "2026-09-02T09:00:00-07:00",
-        "scheduled_arrival": "2026-09-02T11:05:00-07:00",
+        "id": "fs-AA1612-2026-09-10",
+        "flight_number": "AA 1612",
+        "date": "2026-09-10",
+        "origin": "ORD",
+        "destination": "LGA",
+        "status": "cancelled",
+        "scheduled_departure": "2026-09-10T06:00:00-05:00",
+        "scheduled_arrival": "2026-09-10T09:15:00-04:00",
         "estimated_departure": null,
         "estimated_arrival": null,
-        "actual_departure": "2026-09-02T09:12:00-07:00",
-        "actual_arrival": "2026-09-02T11:17:00-07:00",
+        "actual_departure": null,
+        "actual_arrival": null,
+        "actual_destination": null,
+        "provider": "seed"
+      },
+      {
+        "id": "fs-AA3140-2026-09-10",
+        "flight_number": "AA 3140",
+        "date": "2026-09-10",
+        "origin": "ORD",
+        "destination": "LGA",
+        "status": "landed",
+        "scheduled_departure": "2026-09-10T09:20:00-05:00",
+        "scheduled_arrival": "2026-09-10T12:35:00-04:00",
+        "estimated_departure": null,
+        "estimated_arrival": null,
+        "actual_departure": "2026-09-10T09:20:00-05:00",
+        "actual_arrival": "2026-09-10T12:35:00-04:00",
         "actual_destination": null,
         "provider": "seed"
       }
@@ -2883,28 +2899,46 @@
       "service_fee_charge_ids": [],
       "original": [
         {
-          "flight_number": "UA 455",
-          "origin": "SFO",
-          "destination": "SEA",
-          "departure": "2026-09-02T09:00:00-07:00",
-          "arrival": "2026-09-02T11:05:00-07:00",
+          "flight_number": "AA 1612",
+          "origin": "ORD",
+          "destination": "LGA",
+          "departure": "2026-09-10T06:00:00-05:00",
+          "arrival": "2026-09-10T09:15:00-04:00",
           "cabin": "economy"
         }
       ],
-      "change": null,
+      "change": {
+        "kind": "renumbering",
+        "initiated_by": "carrier",
+        "notified_at": "2026-09-02T03:00:00.000Z",
+        "email_id": "em-T25-change",
+        "new_itinerary": [
+          {
+            "flight_number": "AA 3140",
+            "origin": "ORD",
+            "destination": "LGA",
+            "departure": "2026-09-10T09:20:00-05:00",
+            "arrival": "2026-09-10T12:35:00-04:00",
+            "cabin": "economy"
+          }
+        ],
+        "alternative_offered": true,
+        "credit_offered": false,
+        "credit_issued": false
+      },
       "response": {
-        "action": "flew",
-        "at": "2026-09-02T16:00:00.000Z",
-        "source": "email",
-        "ref": "em-T25-flown"
+        "action": "rejected",
+        "at": "2026-09-02T06:00:00.000Z",
+        "source": "traveler_reply",
+        "ref": "reply-T25"
       }
     },
     "label": {
-      "verdict": "not_owed",
-      "basis": "260.2/significant-change",
-      "why": "Landed 12 minutes late.",
-      "title": "On time",
-      "category": "on_time"
+      "verdict": "refund_owed",
+      "basis": "260.6(a)(2)(ii)",
+      "why": "The DOT notice only covers renumbered flights with no significant change. A 3h20m shift is significant, so the cancelled-flight refund stands.",
+      "title": "Renumbered and now arrives 3h20m later, traveler skipped",
+      "category": "renumbered"
     }
   },
   {
@@ -2913,11 +2947,11 @@
     "charges": [
       {
         "transaction_uuid": "tx-T26-ticket",
-        "amount": "344.10",
+        "amount": "264.90",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
-        "transaction_time": "2026-07-29T07:30:00.000Z",
+        "transaction_time": "2026-09-07T17:00:00.000Z",
         "spent_by_user": "Daniel Okafor",
         "card": {
           "card_uuid": "card-daniel.okafor",
@@ -2927,7 +2961,7 @@
           "is_physical_card": false
         },
         "trip_uuid": "trip-T26",
-        "trip_name": "Los Angeles trip"
+        "trip_name": "Denver trip"
       }
     ],
     "emails": [
@@ -2935,33 +2969,33 @@
         "id": "em-T26-purchase",
         "from": "Delta Air Lines <notifications@delta.com>",
         "to": "daniel.okafor@northwind-labs.com",
-        "subject": "Your trip confirmation: ATL to LAX | LYFNYY",
-        "received_at": "2026-07-29T07:32:00.000Z",
-        "body": "Thanks for booking with Delta Air Lines, Daniel Okafor.\n\nConfirmation: LYFNYY\nTicket type: Main fare, nonrefundable\n\n  DL 88  ATL (Atlanta) Wed, Aug 19, 8:30 AM  ->  LAX (Los Angeles) Wed, Aug 19, 10:20 AM  economy\n\nAirfare and taxes: $344.10\nCharged to card ending 9662."
+        "subject": "Your trip confirmation: ATL to DEN | LYFNYY",
+        "received_at": "2026-09-07T17:02:00.000Z",
+        "body": "Thanks for booking with Delta Air Lines, Daniel Okafor.\n\nConfirmation: LYFNYY\nTicket type: Main fare, nonrefundable\n\n  DL 1402  ATL (Atlanta) Mon, Sep 28, 6:00 PM  ->  DEN (Denver) Mon, Sep 28, 7:25 PM  economy\n\nAirfare and taxes: $264.90\nCharged to card ending 9662."
       },
       {
-        "id": "em-T26-flown",
+        "id": "em-T26-change",
         "from": "Delta Air Lines <notifications@delta.com>",
         "to": "daniel.okafor@northwind-labs.com",
-        "subject": "How was your flight to Los Angeles?",
-        "received_at": "2026-08-19T19:20:00.000Z",
-        "body": "Thanks for flying with us on trip LYFNYY, Daniel Okafor. Tell us about your experience."
+        "subject": "We've made a change to your itinerary | LYFNYY",
+        "received_at": "2026-09-18T22:00:00.000Z",
+        "body": "Hi Daniel, we've made a change to your itinerary.\nConf# LYFNYY\n\nWAS:\n  DL 1402  ATL (Atlanta) Mon, Sep 28, 6:00 PM  ->  DEN (Denver) Mon, Sep 28, 7:25 PM  economy\nDue to a schedule change, your flights have been updated.\nNOW:\n  DL 1402  ATL (Atlanta) Mon, Sep 28, 3:01 PM  ->  DEN (Denver) Mon, Sep 28, 4:26 PM  economy\n\nManage your trip in the app.\n\n-- Earn 2x miles on your next booking. Terms apply. --"
       }
     ],
     "flight_status": [
       {
-        "id": "fs-DL88-2026-08-19",
-        "flight_number": "DL 88",
-        "date": "2026-08-19",
+        "id": "fs-DL1402-2026-09-28",
+        "flight_number": "DL 1402",
+        "date": "2026-09-28",
         "origin": "ATL",
-        "destination": "LAX",
+        "destination": "DEN",
         "status": "landed",
-        "scheduled_departure": "2026-08-19T08:30:00-04:00",
-        "scheduled_arrival": "2026-08-19T10:20:00-07:00",
+        "scheduled_departure": "2026-09-28T15:01:00-04:00",
+        "scheduled_arrival": "2026-09-28T16:26:00-06:00",
         "estimated_departure": null,
         "estimated_arrival": null,
-        "actual_departure": "2026-08-19T08:30:00-04:00",
-        "actual_arrival": "2026-08-19T10:12:00-07:00",
+        "actual_departure": "2026-09-28T15:01:00-04:00",
+        "actual_arrival": "2026-09-28T16:26:00-06:00",
         "actual_destination": null,
         "provider": "seed"
       }
@@ -2973,28 +3007,46 @@
       "service_fee_charge_ids": [],
       "original": [
         {
-          "flight_number": "DL 88",
+          "flight_number": "DL 1402",
           "origin": "ATL",
-          "destination": "LAX",
-          "departure": "2026-08-19T08:30:00-04:00",
-          "arrival": "2026-08-19T10:20:00-07:00",
+          "destination": "DEN",
+          "departure": "2026-09-28T18:00:00-04:00",
+          "arrival": "2026-09-28T19:25:00-06:00",
           "cabin": "economy"
         }
       ],
-      "change": null,
+      "change": {
+        "kind": "schedule_change",
+        "initiated_by": "carrier",
+        "notified_at": "2026-09-18T22:00:00.000Z",
+        "email_id": "em-T26-change",
+        "new_itinerary": [
+          {
+            "flight_number": "DL 1402",
+            "origin": "ATL",
+            "destination": "DEN",
+            "departure": "2026-09-28T15:01:00-04:00",
+            "arrival": "2026-09-28T16:26:00-06:00",
+            "cabin": "economy"
+          }
+        ],
+        "alternative_offered": true,
+        "credit_offered": false,
+        "credit_issued": false
+      },
       "response": {
-        "action": "flew",
-        "at": "2026-08-19T12:30:00.000Z",
-        "source": "email",
-        "ref": "em-T26-flown"
+        "action": "rejected",
+        "at": "2026-09-19T01:00:00.000Z",
+        "source": "traveler_reply",
+        "ref": "reply-T26"
       }
     },
     "label": {
       "verdict": "not_owed",
       "basis": "260.2/significant-change",
-      "why": "Landed early.",
-      "title": "On time, early arrival",
-      "category": "on_time"
+      "why": "Departing earlier counts only at 3 hours or more domestically; 2h59m is one minute short.",
+      "title": "Near miss: departs 2h59m earlier, traveler skipped",
+      "category": "near_miss_threshold"
     }
   },
   {
@@ -3093,11 +3145,11 @@
     "charges": [
       {
         "transaction_uuid": "tx-T28-ticket",
-        "amount": "143.50",
+        "amount": "142.80",
         "merchant_name": "Southwest Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
-        "transaction_time": "2026-09-17T06:10:00.000Z",
+        "transaction_time": "2026-10-06T10:30:00.000Z",
         "spent_by_user": "Luis Ortega",
         "card": {
           "card_uuid": "card-luis.ortega",
@@ -3107,7 +3159,7 @@
           "is_physical_card": false
         },
         "trip_uuid": "trip-T28",
-        "trip_name": "Denver trip"
+        "trip_name": "San Diego trip"
       }
     ],
     "emails": [
@@ -3115,33 +3167,33 @@
         "id": "em-T28-purchase",
         "from": "Southwest Airlines <notifications@southwest.com>",
         "to": "luis.ortega@northwind-labs.com",
-        "subject": "Your trip confirmation: AUS to DEN | AQAPLT",
-        "received_at": "2026-09-17T06:12:00.000Z",
-        "body": "Thanks for booking with Southwest Airlines, Luis Ortega.\n\nConfirmation: AQAPLT\nTicket type: Main fare, nonrefundable\n\n  WN 515  AUS (Austin) Thu, Oct 8, 6:10 AM  ->  DEN (Denver) Thu, Oct 8, 7:35 AM  economy\n\nAirfare and taxes: $143.50\nCharged to card ending 7296."
+        "subject": "Your trip confirmation: PHX to SAN | AQAPLT",
+        "received_at": "2026-10-06T10:32:00.000Z",
+        "body": "Thanks for booking with Southwest Airlines, Luis Ortega.\n\nConfirmation: AQAPLT\nTicket type: Main fare, nonrefundable\n\n  WN 1780  PHX (Phoenix) Tue, Oct 27, 8:30 AM  ->  SAN (San Diego) Tue, Oct 27, 9:50 AM  economy\n\nAirfare and taxes: $142.80\nCharged to card ending 7296."
       },
       {
-        "id": "em-T28-flown",
+        "id": "em-T28-change",
         "from": "Southwest Airlines <notifications@southwest.com>",
         "to": "luis.ortega@northwind-labs.com",
-        "subject": "How was your flight to Denver?",
-        "received_at": "2026-10-08T15:35:00.000Z",
-        "body": "Thanks for flying with us on trip AQAPLT, Luis Ortega. Tell us about your experience."
+        "subject": "Your flight WN 1780 has been cancelled | AQAPLT",
+        "received_at": "2026-10-22T05:30:00.000Z",
+        "body": "Hi Luis, your flight wn 1780 has been cancelled.\nConf# AQAPLT\n\nWAS:\n  WN 1780  PHX (Phoenix) Tue, Oct 27, 8:30 AM  ->  SAN (San Diego) Tue, Oct 27, 9:50 AM  economy\nWe were unable to find an alternative flight. A travel credit for the full value of your ticket is available.\n\nYou may choose a refund to your original form of payment instead of accepting this travel credit or the new flight. Travel credits are valid for 5 years from issue.\n\nManage your trip in the app.\n\n-- Earn 2x miles on your next booking. Terms apply. --"
       }
     ],
     "flight_status": [
       {
-        "id": "fs-WN515-2026-10-08",
-        "flight_number": "WN 515",
-        "date": "2026-10-08",
-        "origin": "AUS",
-        "destination": "DEN",
-        "status": "landed",
-        "scheduled_departure": "2026-10-08T06:10:00-05:00",
-        "scheduled_arrival": "2026-10-08T07:35:00-06:00",
+        "id": "fs-WN1780-2026-10-27",
+        "flight_number": "WN 1780",
+        "date": "2026-10-27",
+        "origin": "PHX",
+        "destination": "SAN",
+        "status": "cancelled",
+        "scheduled_departure": "2026-10-27T08:30:00-07:00",
+        "scheduled_arrival": "2026-10-27T09:50:00-07:00",
         "estimated_departure": null,
         "estimated_arrival": null,
-        "actual_departure": "2026-10-08T06:10:00-05:00",
-        "actual_arrival": "2026-10-08T07:35:00-06:00",
+        "actual_departure": null,
+        "actual_arrival": null,
         "actual_destination": null,
         "provider": "seed"
       }
@@ -3153,28 +3205,37 @@
       "service_fee_charge_ids": [],
       "original": [
         {
-          "flight_number": "WN 515",
-          "origin": "AUS",
-          "destination": "DEN",
-          "departure": "2026-10-08T06:10:00-05:00",
-          "arrival": "2026-10-08T07:35:00-06:00",
+          "flight_number": "WN 1780",
+          "origin": "PHX",
+          "destination": "SAN",
+          "departure": "2026-10-27T08:30:00-07:00",
+          "arrival": "2026-10-27T09:50:00-07:00",
           "cabin": "economy"
         }
       ],
-      "change": null,
+      "change": {
+        "kind": "cancellation",
+        "initiated_by": "carrier",
+        "notified_at": "2026-10-22T05:30:00.000Z",
+        "email_id": "em-T28-change",
+        "new_itinerary": null,
+        "alternative_offered": false,
+        "credit_offered": true,
+        "credit_issued": false
+      },
       "response": {
-        "action": "flew",
-        "at": "2026-10-08T11:10:00.000Z",
-        "source": "email",
-        "ref": "em-T28-flown"
+        "action": "none",
+        "at": null,
+        "source": "none",
+        "ref": null
       }
     },
     "label": {
-      "verdict": "not_owed",
-      "basis": "260.2/significant-change",
-      "why": "Exactly on time.",
-      "title": "On time",
-      "category": "on_time"
+      "verdict": "hold_credit_alert",
+      "basis": "260.6(a)(1)",
+      "why": "Cancelled with only a credit offered and the scheduled departure still ahead. If the traveler doesn't accept, the refund becomes due on that date under (iii)(B).",
+      "title": "Live: Oct 27 flight cancelled, only a credit offered",
+      "category": "live_alert"
     }
   },
   {
@@ -3183,11 +3244,11 @@
     "charges": [
       {
         "transaction_uuid": "tx-T29-ticket",
-        "amount": "159.80",
-        "merchant_name": "Expedia",
-        "merchant_category": "Travel Agencies and Tour Operators",
+        "amount": "318.40",
+        "merchant_name": "United Airlines",
+        "merchant_category": "Airlines",
         "state": "CLEARED",
-        "transaction_time": "2026-08-22T13:15:00.000Z",
+        "transaction_time": "2026-09-09T13:00:00.000Z",
         "spent_by_user": "Grace Liu",
         "card": {
           "card_uuid": "card-grace.liu",
@@ -3197,41 +3258,41 @@
           "is_physical_card": false
         },
         "trip_uuid": "trip-T29",
-        "trip_name": "San Diego trip"
+        "trip_name": "Austin trip"
       }
     ],
     "emails": [
       {
         "id": "em-T29-purchase",
-        "from": "Expedia <notifications@expedia.com>",
+        "from": "United Airlines <notifications@united.com>",
         "to": "grace.liu@northwind-labs.com",
-        "subject": "Your trip confirmation: PDX to SAN | MKSCPV",
-        "received_at": "2026-08-22T13:17:00.000Z",
-        "body": "Thanks for booking with Expedia, Grace Liu.\n\nConfirmation: MKSCPV (airline confirmation GVFTLL)\nTicket type: Main fare, nonrefundable\n\n  AS 1024  PDX (Portland) Sat, Sep 12, 11:15 AM  ->  SAN (San Diego) Sat, Sep 12, 1:35 PM  economy\n\nAirfare and taxes: $159.80\nCharged to card ending 3805."
+        "subject": "Your trip confirmation: SFO to AUS | MKSCPV",
+        "received_at": "2026-09-09T13:02:00.000Z",
+        "body": "Thanks for booking with United Airlines, Grace Liu.\n\nConfirmation: MKSCPV\nTicket type: Main fare, nonrefundable\n\n  UA 2244  SFO (San Francisco) Wed, Sep 30, 11:00 AM  ->  AUS (Austin) Wed, Sep 30, 4:45 PM  economy\n\nAirfare and taxes: $318.40\nCharged to card ending 3805."
       },
       {
-        "id": "em-T29-flown",
-        "from": "Alaska Airlines <notifications@alaskaair.com>",
+        "id": "em-T29-change",
+        "from": "United Airlines <notifications@united.com>",
         "to": "grace.liu@northwind-labs.com",
-        "subject": "How was your flight to San Diego?",
-        "received_at": "2026-09-12T22:35:00.000Z",
-        "body": "Thanks for flying with us on trip MKSCPV, Grace Liu. Tell us about your experience."
+        "subject": "We've made a change to your itinerary | MKSCPV",
+        "received_at": "2026-09-25T18:00:00.000Z",
+        "body": "Dear Grace Liu,\n\nWe've made a change to your itinerary.\n\nConfirmation number: MKSCPV\n\nOriginal itinerary:\n  UA 2244  SFO (San Francisco) Wed, Sep 30, 11:00 AM  ->  AUS (Austin) Wed, Sep 30, 4:45 PM  economy\n\nDue to a schedule change, your flights have been updated.\n\nYour new itinerary:\n  UA 2244  SFO (San Francisco) Wed, Sep 30, 11:00 AM  ->  AUS (Austin) Wed, Sep 30, 4:45 PM  premium economy\n\nWe apologize for the inconvenience.\nUnited Airlines Customer Care"
       }
     ],
     "flight_status": [
       {
-        "id": "fs-AS1024-2026-09-12",
-        "flight_number": "AS 1024",
-        "date": "2026-09-12",
-        "origin": "PDX",
-        "destination": "SAN",
+        "id": "fs-UA2244-2026-09-30",
+        "flight_number": "UA 2244",
+        "date": "2026-09-30",
+        "origin": "SFO",
+        "destination": "AUS",
         "status": "landed",
-        "scheduled_departure": "2026-09-12T11:15:00-07:00",
-        "scheduled_arrival": "2026-09-12T13:35:00-07:00",
+        "scheduled_departure": "2026-09-30T11:00:00-07:00",
+        "scheduled_arrival": "2026-09-30T16:45:00-05:00",
         "estimated_departure": null,
         "estimated_arrival": null,
-        "actual_departure": "2026-09-12T11:55:00-07:00",
-        "actual_arrival": "2026-09-12T14:15:00-07:00",
+        "actual_departure": "2026-09-30T11:00:00-07:00",
+        "actual_arrival": "2026-09-30T16:45:00-05:00",
         "actual_destination": null,
         "provider": "seed"
       }
@@ -3243,28 +3304,46 @@
       "service_fee_charge_ids": [],
       "original": [
         {
-          "flight_number": "AS 1024",
-          "origin": "PDX",
-          "destination": "SAN",
-          "departure": "2026-09-12T11:15:00-07:00",
-          "arrival": "2026-09-12T13:35:00-07:00",
+          "flight_number": "UA 2244",
+          "origin": "SFO",
+          "destination": "AUS",
+          "departure": "2026-09-30T11:00:00-07:00",
+          "arrival": "2026-09-30T16:45:00-05:00",
           "cabin": "economy"
         }
       ],
-      "change": null,
+      "change": {
+        "kind": "schedule_change",
+        "initiated_by": "carrier",
+        "notified_at": "2026-09-25T18:00:00.000Z",
+        "email_id": "em-T29-change",
+        "new_itinerary": [
+          {
+            "flight_number": "UA 2244",
+            "origin": "SFO",
+            "destination": "AUS",
+            "departure": "2026-09-30T11:00:00-07:00",
+            "arrival": "2026-09-30T16:45:00-05:00",
+            "cabin": "premium_economy"
+          }
+        ],
+        "alternative_offered": true,
+        "credit_offered": false,
+        "credit_issued": false
+      },
       "response": {
-        "action": "flew",
-        "at": "2026-09-12T18:15:00.000Z",
-        "source": "email",
-        "ref": "em-T29-flown"
+        "action": "rejected",
+        "at": "2026-09-25T21:00:00.000Z",
+        "source": "traveler_reply",
+        "ref": "reply-T29"
       }
     },
     "label": {
       "verdict": "not_owed",
       "basis": "260.2/significant-change",
-      "why": "40 minutes late.",
-      "title": "On time, bought on Expedia",
-      "category": "on_time"
+      "why": "Only a downgrade to a lower class of service is significant. An upgrade with the same times and airports is not.",
+      "title": "Near miss: moved up to premium economy, traveler skipped",
+      "category": "near_miss_threshold"
     }
   },
   {
@@ -5133,8 +5212,8 @@
     },
     "label": {
       "verdict": "not_owed",
-      "basis": "260.6(a)(1)(ii)",
-      "why": "Accepted the seller's credit.",
+      "basis": "399.80(l)",
+      "why": "Accepted Expedia's credit instead of the refund Expedia owed under 399.80(l).",
       "title": "Bought on Expedia, cancelled, traveler took Expedia credit",
       "category": "credit"
     }
@@ -5439,8 +5518,8 @@
     },
     "label": {
       "verdict": "not_owed",
-      "basis": "260.6(a)(1)(i)",
-      "why": "Airport change, but the traveler flew the flight.",
+      "basis": "260.2/significant-change",
+      "why": "An in-flight diversion is not a scheduled airport change under 260.2, and 1h35m late is under 3 hours.",
       "title": "Diverted to OAK, traveler on board",
       "category": "flew_or_accepted"
     }

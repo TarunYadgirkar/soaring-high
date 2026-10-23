@@ -4,18 +4,18 @@
   "as_of": "2026-10-22T19:00:00Z",
   "trips": 50,
   "confusion": {
-    "tp": 24,
+    "tp": 26,
     "fp": 0,
     "fn": 0,
-    "tn": 26
+    "tn": 24
   },
   "precision": 1,
   "recall": 1,
   "f1": 1,
   "verdict_accuracy": 1,
   "basis_accuracy": 1,
-  "sample_owed_cents": 859100,
-  "sample_alert_cents": 245560,
+  "sample_owed_cents": 882260,
+  "sample_alert_cents": 259840,
   "by_category": {
     "cancelled": {
       "n": 8,
@@ -34,26 +34,26 @@
       "correct": 2
     },
     "live_alert": {
+      "n": 4,
+      "correct": 4
+    },
+    "renumbered": {
       "n": 3,
       "correct": 3
     },
-    "on_time": {
-      "n": 7,
-      "correct": 7
-    },
     "near_miss_threshold": {
-      "n": 4,
-      "correct": 4
+      "n": 6,
+      "correct": 6
+    },
+    "on_time": {
+      "n": 3,
+      "correct": 3
     },
     "flew_or_accepted": {
       "n": 5,
       "correct": 5
     },
     "voluntary": {
-      "n": 2,
-      "correct": 2
-    },
-    "renumbered": {
       "n": 2,
       "correct": 2
     },
@@ -125,11 +125,11 @@
       "category": "cancelled",
       "expected": {
         "verdict": "refund_owed",
-        "basis": "260.6(a)(2)(ii)"
+        "basis": "260.6(a)(2)(iii)(A)"
       },
       "got": {
         "verdict": "refund_owed",
-        "basis": "260.6(a)(2)(ii)",
+        "basis": "260.6(a)(2)(iii)(A)",
         "amount_cents": 19870
       },
       "verdict_match": true,
@@ -141,11 +141,11 @@
       "category": "cancelled",
       "expected": {
         "verdict": "refund_owed",
-        "basis": "260.6(a)(2)(ii)"
+        "basis": "260.6(a)(2)(iii)(A)"
       },
       "got": {
         "verdict": "refund_owed",
-        "basis": "260.6(a)(2)(ii)",
+        "basis": "260.6(a)(2)(iii)(A)",
         "amount_cents": 24180
       },
       "verdict_match": true,
@@ -457,24 +457,24 @@
     },
     {
       "trip_id": "T25",
-      "title": "On time",
-      "category": "on_time",
+      "title": "Renumbered and now arrives 3h20m later, traveler skipped",
+      "category": "renumbered",
       "expected": {
-        "verdict": "not_owed",
-        "basis": "260.2/significant-change"
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
       },
       "got": {
-        "verdict": "not_owed",
-        "basis": "260.2/significant-change",
-        "amount_cents": null
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 23160
       },
       "verdict_match": true,
       "basis_match": true
     },
     {
       "trip_id": "T26",
-      "title": "On time, early arrival",
-      "category": "on_time",
+      "title": "Near miss: departs 2h59m earlier, traveler skipped",
+      "category": "near_miss_threshold",
       "expected": {
         "verdict": "not_owed",
         "basis": "260.2/significant-change"
@@ -505,24 +505,24 @@
     },
     {
       "trip_id": "T28",
-      "title": "On time",
-      "category": "on_time",
+      "title": "Live: Oct 27 flight cancelled, only a credit offered",
+      "category": "live_alert",
       "expected": {
-        "verdict": "not_owed",
-        "basis": "260.2/significant-change"
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)"
       },
       "got": {
-        "verdict": "not_owed",
-        "basis": "260.2/significant-change",
-        "amount_cents": null
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)",
+        "amount_cents": 14280
       },
       "verdict_match": true,
       "basis_match": true
     },
     {
       "trip_id": "T29",
-      "title": "On time, bought on Expedia",
-      "category": "on_time",
+      "title": "Near miss: moved up to premium economy, traveler skipped",
+      "category": "near_miss_threshold",
       "expected": {
         "verdict": "not_owed",
         "basis": "260.2/significant-change"
@@ -797,11 +797,11 @@
       "category": "credit",
       "expected": {
         "verdict": "not_owed",
-        "basis": "260.6(a)(1)(ii)"
+        "basis": "399.80(l)"
       },
       "got": {
         "verdict": "not_owed",
-        "basis": "260.6(a)(1)(ii)",
+        "basis": "399.80(l)",
         "amount_cents": null
       },
       "verdict_match": true,
@@ -845,11 +845,11 @@
       "category": "flew_or_accepted",
       "expected": {
         "verdict": "not_owed",
-        "basis": "260.6(a)(1)(i)"
+        "basis": "260.2/significant-change"
       },
       "got": {
         "verdict": "not_owed",
-        "basis": "260.6(a)(1)(i)",
+        "basis": "260.2/significant-change",
         "amount_cents": null
       },
       "verdict_match": true,

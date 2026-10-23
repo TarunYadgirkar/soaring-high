@@ -72,7 +72,8 @@ function payeeFor(ticket: RampTransaction): Payee {
 }
 
 // The itinerary the carrier actually scheduled or flew, built from flight-status
-// data when there is no new itinerary in the airline's email.
+// data when there is no new itinerary in the airline's email. An in-flight
+// diversion is not a scheduled airport change under 260.2, so the destination stays.
 type Delivered = {
   segments: Segment[];
   source: "email" | "flight_status";
@@ -85,7 +86,6 @@ function deliveredFromStatus(original: Segment[], statuses: FlightStatus[]): Seg
       ...seg,
       departure: s.actual_departure ?? s.estimated_departure ?? seg.departure,
       arrival: s.actual_arrival ?? s.estimated_arrival ?? seg.arrival,
-      destination: s.actual_destination ?? seg.destination,
     };
   });
 }
@@ -334,8 +334,8 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
   if (r.action === "accepted_credit") {
     return done({
       verdict: "not_owed",
-      basis: "260.6(a)(1)(ii)",
-      reason: "The traveler affirmatively accepted the airline's credit, which gives up the cash refund.",
+      basis: payee.kind === "ticket_agent" ? "399.80(l)" : "260.6(a)(1)(ii)",
+      reason: "The traveler affirmatively accepted a credit instead of the refund, which gives up the cash refund.",
     });
   }
   if (r.action === "flew" || r.action === "accepted_rebooking") {
@@ -372,14 +372,14 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
   const asOfMs = Date.parse(opts.asOf);
 
   let outcome: Outcome;
-  if (r.action === "rejected" || r.action === "booked_other_carrier") {
+  // Buying another airline's ticket is not a rejection the carrier heard about,
+  // so it falls under the no-response paragraphs once the deadline passes.
+  const otherCarrier = r.action === "booked_other_carrier" ? " The traveler bought a ticket on another airline instead." : "";
+  if (r.action === "rejected") {
     outcome = {
       verdict: "refund_owed",
       basis: "260.6(a)(2)(ii)",
-      reason:
-        r.action === "booked_other_carrier"
-          ? "The traveler rejected the disrupted flight and flew another airline. The full fare is owed."
-          : "The traveler rejected the changed flight and the credit. The full fare is owed.",
+      reason: "The traveler rejected the changed flight and the credit. The full fare is owed.",
       triggerDate: r.at ?? opts.asOf,
     };
   } else if (Date.parse(deadline) > asOfMs) {
@@ -403,7 +403,7 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
     outcome = {
       verdict: "refund_owed",
       basis: "260.6(a)(2)(iii)(A)",
-      reason: "The traveler never responded to the changed or alternative flight, and it departed without them.",
+      reason: `The traveler never responded to the changed or alternative flight, and it departed without them.${otherCarrier}`,
       triggerDate: deadline,
     };
   } else if (change?.credit_offered) {

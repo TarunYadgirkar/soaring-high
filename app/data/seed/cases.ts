@@ -34,8 +34,8 @@ export const CASES: CaseSpec[] = [
     seg: { fn: "WN 2210", from: "DEN", to: "PHX", dep: "2026-10-02 13:20", mins: 110 },
     event: { kind: "cancel", noticeHoursBefore: 4, alternative: { fn: "WN 2218", shiftMin: 300 }, credit: true }, response: "booked_other_carrier",
     otherCarrier: { code: "AA", amount: 264.1 },
-    label: { verdict: "refund_owed", basis: "260.6(a)(2)(ii)" },
-    why: "Booking a different airline instead of the offered rebooking rejects it. The second card charge proves it.",
+    label: { verdict: "refund_owed", basis: "260.6(a)(2)(iii)(A)" },
+    why: "The airline was never told no, so this is no response to the rebooking, which then left without the traveler. The second card charge shows they flew another airline.",
   },
   {
     id: "T05", title: "Cancelled, traveler flew another airline", category: "cancelled",
@@ -43,8 +43,8 @@ export const CASES: CaseSpec[] = [
     seg: { fn: "B6 1003", from: "JFK", to: "MCO", dep: "2026-08-28 06:00", mins: 170 },
     event: { kind: "cancel", noticeHoursBefore: 8, alternative: { fn: "B6 1105", shiftMin: 600 }, credit: false }, response: "booked_other_carrier",
     otherCarrier: { code: "DL", amount: 302.5 },
-    label: { verdict: "refund_owed", basis: "260.6(a)(2)(ii)" },
-    why: "Rejected a 10-hour-later rebooking by buying a Delta ticket.",
+    label: { verdict: "refund_owed", basis: "260.6(a)(2)(iii)(A)" },
+    why: "No response to a 10-hour-later rebooking, which left without the traveler; they bought a Delta ticket instead.",
   },
   {
     id: "T06", title: "Cancelled, no response, rebooked flight left without them", category: "cancelled",
@@ -208,18 +208,20 @@ export const CASES: CaseSpec[] = [
 
   // On time
   {
-    id: "T25", title: "On time", category: "on_time",
-    traveler: "Sofia Alvarez", seller: "carrier", fare: 168.4,
-    seg: { fn: "UA 455", from: "SFO", to: "SEA", dep: "2026-09-02 09:00", mins: 125 },
-    event: { kind: "on_time", arriveDeltaMin: 12 }, response: "flew",
-    label: { verdict: "not_owed", basis: "260.2/significant-change" }, why: "Landed 12 minutes late.",
+    id: "T25", title: "Renumbered and now arrives 3h20m later, traveler skipped", category: "renumbered",
+    traveler: "Sofia Alvarez", seller: "carrier", fare: 231.6,
+    seg: { fn: "AA 1612", from: "ORD", to: "LGA", dep: "2026-09-10 06:00", mins: 135 },
+    event: { kind: "renumber", noticeHoursBefore: 200, newFn: "AA 3140", shiftMin: 200 }, response: "rejected",
+    label: { verdict: "refund_owed", basis: "260.6(a)(2)(ii)" },
+    why: "The DOT notice only covers renumbered flights with no significant change. A 3h20m shift is significant, so the cancelled-flight refund stands.",
   },
   {
-    id: "T26", title: "On time, early arrival", category: "on_time",
-    traveler: "Daniel Okafor", seller: "carrier", fare: 344.1,
-    seg: { fn: "DL 88", from: "ATL", to: "LAX", dep: "2026-08-19 08:30", mins: 290 },
-    event: { kind: "on_time", arriveDeltaMin: -8 }, response: "flew",
-    label: { verdict: "not_owed", basis: "260.2/significant-change" }, why: "Landed early.",
+    id: "T26", title: "Near miss: departs 2h59m earlier, traveler skipped", category: "near_miss_threshold",
+    traveler: "Daniel Okafor", seller: "carrier", fare: 264.9,
+    seg: { fn: "DL 1402", from: "ATL", to: "DEN", dep: "2026-09-28 18:00", mins: 205 },
+    event: { kind: "schedule_change", noticeHoursBefore: 240, depShiftMin: -179, arrShiftMin: -179 }, response: "rejected",
+    label: { verdict: "not_owed", basis: "260.2/significant-change" },
+    why: "Departing earlier counts only at 3 hours or more domestically; 2h59m is one minute short.",
   },
   {
     id: "T27", title: "On time, international", category: "on_time",
@@ -229,18 +231,20 @@ export const CASES: CaseSpec[] = [
     label: { verdict: "not_owed", basis: "260.2/significant-change" }, why: "25 minutes late.",
   },
   {
-    id: "T28", title: "On time", category: "on_time",
-    traveler: "Luis Ortega", seller: "carrier", fare: 143.5,
-    seg: { fn: "WN 515", from: "AUS", to: "DEN", dep: "2026-10-08 06:10", mins: 145 },
-    event: { kind: "on_time", arriveDeltaMin: 0 }, response: "flew",
-    label: { verdict: "not_owed", basis: "260.2/significant-change" }, why: "Exactly on time.",
+    id: "T28", title: "Live: Oct 27 flight cancelled, only a credit offered", category: "live_alert",
+    traveler: "Luis Ortega", seller: "carrier", fare: 142.8,
+    seg: { fn: "WN 1780", from: "PHX", to: "SAN", dep: "2026-10-27 08:30", mins: 80 },
+    event: { kind: "cancel", noticeHoursBefore: 130, credit: true }, response: "none",
+    label: { verdict: "hold_credit_alert", basis: "260.6(a)(1)" },
+    why: "Cancelled with only a credit offered and the scheduled departure still ahead. If the traveler doesn't accept, the refund becomes due on that date under (iii)(B).",
   },
   {
-    id: "T29", title: "On time, bought on Expedia", category: "on_time",
-    traveler: "Grace Liu", seller: "Expedia", fare: 159.8,
-    seg: { fn: "AS 1024", from: "PDX", to: "SAN", dep: "2026-09-12 11:15", mins: 140 },
-    event: { kind: "on_time", arriveDeltaMin: 40 }, response: "flew",
-    label: { verdict: "not_owed", basis: "260.2/significant-change" }, why: "40 minutes late.",
+    id: "T29", title: "Near miss: moved up to premium economy, traveler skipped", category: "near_miss_threshold",
+    traveler: "Grace Liu", seller: "carrier", fare: 318.4,
+    seg: { fn: "UA 2244", from: "SFO", to: "AUS", dep: "2026-09-30 11:00", mins: 225 },
+    event: { kind: "schedule_change", noticeHoursBefore: 120, cabin: "premium_economy" }, response: "rejected",
+    label: { verdict: "not_owed", basis: "260.2/significant-change" },
+    why: "Only a downgrade to a lower class of service is significant. An upgrade with the same times and airports is not.",
   },
   {
     id: "T30", title: "Late 1h35m", category: "on_time",
@@ -356,7 +360,7 @@ export const CASES: CaseSpec[] = [
     traveler: "Marcus Webb", seller: "carrier", fare: 233.1,
     seg: { fn: "UA 1123", from: "DEN", to: "SFO", dep: "2026-09-26 19:00", mins: 155 },
     event: { kind: "diverted", to: "OAK", lateMin: 95 }, response: "flew",
-    label: { verdict: "not_owed", basis: "260.6(a)(1)(i)" }, why: "Airport change, but the traveler flew the flight.",
+    label: { verdict: "not_owed", basis: "260.2/significant-change" }, why: "An in-flight diversion is not a scheduled airport change under 260.2, and 1h35m late is under 3 hours.",
   },
 
   // Credit accepted
@@ -379,7 +383,7 @@ export const CASES: CaseSpec[] = [
     traveler: "Hannah Kim", seller: "Expedia", fare: 248.3,
     seg: { fn: "DL 712", from: "MSP", to: "BOS", dep: "2026-10-16 09:00", mins: 170 },
     event: { kind: "cancel", noticeHoursBefore: 30, credit: true }, response: "accepted_credit",
-    label: { verdict: "not_owed", basis: "260.6(a)(1)(ii)" }, why: "Accepted the seller's credit.",
+    label: { verdict: "not_owed", basis: "399.80(l)" }, why: "Accepted Expedia's credit instead of the refund Expedia owed under 399.80(l).",
   },
 
   // Coverage, already refunded, missing data

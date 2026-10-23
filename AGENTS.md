@@ -173,8 +173,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - [ ] After Oct 22: remove `inputs/` from history, then make the repo public
 - [ ] Pick a flight-status API
 - [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
-- [x] Piece 1: 50 seeded trips (24 positive, 26 negative) with near misses: 2h50m and 2h59m late, 5h and 5h59m international, voluntary changes, renumbered flights, flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
-- [x] Piece 2: rules engine with cited clauses and proof, unit tests (boundaries, holidays, the July 7, 2027 date), and `pnpm eval`. On the seeded set: precision 100%, recall 100%, verdict and cited-clause match 100% (seeded, author-labeled; see Decisions)
+- [x] Piece 1: 50 seeded trips (26 positive, 24 negative) with near misses: 2h50m and 2h59m late, 2h59m earlier, 5h and 5h59m international, cabin upgrade, voluntary changes, renumbered flights (with and without a significant change), flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
+- [x] Piece 2: rules engine with cited clauses and proof, unit tests (boundaries, holidays, the July 7, 2027 date), and `pnpm eval`. On the seeded set: precision 100%, recall 100%, verdict and cited-clause match 100% (seeded, author-labeled; see Decisions). An independent agent re-labeled all 50 cases from the regulation text without seeing the engine: it agreed with every verdict, and its four basis corrections (T04, T05, T46, T49) and four missing near misses are applied. A mutation check (threshold 180 to 181 minutes) makes the eval fail on T08, so the eval does catch boundary bugs.
 - [ ] Teammate review of the 50 labels in `app/data/seed/cases.ts`
 - [ ] Piece 3: Ramp demo MCP client (needs OAuth login), Claude email extraction with an end-to-end eval, flight-status API
 - [ ] Piece 4: claim cards, traveler alert, admin approval, escalation drafts, Stripe Issuing test-mode dispute
@@ -195,6 +195,9 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - Who owes the refund comes from the ticket charge's Ramp `merchant_category`: "Airlines" means the carrier (§260.6(a)(1)), "Travel Agencies and Tour Operators" means the booking site (§399.80(l)). A booking-site refund is "upon request", so it gets no automatic due date.
 - The renumbered-flight exclusion applies when the original flight's scheduled departure date is before July 7, 2027. Assumption: the notice is read as covering flights in that window.
 - The eval numbers are on seeded cases whose labels the same author wrote, so 100% shows the engine matches our reading of the rule, not real-world accuracy. Label rationales are in `cases.ts`. The end-to-end eval in piece 3 (Claude-extracted records) is where real errors will show.
+- A traveler who buys another airline's ticket hasn't told the carrier anything, so the engine treats it as no response (§260.6(a)(2)(iii)), not as a rejection under (a)(2)(ii). The second Ramp charge is the proof they didn't fly.
+- An in-flight diversion is not a scheduled airport change under §260.2 ("scheduled to ... arrive at a different destination airport"), so it isn't a trigger by itself.
+- `not_owed` covers trips outside Part 260 (for example a London to Paris flight). `excluded` means only DOT enforcement discretion (renumbered flights).
 - Out of scope for now: disability-specific changes (§260.6(b)), bag and ancillary-only refunds (§260.4, §260.5), refundable fares, multi-ticket round trips (one trip record is one direction of one ticket).
 
 ## Open questions
@@ -205,6 +208,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - Which flight-status API, and what does historical data cost?
 - How do we get Ramp sandbox access as students?
 - Does the demo MCP OAuth login work without a Ramp account? Needed for piece 3.
+- If an airline offers a credit without the §260.6(c) notice (no statement of the refund right, or valid less than 5 years) and the traveler accepts it, does the acceptance still forfeit the refund? Not modeled yet.
+- Multi-segment itineraries are not seeded yet: a domestic leg of an international trip (the 6h threshold should apply to the whole itinerary) and a London to Paris leg on a single ticket from the US (a covered flight, unlike T47). Add them once the builder supports connections in the original booking.
 - When a traveler doesn't respond to a cancellation and the airline offered both a rebooking and a credit, the engine uses §260.6(a)(2)(iii)(A) (the rebooked flight left without them). (iii)(B) applies only when only a credit was offered. Confirm this reading.
 - "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Soaring High claims US cash refunds owed to the company, found from card data. The same answer covers Service and Gyro Autopilot.
 - "Doesn't Ramp already do this?" Answer: Ramp Intelligence prevents bad spend and catches hotel price drops, but nothing in Ramp recovers money an airline owes (see **Ramp Intelligence** above).
