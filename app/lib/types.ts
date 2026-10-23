@@ -28,7 +28,7 @@ export type AirlineEmail = {
   body: string;
 };
 
-export type FlightStatusState = "scheduled" | "delayed" | "landed" | "cancelled" | "diverted";
+export type FlightStatusState = "scheduled" | "delayed" | "active" | "landed" | "cancelled" | "diverted";
 
 // Normalized record from a flight-status provider. Times are ISO 8601 with offset.
 export type FlightStatus = {
@@ -45,7 +45,7 @@ export type FlightStatus = {
   actual_departure: string | null;
   actual_arrival: string | null;
   actual_destination: string | null;
-  provider: "seed";
+  provider: "seed" | "aerodatabox";
 };
 
 export type Cabin = "economy" | "premium_economy" | "business" | "first";

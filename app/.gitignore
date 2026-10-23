@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Ramp OAuth client and tokens
 /.ramp/
+
+# Flight-status API responses (AeroDataBox terms allow 7 days of storage)
+/.cache/

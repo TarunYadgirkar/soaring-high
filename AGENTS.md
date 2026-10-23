@@ -185,7 +185,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - [x] Claude email extraction (`pnpm extract`, cached per trip, budget cap) and end-to-end eval (`pnpm eval:e2e`). The merge is unit-tested: a perfect extraction reproduces every gold fact and decision
   - [ ] Add `ANTHROPIC_API_KEY` to `app/.env`, check spend, run the extraction, record the end-to-end numbers
   - [x] Flight-status API compared (see Decisions): AeroDataBox via RapidAPI Basic
-  - [ ] Tarun signs up for AeroDataBox Basic and adds `AERODATABOX_RAPIDAPI_KEY` to `app/.env`; then build the adapter that maps it to `FlightStatus`
+  - [x] AeroDataBox adapter (`app/lib/flightstatus/aerodatabox.ts`): maps responses to `FlightStatus`, caches in `app/.cache/` (gitignored, 7-day retention per their terms), stops at 190 lookups a month. `CanceledUncertain` counts as no proof. Mapping tested against the published response schema
+  - [ ] Tarun signs up for AeroDataBox Basic and adds `AERODATABOX_RAPIDAPI_KEY` to `app/.env`; then check real responses (time format, diversions) against the mapping
 - [ ] Piece 4: claim cards, traveler alert, admin approval, escalation drafts, Stripe Issuing test-mode dispute
 
 ## Decisions
