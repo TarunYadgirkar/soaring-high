@@ -38,10 +38,14 @@ The cash comes from the airline or the ticket seller, not from DOT. DOT enforces
 
 - **14 CFR 260.2 ([text](https://www.law.cornell.edu/cfr/text/14/260.2)):** a flight is "significantly delayed or changed" if it departs 3+ hours early or arrives 3+ hours late (6+ for international itineraries), if the departure or arrival airport changes, if connections are added, if the passenger is downgraded, or if accessibility changes for a passenger with a disability. A cancelled flight is a published flight that wasn't operated.
 - **14 CFR 260.6 ([text](https://www.law.cornell.edu/cfr/text/14/260.6)):** the carrier owes a full refund (fare, taxes and ancillary fees) when the consumer rejects the changed flight, the rebooking or the credit, or doesn't respond before departure. Credits must be offered as an explicit alternative, with notice of the refund right, and must stay valid for at least 5 years. **Accepting a credit generally forfeits the refund.**
-- Refunds go to the original form of payment within 7 business days for card purchases (§260.10).
+- Refunds go to the original form of payment with no processing fee (§260.10). The 7-business-day deadline for card purchases is in the **"Prompt refund" definition in §260.2**, counted from the date the refund became due under §260.6(a)(2), not in §260.10. (Checked against eCFR text current to Oct 21, 2026.)
+- **§260.7:** a carrier can't treat a traveler as having accepted a credit unless the traveler affirmatively agrees. A credit the airline drops into the account on its own does not forfeit the refund.
+- **Booking sites ([14 CFR 399.80(l)](https://www.ecfr.gov/current/title-14/section-399.80#p-399.80(l))):** when a ticket agent is the merchant of record, the ticket agent owes the refund, **upon request**, within 7 business days of hearing from the carrier (§260.6(d)–(e)). It may keep a disclosed per-passenger service fee. The merchant of record is whoever appears on the card statement, so the Ramp charge's merchant tells Soaring High who to ask.
+- Thresholds include the boundary: "three hours or more" (domestic) and "six or more" (international). 3h00m counts; 2h59m doesn't.
+- Covered flights are to, from or within the US (§260.2). A London to Paris flight on a company card is out of scope.
 - Parts of the rule are in statute: 49 U.S.C. 42305, from the FAA Reauthorization Act of 2024.
 - **The cause doesn't matter for refunds.** A weather cancellation still owes a refund. The DOT cause-code rule effective Oct 19, 2026 only narrows when airlines owe meals and hotels, which Soaring High doesn't claim.
-- **Exclude:** cancelled-and-renumbered flights that operate without a significant change. DOT is not enforcing refunds for those until July 7, 2027 ([Eckert Seamans](https://www.eckertseamans.com/stay-informed/blogs/aviation/enforcement-discretion-extended-as-applied-to-specific-refund-regulations)).
+- **Exclude:** cancelled-and-renumbered flights that operate without a significant change. DOT is not enforcing refunds for those until July 7, 2027. Primary source: [91 FR 41556, FR Doc. 2026-13675 (July 7, 2026)](https://www.federalregister.gov/documents/2026/07/07/2026-13675/airline-refunds-and-other-consumer-protections); summary by [Eckert Seamans](https://www.eckertseamans.com/stay-informed/blogs/aviation/enforcement-discretion-extended-as-applied-to-specific-refund-regulations). The discretion covers only renumbered flights with no significant change or delay.
 - The US has no cash compensation for delays. DOT withdrew that proposal in Nov 2025.
 
 ### Ramp facts, verified
@@ -73,7 +77,7 @@ How Soaring High plugs into Ramp:
 
 ### Ramp tooling (from github.com/ramp-public)
 
-- **Demo MCP server with sample data, no production account needed:** `https://demo-mcp.ramp.com/mcp`. Production is `https://mcp.ramp.com/mcp`. Source: [ramp-public/skills](https://github.com/ramp-public/skills).
+- **Demo MCP server with sample data:** `https://demo-mcp.ramp.com/mcp`. Checked Oct 22: it returns 401 without a bearer token and advertises OAuth (PKCE, authorize at `demo-mcp.ramp.com/oauth/authorize?auth_level=auto`, token at `demo-api.ramp.com/developer/v1/token/pkce`). Unverified whether the login needs a Ramp account. The response schemas (`get-transactions`, `get-bookings`) are public in [ramp-cli specs/agent-tool.json](https://github.com/ramp-public/ramp-cli/blob/main/src/ramp_cli/specs/agent-tool.json); the seeded charges mirror them. Production is `https://mcp.ramp.com/mcp`. Source: [ramp-public/skills](https://github.com/ramp-public/skills).
 - **`ramp` CLI** ([ramp-public/ramp-cli](https://github.com/ramp-public/ramp-cli)) defaults to the sandbox. Install with `brew install ramp-public/ramp/ramp-cli`. Relevant commands: `transactions list|get|trips|memo-suggestions`, `travel list|bookings`, `receipts upload|attach`. Use `--agent` for JSON output.
 - **Python SDK** ([ramp-public/ramp-python](https://github.com/ramp-public/ramp-python)) defaults to the sandbox and uses `RAMP_CLIENT_ID` / `RAMP_CLIENT_SECRET`. It isn't on PyPI yet, so install it from the repo.
 - **Older MCP server** ([ramp-public/ramp_mcp](https://github.com/ramp-public/ramp_mcp)) has `load_transactions` (`transactions:read`) with `RAMP_ENV=demo`.
@@ -145,8 +149,15 @@ Repo: https://github.com/TarunYadgirkar/BBS-RAMP-Hack (private). Default branch 
 | [sim/judge.py](sim/judge.py) | Simulated judge panel; `VERSION` and `PITCHES` select the round |
 | `data/` | Simulation responses, extracted ideas, judge results, spend ledger |
 | [assets/generated/dashboard/](assets/generated/dashboard/) | Source of the dashboard page |
+| [app/](app/) | The product: Next.js 16, TypeScript strict, Tailwind, pnpm. Node 22 (`app/.nvmrc`; pnpm 11 fails on node 20) |
+| [app/lib/types.ts](app/lib/types.ts) | Trip record: Ramp-shaped charges, airline emails, flight-status records, structured facts, and the engine's `Decision` |
+| [app/lib/rules/](app/lib/rules/) | The 14 CFR 260 rules engine (`engine.ts`), verbatim clause excerpts (`clauses.ts`), business days and federal holidays (`dates.ts`), unit tests |
+| [app/data/seed/](app/data/seed/) | The 50 seeded trips: case specs and labels (`cases.ts`), generator (`build.ts`), output (`trips.json`) |
+| [app/scripts/](app/scripts/) | `pnpm seed` regenerates `trips.json`; `pnpm eval` prints precision and recall and writes `app/data/eval/latest.json` |
 
-Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropic API key in a `.env` file (copy `.env.example`). Run them from the repo root, for example `uv run sim/report.py --tags pilot full`. Every script that calls the API spends real money; check `uv run sim/generate.py spend` first.
+In `app/`: `pnpm install`, then `pnpm test`, `pnpm seed`, `pnpm eval`, `pnpm typecheck`. None of these call a paid API.
+
+Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropic API key in a `.env` file (copy `.env.example`). Run them from the repo root, for example `uv run sim/report.py --tags pilot full`. Every script that calls the API spends real money; check `uv run sim/generate.py spend` first.
 
 ## Status
 
@@ -161,7 +172,12 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 - [ ] Request Ramp developer API sandbox access now; it may take days. The demo MCP server works without it.
 - [ ] After Oct 22: remove `inputs/` from history, then make the repo public
 - [ ] Pick a flight-status API
-- [ ] Plan the build sprint (Oct 28 – Nov 7)
+- [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
+- [x] Piece 1: 50 seeded trips (24 positive, 26 negative) with near misses: 2h50m and 2h59m late, 5h and 5h59m international, voluntary changes, renumbered flights, flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
+- [x] Piece 2: rules engine with cited clauses and proof, unit tests (boundaries, holidays, the July 7, 2027 date), and `pnpm eval`. On the seeded set: precision 100%, recall 100%, verdict and cited-clause match 100% (seeded, author-labeled; see Decisions)
+- [ ] Teammate review of the 50 labels in `app/data/seed/cases.ts`
+- [ ] Piece 3: Ramp demo MCP client (needs OAuth login), Claude email extraction with an end-to-end eval, flight-status API
+- [ ] Piece 4: claim cards, traveler alert, admin approval, escalation drafts, Stripe Issuing test-mode dispute
 
 ## Decisions
 
@@ -173,6 +189,13 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 - No voice call in the core pitch. It read as a gimmick.
 - Escalation order: refund request, then DOT complaint, then card dispute, each behind admin approval.
 - Don't present made-up results as real. Every number on a slide needs a source or a measurement.
+- The product lives in `app/` as one Next.js project. The rules engine is TypeScript in the same project so the UI imports it directly. `sim/` and `video/` stay separate.
+- Engine verdicts: `refund_owed`, `hold_credit_alert` (a qualifying disruption where the traveler hasn't responded and the flight hasn't left: the "don't accept the credit" moment), `not_owed`, `excluded` (renumbered flights under 91 FR 41556), `needs_info` (no independent flight-status record, so no claim). Precision and recall treat `refund_owed` and `hold_credit_alert` as positive.
+- Each decision has one `basis` clause that the eval checks, plus all supporting citations and proof rows that point at the card charge, the email and the flight-status record.
+- Who owes the refund comes from the ticket charge's Ramp `merchant_category`: "Airlines" means the carrier (§260.6(a)(1)), "Travel Agencies and Tour Operators" means the booking site (§399.80(l)). A booking-site refund is "upon request", so it gets no automatic due date.
+- The renumbered-flight exclusion applies when the original flight's scheduled departure date is before July 7, 2027. Assumption: the notice is read as covering flights in that window.
+- The eval numbers are on seeded cases whose labels the same author wrote, so 100% shows the engine matches our reading of the rule, not real-world accuracy. Label rationales are in `cases.ts`. The end-to-end eval in piece 3 (Claude-extracted records) is where real errors will show.
+- Out of scope for now: disability-specific changes (§260.6(b)), bag and ancillary-only refunds (§260.4, §260.5), refundable fares, multi-ticket round trips (one trip record is one direction of one ticket).
 
 ## Open questions
 
@@ -181,6 +204,8 @@ Running the scripts needs [uv](https://docs.astral.sh/uv/) and your own Anthropi
 - Can Soaring High act for the company when the ticket is in an employee's name? Who files the DOT complaint?
 - Which flight-status API, and what does historical data cost?
 - How do we get Ramp sandbox access as students?
+- Does the demo MCP OAuth login work without a Ramp account? Needed for piece 3.
+- When a traveler doesn't respond to a cancellation and the airline offered both a rebooking and a credit, the engine uses §260.6(a)(2)(iii)(A) (the rebooked flight left without them). (iii)(B) applies only when only a credit was offered. Confirm this reading.
 - "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Soaring High claims US cash refunds owed to the company, found from card data. The same answer covers Service and Gyro Autopilot.
 - "Doesn't Ramp already do this?" Answer: Ramp Intelligence prevents bad spend and catches hotel price drops, but nothing in Ramp recovers money an airline owes (see **Ramp Intelligence** above).
 - How many corporate trips are called off or rebooked on another airline, rather than flown on the rebooked flight? That is the real size of the refund pool.
@@ -207,3 +232,4 @@ Put your name next to a part to claim it.
 | 3. Product and pitch | _open_ | Traveler alert, claim cards, admin approval screen, the escalation flow (refund request, DOT complaint, Stripe test-mode dispute), and the pitch | Record the video, fill in the roster, submit the form | UI, demo script and Q&A prep for the live final |
 
 - Oct 18 (Claude, session for siddrrsh): added **Ramp Intelligence** and **Risks** sections and Q&A answers. The brief text is unchanged. Next: decide whether a Ramp Intelligence line should replace one in the brief, and add rebooked-flight cases to the seeded trips.
+- Oct 22 (Claude, session for Tarun, on taruns-macbook): built pieces 1 and 2 in `app/` (seeded trips, rules engine, tests, eval). Toolchain on this server: node 22 via nvm (`~/.nvm`), pnpm 11 via corepack, uv and gh from Homebrew. Next: piece 3. Get the demo MCP OAuth working, pick a flight-status API (compare free tiers, ask Tarun before anything paid), then Claude extraction of `emails` into `facts` with an end-to-end eval against the seeded gold facts.
