@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Claims read a local event log on every request, so pages render per request.
   turbopack: {
     rules: {
       "*.css": {

@@ -82,3 +82,22 @@ export function formatDuration(hours: number): string {
 export function localDate(iso: string): string {
   return iso.slice(0, 10);
 }
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Readable wall-clock time from an ISO timestamp, keeping its own offset:
+// "2026-10-24T13:00:00-07:00" -> "Oct 24, 2026, 1:00 PM local"; "...Z" -> "... UTC".
+export function wallClock(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(iso);
+  if (!m) return iso;
+  const [, y, mo, d, hh, mm] = m;
+  const h = Number(hh);
+  const zone = /(Z|\.\d{3}Z)$/.test(iso) ? "UTC" : "local";
+  return `${MONTHS[Number(mo) - 1]} ${Number(d)}, ${y}, ${h % 12 || 12}:${mm} ${h < 12 ? "AM" : "PM"} ${zone}`;
+}
+
+// "2026-11-02" -> "Nov 2"
+export function shortDay(date: string): string {
+  const [, mo, d] = date.slice(0, 10).split("-").map(Number);
+  return `${MONTHS[mo - 1]} ${d}`;
+}

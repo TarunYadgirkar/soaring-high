@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Flight-status API responses (AeroDataBox terms allow 7 days of storage)
 /.cache/
+
+# Demo claim events and clock
+/.data/

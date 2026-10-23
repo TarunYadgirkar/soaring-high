@@ -23,7 +23,7 @@ describe("escalation order", () => {
     expect(stage(decisionFor("T01"), [requested], "2026-10-30T12:00:00Z")).toBe("refund_pending");
     expect(allowed("T01", [requested], "2026-10-30T12:00:00Z")).toEqual([]);
     const dispute = actions(decisionFor("T01"), [requested], "2026-10-30T12:00:00Z").find((a) => a.kind === "open_dispute");
-    expect(dispute?.reason).toMatch(/pending until 2026-11-02/);
+    expect(dispute?.reason).toMatch(/pending until Nov 2/);
   });
 
   it("allows the DOT complaint once the request is overdue, then the dispute", () => {

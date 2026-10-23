@@ -14,7 +14,7 @@ import type {
   Verdict,
 } from "../types";
 import { cite, RENUMBER_DISCRETION_ENDS } from "./clauses";
-import { addBusinessDays, formatDuration, hoursBetween, localDate } from "./dates";
+import { addBusinessDays, formatDuration, hoursBetween, localDate, wallClock } from "./dates";
 
 export type EngineOptions = {
   asOf: string;
@@ -227,7 +227,7 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
       ref: change.email_id,
       field: "change.kind",
       value: change.kind,
-      note: `Airline notice received ${change.notified_at}.`,
+      note: `Airline notice received ${wallClock(change.notified_at)}.`,
     });
   }
 
@@ -263,7 +263,7 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
       ref: s.id,
       field: "status",
       value: "cancelled",
-      note: `${s.flight_number} ${s.origin} to ${s.destination} scheduled ${s.scheduled_departure} was not operated.`,
+      note: `${s.flight_number} ${s.origin} to ${s.destination} scheduled ${wallClock(s.scheduled_departure)} was not operated.`,
     });
   } else {
     const last = known[known.length - 1];
@@ -327,7 +327,7 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
       ref: r.ref ?? "none",
       field: "response.action",
       value: r.action,
-      note: `Recorded from ${r.source}${r.at ? ` at ${r.at}` : ""}.`,
+      note: `Recorded from ${r.source}${r.at ? ` at ${wallClock(r.at)}` : ""}.`,
     });
   }
 
@@ -388,7 +388,7 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
       {
         verdict: "hold_credit_alert",
         basis: "260.6(a)(1)",
-        reason: `Disruption qualifies and the traveler hasn't responded. Tell them not to accept the credit: rejecting the ${alternative ? "changed flight" : "offer"} before ${deadline} makes the full fare refundable to the card.`,
+        reason: `Disruption qualifies and the traveler hasn't responded. Tell them not to accept the credit: rejecting the ${alternative ? "changed flight" : "offer"} before ${wallClock(deadline)} makes the full fare refundable to the card.`,
       },
       owedCents,
     );

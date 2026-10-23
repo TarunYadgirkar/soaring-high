@@ -9,3 +9,6 @@ video/node_modules/
 video/out/
 video/public/*.mp4
 assets/generated/video/*.mp4
+
+# Playwright MCP screenshots and snapshots
+.playwright-mcp/

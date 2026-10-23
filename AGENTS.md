@@ -187,7 +187,13 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - [x] Flight-status API compared (see Decisions): AeroDataBox via RapidAPI Basic
   - [x] AeroDataBox adapter (`app/lib/flightstatus/aerodatabox.ts`): maps responses to `FlightStatus`, caches in `app/.cache/` (gitignored, 7-day retention per their terms), stops at 190 lookups a month. `CanceledUncertain` counts as no proof. Mapping tested against the published response schema
   - [ ] Tarun signs up for AeroDataBox Basic and adds `AERODATABOX_RAPIDAPI_KEY` to `app/.env`; then check real responses (time format, diversions) against the mapping
-- [ ] Piece 4: claim cards, traveler alert, admin approval, escalation drafts, Stripe Issuing test-mode dispute
+- [ ] Piece 4: product
+  - [x] Escalation rules (`app/lib/escalation/escalation.ts`): fixed order, refund request then DOT complaint then dispute. A dispute is blocked while a refund request is inside its 7-business-day window. Unit-tested
+  - [x] Deterministic drafts: traveler alert, refund request, DOT complaint, dispute evidence. Each cites the clauses and lists the proof
+  - [x] UI (`pnpm build && pnpm start`): claims board, claim page (boarding-pass header with the amount owed, the deciding clause quoted, evidence table, escalation steps with drafts and one-click approval), and an accuracy page that reads the eval output. Demo clock ("Skip 8 business days") and "Reset demo" make the overdue path showable. State lives in `app/.data/` (gitignored). Checked in a browser on Oct 22
+  - [ ] Stripe Issuing test-mode dispute: needs `STRIPE_SECRET_KEY=sk_test_...` from Tarun
+  - [ ] AeroDataBox credit line in the UI once live flight data is shown (required by its free-plan terms)
+  - [ ] Demo script (3 to 5 minutes) and screen recording for Nov 7
 
 ## Decisions
 
@@ -220,6 +226,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - Email extraction defaults to `claude-opus-5-5` at effort `low`, with Zod structured outputs. `--model claude-haiku-5-5` is about 40 times cheaper per token; Tarun picks.
   - Claude returns local wall-clock times and code converts them to offsets using the airport table, so the model never does timezone arithmetic.
   - Facts that come from outside the inbox stay as joined: card charge ids, a traveler's reply, a second airline charge.
+- The demo app has no login. Server actions re-check the escalation rules on every POST, so a crafted request can't skip a step. Add auth before anything leaves localhost.
+- UI type: Barlow Condensed (airport codes, amounts), Public Sans (interface), Source Serif 4 (quoted regulation only). Palette: ink navy, ticket paper, taxiway yellow only for money owed, stamp red only for blocked or refused. The board's "What happened" column comes from the engine's triggers, never from the eval labels.
 - Out of scope for now: disability-specific changes (§260.6(b)), bag and ancillary-only refunds (§260.4, §260.5), refundable fares, multi-ticket round trips (one trip record is one direction of one ticket).
 
 ## Open questions

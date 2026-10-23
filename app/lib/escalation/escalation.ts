@@ -1,4 +1,4 @@
-import { addBusinessDays, localDate } from "../rules/dates";
+import { addBusinessDays, localDate, shortDay } from "../rules/dates";
 import type { Decision } from "../types";
 
 export type ClaimEvent =
@@ -59,7 +59,8 @@ export function stage(decision: Decision, events: ClaimEvent[], asOf: string): C
 // so the company can't recover twice.
 export function actions(decision: Decision, events: ClaimEvent[], asOf: string): Action[] {
   const s = stage(decision, events, asOf);
-  const due = requestDueBy(events);
+  const dueBy = requestDueBy(events);
+  const due = dueBy ? shortDay(dueBy) : null;
   const unresolved = s === "refund_overdue" || s === "refund_refused";
   return [
     {
