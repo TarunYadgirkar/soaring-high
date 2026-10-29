@@ -172,7 +172,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - [x] Upload the video (Drive, anyone with the link) and paste the link into the form
 - [x] Form checked page by page on Oct 21; ready to submit
 - [x] Submit Round 1. Soaring advanced to the build round (email from [email removed], Oct 29)
-- [ ] Request Ramp developer API sandbox access. Form filled on Oct 29 ([email removed]); Tarun must tick the API agreement and submit himself. The demo MCP login turned out to require a Ramp account email, so sandbox access is likely the way in. Reply to BBS drafted in Tarun's Gmail asking for help getting it approved
+- [x] Request Ramp developer API sandbox access: submitted Oct 29 under [email removed] (sandbox "Soaring High (BBS x Ramp Hackathon)"); Ramp says it goes live by email. Reply sent to BBS ([email removed]) asking for help getting it approved. The demo MCP login needs a Ramp account email, so use the sandbox login once it arrives
+- [ ] Once the sandbox email arrives: log in, run `pnpm ramp:login`, pull real transactions and bookings
 - [ ] Remove `inputs/` from history, then make the repo public (or share it with the judges): Round 2 submission is the GitHub repository
 - [ ] Pick a flight-status API
 - [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
