@@ -126,3 +126,25 @@ describe("decisions over the seeded trips", () => {
     expect(JSON.stringify(trip)).toBe(before);
   });
 });
+
+describe("Ramp transaction formats", () => {
+  it("parses Ramp display amounts", async () => {
+    const { toCents } = await import("./engine");
+    expect(toCents("$435.56")).toBe(43556);
+    expect(toCents("$1,446.13")).toBe(144613);
+    expect(toCents("-$259.49")).toBe(-25949);
+    expect(() => toCents("435,56 EUR")).toThrow();
+  });
+
+  it("treats Egencia in Travel Misc as a booking site and Amtrak as unknown", () => {
+    const base = CASES.find((c) => c.id === "T19");
+    if (!base) throw new Error("T19");
+    const trip = buildTrip(base);
+    const withMerchant = (name: string) => ({
+      ...trip,
+      charges: trip.charges.map((c) => (c.transaction_uuid === trip.facts.ticket_charge_id ? { ...c, merchant_name: name, merchant_category: "Travel Misc" } : c)),
+    });
+    expect(decide(withMerchant("Egencia"), { asOf: AS_OF }).payee?.kind).toBe("ticket_agent");
+    expect(decide(withMerchant("Amtrak"), { asOf: AS_OF }).payee?.kind).toBe("unknown");
+  });
+});

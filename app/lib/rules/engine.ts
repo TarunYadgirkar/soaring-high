@@ -30,13 +30,17 @@ const CABIN_RANK: Record<Cabin, number> = {
   first: 3,
 };
 
+// Ramp files airlines under "Airlines". Booking sites land in "Travel Misc"
+// alongside rail and car rental, so they are recognized by merchant name.
 const CARRIER_CATEGORY = "Airlines";
-const TICKET_AGENT_CATEGORY = "Travel Agencies and Tour Operators";
+const TICKET_AGENTS = /\b(expedia|priceline|egencia|booking\.com|kiwi\.com|navan|travelperk|perk|orbitz|cheapoair|hotwire|kayak|trip\.com)\b/i;
 
+// Ramp returns amounts as display strings: "$1,446.13", "-$259.49".
 export function toCents(amount: string): number {
-  const value = Number(amount);
-  if (!Number.isFinite(value)) throw new Error(`Bad amount ${amount}`);
-  return Math.round(value * 100);
+  const m = /^(-)?\$?(-)?([\d,]+(?:\.\d{1,2})?)$/.exec(amount.trim());
+  if (!m) throw new Error(`Bad amount ${amount}`);
+  const cents = Math.round(Number(m[3].replace(/,/g, "")) * 100);
+  return m[1] || m[2] ? -cents : cents;
 }
 
 export function formatUsd(cents: number): string {
@@ -65,7 +69,7 @@ function payeeFor(ticket: RampTransaction): Payee {
   if (ticket.merchant_category === CARRIER_CATEGORY) {
     return { kind: "carrier", name: ticket.merchant_name, clause: "260.6(a)(1)" };
   }
-  if (ticket.merchant_category === TICKET_AGENT_CATEGORY) {
+  if (TICKET_AGENTS.test(ticket.merchant_name)) {
     return { kind: "ticket_agent", name: ticket.merchant_name, clause: "399.80(l)" };
   }
   return { kind: "unknown", name: ticket.merchant_name, clause: null };

@@ -152,6 +152,12 @@ function money(n: number): string {
   return n.toFixed(2);
 }
 
+// Ramp's display format for transaction amounts, e.g. "$1,446.13" or "-$259.49".
+function rampAmount(n: number): string {
+  const abs = Math.abs(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return `${n < 0 ? "-" : ""}$${abs}`;
+}
+
 function segment(fn: string, from: string, to: string, depMs: number, mins: number, cabin: Cabin): Segment {
   return {
     flight_number: fn,
@@ -261,7 +267,7 @@ export function buildTrip(spec: CaseSpec): SeedTrip {
     const id = `tx-${spec.id}-${suffix}`;
     charges.push({
       transaction_uuid: id,
-      amount: money(amount),
+      amount: rampAmount(amount),
       merchant_name: merchant,
       merchant_category: category,
       state: "CLEARED",
@@ -273,7 +279,7 @@ export function buildTrip(spec: CaseSpec): SeedTrip {
     });
     return id;
   };
-  const sellerCategory = spec.seller === "carrier" ? "Airlines" : "Travel Agencies and Tour Operators";
+  const sellerCategory = spec.seller === "carrier" ? "Airlines" : "Travel Misc";
   const ticketId = addCharge("ticket", spec.fare, sellerName, sellerCategory, purchaseMs);
   const ancillaryIds = (spec.ancillaries ?? []).map((a, i) =>
     addCharge(`anc${i + 1}`, a.amount, carrier.name, "Airlines", purchaseMs + (i + 1) * 3 * HOUR),

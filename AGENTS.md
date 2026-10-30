@@ -173,7 +173,15 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - [x] Form checked page by page on Oct 21; ready to submit
 - [x] Submit Round 1. Soaring advanced to the build round (email from [email removed], Oct 29)
 - [x] Request Ramp developer API sandbox access: submitted Oct 29 under [email removed] (sandbox "Soaring High (BBS x Ramp Hackathon)"); Ramp says it goes live by email. Reply sent to BBS ([email removed]) asking for help getting it approved. The demo MCP login needs a Ramp account email, so use the sandbox login once it arrives
-- [ ] Once the sandbox email arrives: log in, run `pnpm ramp:login`, pull real transactions and bookings
+- [x] Ramp demo MCP connected Oct 29 (`pnpm ramp:login`; Tarun approved in his Chrome and the one-time code was relayed to the build machine). 132 tools. `pnpm exec tsx scripts/ramp-probe.ts` saves samples to `app/data/ramp/sample-*.json` (gitignored)
+  - What the sandbox returns, compared with the seeds:
+    - Amounts are display strings (`"$1,446.13"`, `"-$259.49"`). `toCents` now parses them and the seeds use the same format.
+    - Airlines are `merchant_category: "Airlines"`.
+    - Booking sites such as Egencia sit in `"Travel Misc"` alongside Amtrak and Enterprise, so the engine identifies them by merchant name. The seeds now use "Travel Misc".
+    - Demo charges have `trip_uuid: null`, so charges and bookings don't join directly.
+  - Bookings: `ramp_get_bookings` returns `flight_booking_id`, flight number, airline, airports, times, cabin, trip, and `slices[]`. Slices include `is_refundable`, `fare_name` and `number_of_stops`. The sandbox has 4 flight bookings (AC 1521, UA 8565, AA 6020, B6 2153).
+  - `ramp_booking_cancellation_details` says Ramp Travel bookings are "managed by Duffel, Ramp's travel partner". Unverified: whether Duffel, the airline or Ramp is the merchant of record on the card. That decides who owes the refund.
+- [ ] Join sandbox bookings to airline charges (by airline and date, since `trip_uuid` is empty) and run the engine on real sandbox trips once flight-status data is connected
 - [ ] Remove `inputs/` from history, then make the repo public (or share it with the judges): Round 2 submission is the GitHub repository
 - [ ] Pick a flight-status API
 - [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22

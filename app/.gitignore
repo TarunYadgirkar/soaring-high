@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Demo claim events and clock
 /.data/
+
+# Raw Ramp sandbox responses (may include account names)
+/data/ramp/sample-*.json

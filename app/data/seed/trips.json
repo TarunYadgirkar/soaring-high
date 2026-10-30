@@ -5,7 +5,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T01-ticket",
-        "amount": "412.30",
+        "amount": "$412.30",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -23,7 +23,7 @@
       },
       {
         "transaction_uuid": "tx-T01-anc1",
-        "amount": "39.00",
+        "amount": "$39.00",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -124,7 +124,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T02-ticket",
-        "amount": "286.40",
+        "amount": "$286.40",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -142,7 +142,7 @@
       },
       {
         "transaction_uuid": "tx-T02-anc1",
-        "amount": "35.00",
+        "amount": "$35.00",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -243,7 +243,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T03-ticket",
-        "amount": "338.90",
+        "amount": "$338.90",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -367,7 +367,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T04-ticket",
-        "amount": "198.70",
+        "amount": "$198.70",
         "merchant_name": "Southwest Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -385,7 +385,7 @@
       },
       {
         "transaction_uuid": "tx-T04-other",
-        "amount": "264.10",
+        "amount": "$264.10",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -509,7 +509,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T05-ticket",
-        "amount": "241.80",
+        "amount": "$241.80",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -527,7 +527,7 @@
       },
       {
         "transaction_uuid": "tx-T05-other",
-        "amount": "302.50",
+        "amount": "$302.50",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -651,7 +651,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T06-ticket",
-        "amount": "176.20",
+        "amount": "$176.20",
         "merchant_name": "Alaska Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -775,7 +775,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T07-ticket",
-        "amount": "254.60",
+        "amount": "$254.60",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -874,7 +874,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T08-ticket",
-        "amount": "309.10",
+        "amount": "$309.10",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -973,7 +973,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T09-ticket",
-        "amount": "221.30",
+        "amount": "$221.30",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -991,7 +991,7 @@
       },
       {
         "transaction_uuid": "tx-T09-anc1",
-        "amount": "25.00",
+        "amount": "$25.00",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1092,7 +1092,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T10-ticket",
-        "amount": "498.20",
+        "amount": "$498.20",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1200,7 +1200,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T11-ticket",
-        "amount": "367.40",
+        "amount": "$367.40",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1308,7 +1308,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T12-ticket",
-        "amount": "455.00",
+        "amount": "$455.00",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1432,7 +1432,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T13-ticket",
-        "amount": "152.90",
+        "amount": "$152.90",
         "merchant_name": "Southwest Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1556,7 +1556,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T14-ticket",
-        "amount": "412.70",
+        "amount": "$412.70",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1704,7 +1704,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T15-ticket",
-        "amount": "1289.00",
+        "amount": "$1,289.00",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1812,7 +1812,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T16-ticket",
-        "amount": "1134.50",
+        "amount": "$1,134.50",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -1911,7 +1911,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T17-ticket",
-        "amount": "986.20",
+        "amount": "$986.20",
         "merchant_name": "Air France",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2010,7 +2010,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T18-ticket",
-        "amount": "219.80",
+        "amount": "$219.80",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2109,9 +2109,9 @@
     "charges": [
       {
         "transaction_uuid": "tx-T19-ticket",
-        "amount": "263.40",
+        "amount": "$263.40",
         "merchant_name": "Expedia",
-        "merchant_category": "Travel Agencies and Tour Operators",
+        "merchant_category": "Travel Misc",
         "state": "CLEARED",
         "transaction_time": "2026-08-26T16:00:00.000Z",
         "spent_by_user": "Omar Haddad",
@@ -2208,9 +2208,9 @@
     "charges": [
       {
         "transaction_uuid": "tx-T20-ticket",
-        "amount": "189.60",
+        "amount": "$189.60",
         "merchant_name": "Priceline",
-        "merchant_category": "Travel Agencies and Tour Operators",
+        "merchant_category": "Travel Misc",
         "state": "CLEARED",
         "transaction_time": "2026-08-04T13:30:00.000Z",
         "spent_by_user": "Maya Chen",
@@ -2226,9 +2226,9 @@
       },
       {
         "transaction_uuid": "tx-T20-fee",
-        "amount": "12.00",
+        "amount": "$12.00",
         "merchant_name": "Priceline",
-        "merchant_category": "Travel Agencies and Tour Operators",
+        "merchant_category": "Travel Misc",
         "state": "CLEARED",
         "transaction_time": "2026-08-04T13:31:00.000Z",
         "spent_by_user": "Maya Chen",
@@ -2327,7 +2327,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T21-ticket",
-        "amount": "301.20",
+        "amount": "$301.20",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2451,7 +2451,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T22-ticket",
-        "amount": "278.40",
+        "amount": "$278.40",
         "merchant_name": "Alaska Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2559,7 +2559,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T23-ticket",
-        "amount": "1876.00",
+        "amount": "$1,876.00",
         "merchant_name": "Japan Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2667,7 +2667,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T24-ticket",
-        "amount": "356.90",
+        "amount": "$356.90",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2685,7 +2685,7 @@
       },
       {
         "transaction_uuid": "tx-T24-anc1",
-        "amount": "49.00",
+        "amount": "$49.00",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2703,7 +2703,7 @@
       },
       {
         "transaction_uuid": "tx-T24-anc2",
-        "amount": "35.00",
+        "amount": "$35.00",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2721,7 +2721,7 @@
       },
       {
         "transaction_uuid": "tx-T24-refund",
-        "amount": "-356.90",
+        "amount": "-$356.90",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2823,7 +2823,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T25-ticket",
-        "amount": "231.60",
+        "amount": "$231.60",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -2947,7 +2947,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T26-ticket",
-        "amount": "264.90",
+        "amount": "$264.90",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3055,7 +3055,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T27-ticket",
-        "amount": "1045.70",
+        "amount": "$1,045.70",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3145,7 +3145,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T28-ticket",
-        "amount": "142.80",
+        "amount": "$142.80",
         "merchant_name": "Southwest Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3244,7 +3244,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T29-ticket",
-        "amount": "318.40",
+        "amount": "$318.40",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3352,7 +3352,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T30-ticket",
-        "amount": "298.60",
+        "amount": "$298.60",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3442,7 +3442,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T31-ticket",
-        "amount": "312.00",
+        "amount": "$312.00",
         "merchant_name": "Air Canada",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3532,7 +3532,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T32-ticket",
-        "amount": "386.30",
+        "amount": "$386.30",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3631,7 +3631,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T33-ticket",
-        "amount": "241.10",
+        "amount": "$241.10",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3738,7 +3738,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T34-ticket",
-        "amount": "1198.40",
+        "amount": "$1,198.40",
         "merchant_name": "Lufthansa",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3837,7 +3837,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T35-ticket",
-        "amount": "1086.90",
+        "amount": "$1,086.90",
         "merchant_name": "British Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -3936,7 +3936,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T36-ticket",
-        "amount": "184.30",
+        "amount": "$184.30",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4052,7 +4052,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T37-ticket",
-        "amount": "352.00",
+        "amount": "$352.00",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4151,7 +4151,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T38-ticket",
-        "amount": "276.50",
+        "amount": "$276.50",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4250,7 +4250,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T39-ticket",
-        "amount": "207.40",
+        "amount": "$207.40",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4374,7 +4374,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T40-ticket",
-        "amount": "233.80",
+        "amount": "$233.80",
         "merchant_name": "Delta Air Lines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4498,7 +4498,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T41-ticket",
-        "amount": "247.90",
+        "amount": "$247.90",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4630,7 +4630,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T42-ticket",
-        "amount": "129.60",
+        "amount": "$129.60",
         "merchant_name": "Southwest Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4762,7 +4762,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T43-ticket",
-        "amount": "212.40",
+        "amount": "$212.40",
         "merchant_name": "JetBlue Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -4869,7 +4869,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T44-ticket",
-        "amount": "274.90",
+        "amount": "$274.90",
         "merchant_name": "American Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -5001,7 +5001,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T45-ticket",
-        "amount": "421.70",
+        "amount": "$421.70",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -5117,9 +5117,9 @@
     "charges": [
       {
         "transaction_uuid": "tx-T46-ticket",
-        "amount": "248.30",
+        "amount": "$248.30",
         "merchant_name": "Expedia",
-        "merchant_category": "Travel Agencies and Tour Operators",
+        "merchant_category": "Travel Misc",
         "state": "CLEARED",
         "transaction_time": "2026-09-25T09:00:00.000Z",
         "spent_by_user": "Hannah Kim",
@@ -5224,7 +5224,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T47-ticket",
-        "amount": "189.00",
+        "amount": "$189.00",
         "merchant_name": "British Airways",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -5323,7 +5323,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T48-ticket",
-        "amount": "164.20",
+        "amount": "$164.20",
         "merchant_name": "Alaska Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -5341,7 +5341,7 @@
       },
       {
         "transaction_uuid": "tx-T48-refund",
-        "amount": "-164.20",
+        "amount": "-$164.20",
         "merchant_name": "Alaska Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -5440,7 +5440,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T49-ticket",
-        "amount": "233.10",
+        "amount": "$233.10",
         "merchant_name": "United Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
@@ -5530,7 +5530,7 @@
     "charges": [
       {
         "transaction_uuid": "tx-T50-ticket",
-        "amount": "167.30",
+        "amount": "$167.30",
         "merchant_name": "Southwest Airlines",
         "merchant_category": "Airlines",
         "state": "CLEARED",
