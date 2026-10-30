@@ -9,6 +9,7 @@ const VIEWS = {
     label: "In progress",
     test: (c: Claim) => ["refund_pending", "refund_overdue", "refund_refused", "dot_filed", "disputed", "alerted", "recovered"].includes(c.stage),
   },
+  ramp: { label: "Ramp sandbox", test: (c: Claim) => c.trip.source === "ramp_sandbox" },
   all: { label: "All trips", test: () => true },
 } as const;
 type View = keyof typeof VIEWS;
@@ -100,7 +101,10 @@ function BoardRow({ c }: { c: Claim }) {
           </span>
         </Link>
       </td>
-      <td className="hidden px-4 py-3 text-sm md:table-cell">{c.trip.traveler}</td>
+      <td className="hidden px-4 py-3 text-sm md:table-cell">
+        {c.trip.traveler}
+        {c.trip.source === "ramp_sandbox" && <span className="block text-xs text-ink-soft">From Ramp sandbox</span>}
+      </td>
       <td className="hidden max-w-xs px-4 py-3 text-sm lg:table-cell">{whatHappened(c.decision)}</td>
       <td className="hidden px-4 py-3 text-sm sm:table-cell">{ruleLabel(c.decision.basis)}</td>
       <td className="px-4 py-3 text-right">

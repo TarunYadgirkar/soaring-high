@@ -181,7 +181,13 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
     - Demo charges have `trip_uuid: null`, so charges and bookings don't join directly.
   - Bookings: `ramp_get_bookings` returns `flight_booking_id`, flight number, airline, airports, times, cabin, trip, and `slices[]`. Slices include `is_refundable`, `fare_name` and `number_of_stops`. The sandbox has 4 flight bookings (AC 1521, UA 8565, AA 6020, B6 2153).
   - `ramp_booking_cancellation_details` says Ramp Travel bookings are "managed by Duffel, Ramp's travel partner". Unverified: whether Duffel, the airline or Ramp is the merchant of record on the card. That decides who owes the refund.
-- [ ] Join sandbox bookings to airline charges (by airline and date, since `trip_uuid` is empty) and run the engine on real sandbox trips once flight-status data is connected
+- [x] Sandbox join (`pnpm ramp:sync`, logic in `app/lib/ramp/join.ts`, tested on a trimmed fixture of the sandbox responses):
+  - Pulls all business transactions (paginated) and the acting user's flight bookings.
+  - Matches a booking to an "Airlines" charge from the same airline, within 60 days before departure up to departure day. The charge memo must name the route or the destination city; a same-airline charge alone could be wifi or a bag fee, so it isn't enough.
+  - Writes trips to `app/.data/ramp-trips.json` (gitignored). The app lists them under a "Ramp sandbox" filter and shows how each trip was joined.
+  - Result on Oct 29: 1 of 4 bookings joined (AC 1521 LGA to YYZ, the $435.56 Air Canada charge with memo "Flight to Toronto"). The other three have no route-matching ticket charge (B6 2153 has only $10 wifi charges; AA 6020's only candidate memo is "Flight for work trip"), so the join reports them instead of guessing.
+  - The joined trip shows "Not proven yet": with no flight-status record, the engine won't claim anything.
+- [ ] Flight data for sandbox trips: the sandbox flight numbers look synthetic (UA 8565 DCA-DEN), so AeroDataBox may have no record of them. If so, demo the sandbox trip as "joined from Ramp, waiting for proof" and keep the seeded trips for the full refund flow
 - [ ] Remove `inputs/` from history, then make the repo public (or share it with the judges): Round 2 submission is the GitHub repository
 - [ ] Pick a flight-status API
 - [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22

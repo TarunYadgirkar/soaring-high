@@ -1,0 +1,223 @@
+{
+  "note": "Trimmed responses from Ramp's demo sandbox (fictional company), Oct 29, 2026.",
+  "flights": [
+    {
+      "booking_request_id": null,
+      "flight_booking_id": "65e7eae6-c76b-44f6-a5aa-b34d1607b8a8",
+      "display_name": "One-way flight to Toronto",
+      "flight_number": "AC 1521",
+      "airline": "Air Canada",
+      "departure_airport": "LGA",
+      "arrival_airport": "YYZ",
+      "departure_time": "2026-11-17T18:07:21-05:00",
+      "arrival_time": "2026-11-17T22:07:21-05:00",
+      "cabin_class": "Economy",
+      "status": "CONFIRMED",
+      "approval_display_status": null,
+      "ticketing_status": null,
+      "error_message": null,
+      "trip_name": "Client Visits in Toronto",
+      "trip_id": "b85ccbe6-6539-442f-8e25-25d786969b4e",
+      "booked_at": "2026-10-29T23:07:23+00:00",
+      "slices": [
+        {
+          "flight_number": "AC 1521",
+          "airline": "Air Canada",
+          "departure_airport": "LGA",
+          "departure_timezone": "America/New_York",
+          "arrival_airport": "YYZ",
+          "arrival_city": "Toronto",
+          "arrival_timezone": "America/Toronto",
+          "departure_time": "2026-11-17T18:07:21-05:00",
+          "arrival_time": "2026-11-17T22:07:21-05:00",
+          "cabin_class": "Economy"
+        }
+      ]
+    },
+    {
+      "booking_request_id": null,
+      "flight_booking_id": "219c571a-3638-465a-914d-4f549debb9be",
+      "display_name": "One-way flight to Miami",
+      "flight_number": "AA 6020",
+      "airline": "American Airlines",
+      "departure_airport": "LGA",
+      "arrival_airport": "MIA",
+      "departure_time": "2026-10-19T19:07:21-04:00",
+      "arrival_time": "2026-10-19T23:07:21-04:00",
+      "cabin_class": "Economy",
+      "status": "CONFIRMED",
+      "approval_display_status": null,
+      "ticketing_status": null,
+      "error_message": null,
+      "trip_name": "Sales Kick-Off in Miami",
+      "trip_id": "35762781-598e-44d5-b155-024acfc4c723",
+      "booked_at": "2026-10-29T23:07:21+00:00",
+      "slices": [
+        {
+          "flight_number": "AA 6020",
+          "airline": "American Airlines",
+          "departure_airport": "LGA",
+          "departure_timezone": "America/New_York",
+          "arrival_airport": "MIA",
+          "arrival_city": "Miami",
+          "arrival_timezone": "America/New_York",
+          "departure_time": "2026-10-19T19:07:21-04:00",
+          "arrival_time": "2026-10-19T23:07:21-04:00",
+          "cabin_class": "Economy"
+        }
+      ]
+    },
+    {
+      "booking_request_id": null,
+      "flight_booking_id": "2a195ad0-96cf-4c29-a89d-e99b23a44377",
+      "display_name": "One-way flight to Las Vegas",
+      "flight_number": "B6 2153",
+      "airline": "JetBlue",
+      "departure_airport": "LAX",
+      "arrival_airport": "LAS",
+      "departure_time": "2026-09-09T16:07:21-07:00",
+      "arrival_time": "2026-09-09T20:07:21-07:00",
+      "cabin_class": "Economy",
+      "status": "CONFIRMED",
+      "approval_display_status": null,
+      "ticketing_status": null,
+      "error_message": null,
+      "trip_name": "ERP Conference",
+      "trip_id": "6eab3f5d-398d-42f3-8424-27a8e590ac59",
+      "booked_at": "2026-10-29T23:07:22+00:00",
+      "slices": [
+        {
+          "flight_number": "B6 2153",
+          "airline": "JetBlue",
+          "departure_airport": "LAX",
+          "departure_timezone": "America/Los_Angeles",
+          "arrival_airport": "LAS",
+          "arrival_city": "Las Vegas",
+          "arrival_timezone": "America/Los_Angeles",
+          "departure_time": "2026-09-09T16:07:21-07:00",
+          "arrival_time": "2026-09-09T20:07:21-07:00",
+          "cabin_class": "Economy"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "transaction_uuid": "353621ea-b951-4f0d-bd98-1e9e285bd6b6",
+      "amount": "$435.56",
+      "merchant_name": "Air Canada",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-11-17T22:59:21+00:00",
+      "spent_by_user": "David Wallace",
+      "card": null,
+      "reason_or_justification": "Flight to Toronto",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "bceb7dcf-e384-422f-ac24-e6c0e535f236",
+      "amount": "$750.00",
+      "merchant_name": "American Airlines",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-10-29T22:59:29+00:00",
+      "spent_by_user": "Michael Scott",
+      "card": null,
+      "reason_or_justification": "Flight LGA-BOS for last-minute customer escalation",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "596e4258-88f0-4899-a9f3-e068613edfeb",
+      "amount": "$340.00",
+      "merchant_name": "American Airlines",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-10-29T22:58:01+00:00",
+      "spent_by_user": "Laura Van Lenten",
+      "card": null,
+      "reason_or_justification": "Flight BOS-LAS for customer onsite",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "76e22924-4388-492b-8498-e596af2d3bba",
+      "amount": "$820.00",
+      "merchant_name": "American Airlines",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-10-24T16:45:04+00:00",
+      "spent_by_user": "Jan Levinson",
+      "card": null,
+      "reason_or_justification": "Flight JFK-SFO for SF executive offsite",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "4106c26f-09c4-42ff-9dab-d4d1a7f7b2eb",
+      "amount": "$245.48",
+      "merchant_name": "American Airlines",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-10-14T23:01:42+00:00",
+      "spent_by_user": "John Mosca",
+      "card": null,
+      "reason_or_justification": "Flight for work trip",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "bbcadc9e-6f82-4f2f-9f3c-0c8f58683943",
+      "amount": "$245.48",
+      "merchant_name": "American Airlines",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-10-14T23:00:21+00:00",
+      "spent_by_user": "John Mosca",
+      "card": null,
+      "reason_or_justification": "Flight for work trip",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "3c3453a4-854b-4b5e-ad2e-bfe2172c1f38",
+      "amount": "$10.00",
+      "merchant_name": "Jetblue",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-08-19T22:59:16+00:00",
+      "spent_by_user": "Laura Van Lenten",
+      "card": null,
+      "reason_or_justification": "plane wifi",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "5a51ff46-9518-46dd-85e5-2923d7acc3c4",
+      "amount": "$10.00",
+      "merchant_name": "Jetblue",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-08-15T22:59:16+00:00",
+      "spent_by_user": "Laura Van Lenten",
+      "card": null,
+      "reason_or_justification": "plane wifi",
+      "trip_uuid": null,
+      "trip_name": null
+    },
+    {
+      "transaction_uuid": "19fb5a23-b0de-421e-bd53-cf3ebaf8866a",
+      "amount": "$498.36",
+      "merchant_name": "Southwest Airlines",
+      "merchant_category": "Airlines",
+      "state": "CLEARED",
+      "transaction_time": "2026-08-09T23:07:21+00:00",
+      "spent_by_user": "Jose Millan",
+      "card": null,
+      "reason_or_justification": "Roundtrip flight from SFO to LGA",
+      "trip_uuid": null,
+      "trip_name": null
+    }
+  ]
+}

@@ -73,7 +73,7 @@ export function refundRequest(t: Trip, d: Decision): Draft {
     body: [
       `To ${payee},`,
       "",
-      `We request a full refund of ${d.amount_cents !== null ? formatUsd(d.amount_cents) : "the fare"} for confirmation ${t.facts.record_locator} (${t.traveler}), ${route(t)}, to the original form of payment: the company card ending ${ticket?.card.last_four ?? "on file"}.`,
+      `We request a full refund of ${d.amount_cents !== null ? formatUsd(d.amount_cents) : "the fare"} for confirmation ${t.facts.record_locator} (${t.traveler}), ${route(t)}, to the original form of payment: the company card ending ${ticket?.card?.last_four ?? "on file"}.`,
       "",
       `Basis: ${d.reason}`,
       "",

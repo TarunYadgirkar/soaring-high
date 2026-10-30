@@ -26,6 +26,19 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
         <div className="space-y-10">
           <Why c={c} />
           <Evidence proof={c.decision.proof} />
+          {c.trip.join_reasons && (
+            <section className="space-y-2">
+              <h2 className="text-lg font-semibold">How this trip was joined</h2>
+              <p className="max-w-[68ch] text-sm text-ink-soft">
+                Ramp&apos;s sandbox charges carry no trip link, so the booking was matched to the card charge by airline, date and memo.
+              </p>
+              <ul className="list-disc space-y-1 pl-5 text-sm">
+                {c.trip.join_reasons.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
         <Escalation c={c} />
       </div>
@@ -44,7 +57,7 @@ function BoardingPass({ c }: { c: Claim }) {
       <div className="flex-1 space-y-5 p-6 md:p-8">
         <div className="flex items-center justify-between gap-4 text-sm text-ink-soft">
           <span>
-            {c.trip.traveler}, confirmation {c.trip.facts.record_locator}
+            {c.trip.traveler}, {c.trip.source === "ramp_sandbox" ? `Ramp sandbox booking ${c.trip.facts.record_locator.slice(0, 8)}` : `confirmation ${c.trip.facts.record_locator}`}
           </span>
           <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${toneClass[stageTone(c.stage)]}`}>{stageLabel(c.stage, d.verdict)}</span>
         </div>
@@ -84,7 +97,7 @@ function BoardingPass({ c }: { c: Claim }) {
       <div className={`stub-in flex flex-col justify-between gap-4 p-6 md:w-72 md:p-8 ${isOwed ? "bg-owed" : "bg-paper"}`}>
         <div>
           <p className="text-sm">{d.verdict === "hold_credit_alert" ? "Refundable if the traveler declines" : isOwed ? `Owed to the card by ${d.payee?.name}` : "Refund"}</p>
-          <p className="font-sign text-5xl font-bold">{isOwed ? usd(d.amount_cents) : "Not owed"}</p>
+          <p className="font-sign text-5xl font-bold">{isOwed ? usd(d.amount_cents) : d.verdict === "needs_info" ? "Not proven yet" : "Not owed"}</p>
         </div>
         <div className="text-sm">
           <p>{ruleLabel(d.basis)}</p>

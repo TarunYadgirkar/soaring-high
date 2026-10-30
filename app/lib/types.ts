@@ -1,5 +1,5 @@
-// Subset of an item from Ramp's agent-tools `get-transactions` response
-// (ramp-public/ramp-cli specs/agent-tool.json). Ramp returns amount as a string.
+// Subset of an item from Ramp's `ramp_get_transactions` MCP tool. Amounts are
+// display strings ("$1,446.13"); the sandbox returns card as null.
 export type RampTransaction = {
   transaction_uuid: string;
   amount: string;
@@ -14,7 +14,8 @@ export type RampTransaction = {
     last_four: string;
     card_state: "ACTIVE";
     is_physical_card: boolean;
-  };
+  } | null;
+  reason_or_justification?: string | null;
   trip_uuid: string | null;
   trip_name: string | null;
 };
@@ -102,6 +103,9 @@ export type TripFacts = {
 
 export type Trip = {
   id: string;
+  source?: "seed" | "ramp_sandbox";
+  title?: string;
+  join_reasons?: string[];
   traveler: string;
   charges: RampTransaction[];
   emails: AirlineEmail[];

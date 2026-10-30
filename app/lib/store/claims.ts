@@ -59,18 +59,27 @@ export function resetDemo(): void {
   writeJson(CLOCK, { now: AS_OF });
 }
 
+// Trips joined from the Ramp sandbox by `pnpm ramp:sync`; absent until it has run.
+function rampTrips(): Trip[] {
+  return readJson<Trip[]>(join(DATA, "ramp-trips.json"), []);
+}
+
 export function tripIds(): string[] {
-  return seedTrips().map((t) => t.id);
+  return [...seedTrips().map((t) => t.id), ...rampTrips().map((t) => t.id)];
 }
 
 export function claims(): Claim[] {
   const asOf = now();
   const events = allEvents();
-  return seedTrips().map(({ label, ...trip }) => {
+  const build = (trip: Trip, title: string): Claim => {
     const decision = decide(trip, { asOf });
     const ev = events[trip.id] ?? [];
-    return { trip, title: label.title, decision, events: ev, stage: stage(decision, ev, asOf), actions: actions(decision, ev, asOf) };
-  });
+    return { trip, title, decision, events: ev, stage: stage(decision, ev, asOf), actions: actions(decision, ev, asOf) };
+  };
+  return [
+    ...seedTrips().map(({ label, ...trip }) => build({ ...trip, source: "seed" }, label.title)),
+    ...rampTrips().map((trip) => build(trip, trip.title ?? trip.id)),
+  ];
 }
 
 export function claim(id: string): Claim | undefined {

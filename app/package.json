@@ -13,7 +13,8 @@
     "eval": "tsx scripts/eval.ts",
     "ramp:login": "tsx scripts/ramp-login.ts",
     "extract": "tsx scripts/extract.ts",
-    "eval:e2e": "tsx scripts/eval-e2e.ts"
+    "eval:e2e": "tsx scripts/eval-e2e.ts",
+    "ramp:sync": "tsx scripts/ramp-sync.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.1.0",

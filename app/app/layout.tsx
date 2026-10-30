@@ -48,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </div>
           <p className="mx-auto max-w-6xl px-5 pb-3 text-xs text-ink-soft">
-            Sample data: 50 seeded trips with Ramp-style card charges, airline emails and flight-status records. Not real travelers.
+            Sample data: 50 seeded trips with Ramp-style card charges, airline emails and flight-status records, plus trips joined from Ramp&apos;s demo sandbox. Not real travelers.
           </p>
         </header>
         <main className="mx-auto max-w-6xl px-5 py-8">{children}</main>

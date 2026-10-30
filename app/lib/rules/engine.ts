@@ -183,7 +183,7 @@ export function decide(trip: Trip, opts: EngineOptions): Decision {
     ref: ticket.transaction_uuid,
     field: "amount",
     value: formatUsd(toCents(ticket.amount)),
-    note: `${ticket.merchant_name} (${ticket.merchant_category}) on card ending ${ticket.card.last_four}, ${localDate(ticket.transaction_time)}.`,
+    note: `${ticket.merchant_name} (${ticket.merchant_category}) ${ticket.card ? `on card ending ${ticket.card.last_four}` : `spent by ${ticket.spent_by_user}`}, ${localDate(ticket.transaction_time)}.`,
   });
 
   const done = (p: Outcome, amountCents: number | null = null): Decision => {
