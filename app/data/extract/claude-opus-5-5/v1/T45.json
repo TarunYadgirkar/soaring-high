@@ -1,0 +1,41 @@
+{
+  "trip_id": "T45",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "PYEJSZ",
+    "original_itinerary": [
+      {
+        "flight_number": "UA 1890",
+        "origin": "EWR",
+        "destination": "SFO",
+        "departure_local": "2026-09-04T18:00",
+        "arrival_local": "2026-09-04T21:30",
+        "cabin": "economy"
+      }
+    ],
+    "change": {
+      "email_id": "em-T45-change",
+      "kind": "schedule_change",
+      "initiated_by": "carrier",
+      "new_itinerary": [
+        {
+          "flight_number": "UA 1890",
+          "origin": "EWR",
+          "destination": "SFO",
+          "departure_local": "2026-09-04T22:00",
+          "arrival_local": "2026-09-05T01:30",
+          "cabin": "economy"
+        }
+      ],
+      "alternative_offered": true,
+      "credit_offered": true,
+      "credit_issued": false
+    },
+    "traveler_action_in_email": "accepted_credit"
+  },
+  "usage": {
+    "input_tokens": 2457,
+    "output_tokens": 270
+  },
+  "cost_usd": 0.015228
+}

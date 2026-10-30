@@ -1,5 +1,5 @@
 import "server-only";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { AS_OF, type SeedTrip } from "../../data/seed/build";
 import { actions, stage, type Action, type ClaimEvent, type ClaimStage } from "../escalation/escalation";
@@ -92,8 +92,10 @@ export type EvalSummary = {
 export function evalResults(): { gold: EvalSummary | null; e2e: EvalSummary[] } {
   const dir = join(ROOT, "data/eval");
   const gold = readJson<EvalSummary | null>(join(dir, "latest.json"), null);
-  const e2e = ["claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"]
-    .map((m) => readJson<EvalSummary | null>(join(dir, `e2e-${m}.json`), null))
+  const e2e = readdirSync(dir)
+    .filter((f) => f.startsWith("e2e-") && f.endsWith(".json"))
+    .sort()
+    .map((f) => readJson<EvalSummary | null>(join(dir, f), null))
     .filter((x): x is EvalSummary => x !== null);
   return { gold, e2e };
 }

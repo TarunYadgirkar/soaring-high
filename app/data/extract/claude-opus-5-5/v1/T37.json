@@ -1,0 +1,32 @@
+{
+  "trip_id": "T37",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "WCPNBB",
+    "original_itinerary": [
+      {
+        "flight_number": "UA 778",
+        "origin": "SFO",
+        "destination": "IAD",
+        "departure_local": "2026-09-08T07:00",
+        "arrival_local": "2026-09-08T15:20",
+        "cabin": "economy"
+      }
+    ],
+    "change": {
+      "email_id": "em-T37-change",
+      "kind": "voluntary",
+      "initiated_by": "traveler",
+      "new_itinerary": null,
+      "alternative_offered": false,
+      "credit_offered": false,
+      "credit_issued": false
+    },
+    "traveler_action_in_email": null
+  },
+  "usage": {
+    "input_tokens": 2115,
+    "output_tokens": 186
+  },
+  "cost_usd": 0.01218
+}

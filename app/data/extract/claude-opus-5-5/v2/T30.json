@@ -1,0 +1,24 @@
+{
+  "trip_id": "T30",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "KHXYYY",
+    "original_itinerary": [
+      {
+        "flight_number": "B6 23",
+        "origin": "JFK",
+        "destination": "LAX",
+        "departure_local": "2026-10-14T07:00",
+        "arrival_local": "2026-10-14T10:25",
+        "cabin": "economy"
+      }
+    ],
+    "change": null,
+    "traveler_action_in_email": "flew"
+  },
+  "usage": {
+    "input_tokens": 2252,
+    "output_tokens": 120
+  },
+  "cost_usd": 0.011408
+}

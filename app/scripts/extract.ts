@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { parseArgs } from "node:util";
 import Anthropic from "@anthropic-ai/sdk";
 import type { SeedTrip } from "../data/seed/build";
-import { DEFAULT_MODEL, extractTrip, PRICES, type ExtractionResult } from "../lib/extract/extract";
+import { DEFAULT_MODEL, extractTrip, PRICES, PROMPT_VERSION, type ExtractionResult } from "../lib/extract/extract";
 
 const APP = join(import.meta.dirname, "..");
 if (existsSync(join(APP, ".env"))) process.loadEnvFile(join(APP, ".env"));
@@ -27,7 +27,7 @@ if (!process.env.ANTHROPIC_API_KEY) {
 
 const trips: SeedTrip[] = JSON.parse(readFileSync(join(APP, "data/seed/trips.json"), "utf8"));
 const only = values.only ? new Set(values.only.split(",")) : null;
-const cacheDir = join(APP, "data/extract", model);
+const cacheDir = join(APP, "data/extract", model, PROMPT_VERSION);
 mkdirSync(cacheDir, { recursive: true });
 const cachePath = (id: string) => join(cacheDir, `${id}.json`);
 

@@ -1,0 +1,32 @@
+{
+  "trip_id": "T35",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "UTWRGF",
+    "original_itinerary": [
+      {
+        "flight_number": "BA 286",
+        "origin": "SFO",
+        "destination": "LHR",
+        "departure_local": "2026-10-03T19:50",
+        "arrival_local": "2026-10-04T14:15",
+        "cabin": "economy"
+      }
+    ],
+    "change": {
+      "email_id": "em-T35-change",
+      "kind": "delay",
+      "initiated_by": "carrier",
+      "new_itinerary": null,
+      "alternative_offered": false,
+      "credit_offered": false,
+      "credit_issued": false
+    },
+    "traveler_action_in_email": null
+  },
+  "usage": {
+    "input_tokens": 2395,
+    "output_tokens": 184
+  },
+  "cost_usd": 0.01326
+}

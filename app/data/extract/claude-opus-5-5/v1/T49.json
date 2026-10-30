@@ -1,0 +1,24 @@
+{
+  "trip_id": "T49",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "BFHNKY",
+    "original_itinerary": [
+      {
+        "flight_number": "UA 1123",
+        "origin": "DEN",
+        "destination": "SFO",
+        "departure_local": "2026-09-26T19:00",
+        "arrival_local": "2026-09-26T20:35",
+        "cabin": "economy"
+      }
+    ],
+    "change": null,
+    "traveler_action_in_email": "flew"
+  },
+  "usage": {
+    "input_tokens": 2074,
+    "output_tokens": 121
+  },
+  "cost_usd": 0.010716
+}

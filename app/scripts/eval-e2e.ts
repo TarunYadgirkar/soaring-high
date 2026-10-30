@@ -3,14 +3,14 @@ import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { AS_OF, type SeedTrip } from "../data/seed/build";
 import { report, row, score } from "../lib/eval/score";
-import { DEFAULT_MODEL, type ExtractionResult } from "../lib/extract/extract";
+import { DEFAULT_MODEL, PROMPT_VERSION, type ExtractionResult } from "../lib/extract/extract";
 import { compareFacts, mergeExtraction } from "../lib/extract/merge";
 import { decide } from "../lib/rules/engine";
 
 const APP = join(import.meta.dirname, "..");
 const { values } = parseArgs({ options: { model: { type: "string", default: DEFAULT_MODEL } } });
 const model = values.model;
-const cacheDir = join(APP, "data/extract", model);
+const cacheDir = join(APP, "data/extract", model, PROMPT_VERSION);
 
 const trips: SeedTrip[] = JSON.parse(readFileSync(join(APP, "data/seed/trips.json"), "utf8"));
 const missing: string[] = [];
@@ -48,7 +48,7 @@ if (rows.length === 0) {
 const s = score(rows);
 const lines = [
   report(
-    `Soaring High end-to-end eval: ${s.trips} seeded trips, facts extracted from email by ${model}, as of ${AS_OF}`,
+    `Soaring High end-to-end eval: ${s.trips} seeded trips, facts extracted from email by ${model} (prompt ${PROMPT_VERSION}), as of ${AS_OF}`,
     "Seeded, author-labeled cases. Claude reads the emails; the rules engine decides. Positive = refund_owed or hold_credit_alert.",
     s,
   ),
@@ -65,11 +65,11 @@ console.log(lines.join("\n"));
 const evalDir = join(APP, "data/eval");
 mkdirSync(evalDir, { recursive: true });
 writeFileSync(
-  join(evalDir, `e2e-${model}.json`),
+  join(evalDir, `e2e-${model}-${PROMPT_VERSION}.json`),
   `${JSON.stringify(
     {
       dataset: "seed",
-      facts: `extracted by ${model}`,
+      facts: `extracted by ${model}, prompt ${PROMPT_VERSION}`,
       note: "Seeded, author-labeled cases. Not real-world accuracy.",
       as_of: AS_OF,
       extraction_cost_usd: costUsd,

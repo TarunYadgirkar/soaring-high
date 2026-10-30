@@ -1,0 +1,917 @@
+{
+  "dataset": "seed",
+  "facts": "extracted by claude-opus-5-5, prompt v1 (first run, change kinds undefined)",
+  "note": "Seeded, author-labeled cases. Not real-world accuracy.",
+  "as_of": "2026-10-22T19:00:00Z",
+  "extraction_cost_usd": 0.688756,
+  "field_accuracy": {
+    "record_locator": {
+      "n": 50,
+      "ok": 50
+    },
+    "original": {
+      "n": 50,
+      "ok": 50
+    },
+    "change.kind": {
+      "n": 50,
+      "ok": 48
+    },
+    "change.initiated_by": {
+      "n": 50,
+      "ok": 50
+    },
+    "change.new_itinerary": {
+      "n": 50,
+      "ok": 40
+    },
+    "change.alternative_offered": {
+      "n": 50,
+      "ok": 50
+    },
+    "change.credit_offered": {
+      "n": 50,
+      "ok": 50
+    },
+    "change.credit_issued": {
+      "n": 50,
+      "ok": 50
+    },
+    "response.action": {
+      "n": 50,
+      "ok": 50
+    }
+  },
+  "missing": [],
+  "merge_errors": [],
+  "trips": 50,
+  "confusion": {
+    "tp": 26,
+    "fp": 1,
+    "fn": 0,
+    "tn": 23
+  },
+  "precision": 0.9629629629629629,
+  "recall": 1,
+  "f1": 0.9811320754716981,
+  "verdict_accuracy": 0.98,
+  "basis_accuracy": 0.98,
+  "sample_owed_cents": 905640,
+  "sample_alert_cents": 259840,
+  "by_category": {
+    "cancelled": {
+      "n": 8,
+      "correct": 8
+    },
+    "significant_change": {
+      "n": 10,
+      "correct": 10
+    },
+    "credit": {
+      "n": 4,
+      "correct": 4
+    },
+    "ticket_agent": {
+      "n": 2,
+      "correct": 2
+    },
+    "live_alert": {
+      "n": 4,
+      "correct": 4
+    },
+    "renumbered": {
+      "n": 3,
+      "correct": 2
+    },
+    "near_miss_threshold": {
+      "n": 6,
+      "correct": 6
+    },
+    "on_time": {
+      "n": 3,
+      "correct": 3
+    },
+    "flew_or_accepted": {
+      "n": 5,
+      "correct": 5
+    },
+    "voluntary": {
+      "n": 2,
+      "correct": 2
+    },
+    "coverage": {
+      "n": 1,
+      "correct": 1
+    },
+    "already_refunded": {
+      "n": 1,
+      "correct": 1
+    },
+    "missing_data": {
+      "n": 1,
+      "correct": 1
+    }
+  },
+  "rows": [
+    {
+      "trip_id": "T01",
+      "title": "Cancelled, nothing offered",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(i)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(i)",
+        "amount_cents": 45130
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T02",
+      "title": "Cancelled, nothing offered, bag fee",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(i)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(i)",
+        "amount_cents": 32140
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T03",
+      "title": "Cancelled, traveler rejected next-day rebooking",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 33890
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T04",
+      "title": "Cancelled, traveler flew another airline",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)",
+        "amount_cents": 19870
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T05",
+      "title": "Cancelled, traveler flew another airline",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)",
+        "amount_cents": 24180
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T06",
+      "title": "Cancelled, no response, rebooked flight left without them",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)",
+        "amount_cents": 17620
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T07",
+      "title": "Cancelled, only a credit offered, no response",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(B)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(B)",
+        "amount_cents": 25460
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T08",
+      "title": "Delayed exactly 3h00m, traveler skipped the trip",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 30910
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T09",
+      "title": "Delayed 4h15m, traveler skipped the trip",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 24630
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T10",
+      "title": "Schedule change: departs 3h30m earlier",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 49820
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T11",
+      "title": "Schedule change: arrives 3h20m later, no response",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)",
+        "amount_cents": 36740
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T12",
+      "title": "Arrival airport moved from JFK to EWR",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 45500
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T13",
+      "title": "Departure airport moved from SFO to OAK",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 15290
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T14",
+      "title": "Nonstop changed to a connection via ORD",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 41270
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T15",
+      "title": "Downgraded from business to economy",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 128900
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T16",
+      "title": "International, delayed 6h40m, traveler skipped",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 113450
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T17",
+      "title": "International, delayed exactly 6h00m, traveler skipped",
+      "category": "significant_change",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 98620
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T18",
+      "title": "Credit put in account without the traveler agreeing",
+      "category": "credit",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.7"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.7",
+        "amount_cents": 21980
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T19",
+      "title": "Bought on Expedia, cancelled, nothing offered",
+      "category": "ticket_agent",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "399.80(l)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "399.80(l)",
+        "amount_cents": 26340
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T20",
+      "title": "Bought on Priceline, delayed 4h, traveler skipped",
+      "category": "ticket_agent",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "399.80(l)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "399.80(l)",
+        "amount_cents": 18960
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T21",
+      "title": "Live: Saturday flight cancelled, rebooking and credit offered",
+      "category": "live_alert",
+      "expected": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)"
+      },
+      "got": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)",
+        "amount_cents": 30120
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T22",
+      "title": "Live: Nov 2 flight now arrives 5h later",
+      "category": "live_alert",
+      "expected": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)"
+      },
+      "got": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)",
+        "amount_cents": 27840
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T23",
+      "title": "Live: Tokyo flight now departs 7h earlier",
+      "category": "live_alert",
+      "expected": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)"
+      },
+      "got": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)",
+        "amount_cents": 187600
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T24",
+      "title": "Fare refunded, seat and bag fees not",
+      "category": "cancelled",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(i)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(i)",
+        "amount_cents": 8400
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T25",
+      "title": "Renumbered and now arrives 3h20m later, traveler skipped",
+      "category": "renumbered",
+      "expected": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(ii)",
+        "amount_cents": 23160
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T26",
+      "title": "Near miss: departs 2h59m earlier, traveler skipped",
+      "category": "near_miss_threshold",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T27",
+      "title": "On time, international",
+      "category": "on_time",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T28",
+      "title": "Live: Oct 27 flight cancelled, only a credit offered",
+      "category": "live_alert",
+      "expected": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)"
+      },
+      "got": {
+        "verdict": "hold_credit_alert",
+        "basis": "260.6(a)(1)",
+        "amount_cents": 14280
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T29",
+      "title": "Near miss: moved up to premium economy, traveler skipped",
+      "category": "near_miss_threshold",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T30",
+      "title": "Late 1h35m",
+      "category": "on_time",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T31",
+      "title": "On time, Toronto to Chicago",
+      "category": "on_time",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T32",
+      "title": "Near miss: landed 2h50m late, traveler skipped",
+      "category": "near_miss_threshold",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T33",
+      "title": "Near miss: landed 2h59m late",
+      "category": "near_miss_threshold",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T34",
+      "title": "Near miss: international 5h late, traveler skipped",
+      "category": "near_miss_threshold",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T35",
+      "title": "Near miss: international 5h59m late, traveler skipped",
+      "category": "near_miss_threshold",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T36",
+      "title": "Arrives 3h10m later, traveler flew it",
+      "category": "flew_or_accepted",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T37",
+      "title": "Voluntary: traveler moved the trip a week",
+      "category": "voluntary",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T38",
+      "title": "Voluntary: traveler cancelled and took a credit",
+      "category": "voluntary",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T39",
+      "title": "Renumbered AA 1543 to AA 2297, 25 min later, traveler skipped",
+      "category": "renumbered",
+      "expected": {
+        "verdict": "excluded",
+        "basis": "91-FR-41556"
+      },
+      "got": {
+        "verdict": "excluded",
+        "basis": "91-FR-41556",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T40",
+      "title": "Renumbered DL 2330 to DL 5512, 1h10m later, no response",
+      "category": "renumbered",
+      "expected": {
+        "verdict": "excluded",
+        "basis": "91-FR-41556"
+      },
+      "got": {
+        "verdict": "refund_owed",
+        "basis": "260.6(a)(2)(iii)(A)",
+        "amount_cents": 23380
+      },
+      "verdict_match": false,
+      "basis_match": false
+    },
+    {
+      "trip_id": "T41",
+      "title": "Cancelled, traveler flew the rebooked flight",
+      "category": "flew_or_accepted",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T42",
+      "title": "Cancelled, traveler accepted next-morning rebooking",
+      "category": "flew_or_accepted",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T43",
+      "title": "Delayed 3h40m, traveler flew it",
+      "category": "flew_or_accepted",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(i)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T44",
+      "title": "Cancelled, traveler accepted the credit",
+      "category": "credit",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(ii)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(ii)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T45",
+      "title": "Arrives 4h later, traveler accepted the credit",
+      "category": "credit",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(ii)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.6(a)(1)(ii)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T46",
+      "title": "Bought on Expedia, cancelled, traveler took Expedia credit",
+      "category": "credit",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "399.80(l)"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "399.80(l)",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T47",
+      "title": "London to Paris, cancelled",
+      "category": "coverage",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/covered-flight"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/covered-flight",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T48",
+      "title": "Cancelled, refund already posted",
+      "category": "already_refunded",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.10"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.10",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T49",
+      "title": "Diverted to OAK, traveler on board",
+      "category": "flew_or_accepted",
+      "expected": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change"
+      },
+      "got": {
+        "verdict": "not_owed",
+        "basis": "260.2/significant-change",
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    },
+    {
+      "trip_id": "T50",
+      "title": "Cancellation email but no flight-status record",
+      "category": "missing_data",
+      "expected": {
+        "verdict": "needs_info",
+        "basis": null
+      },
+      "got": {
+        "verdict": "needs_info",
+        "basis": null,
+        "amount_cents": null
+      },
+      "verdict_match": true,
+      "basis_match": true
+    }
+  ]
+}

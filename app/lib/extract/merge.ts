@@ -32,7 +32,8 @@ export function mergeExtraction(trip: Trip, ex: ExtractedTrip): { trip: Trip } |
           initiated_by: ex.change.initiated_by,
           notified_at: emailTime(ex.change.email_id),
           email_id: ex.change.email_id,
-          new_itinerary: ex.change.new_itinerary ? ex.change.new_itinerary.map(toSegment) : null,
+          // A delay notice's estimated times are not a new booking; flight-status data is the proof.
+          new_itinerary: ex.change.kind !== "delay" && ex.change.new_itinerary ? ex.change.new_itinerary.map(toSegment) : null,
           alternative_offered: ex.change.alternative_offered,
           credit_offered: ex.change.credit_offered,
           credit_issued: ex.change.credit_issued,

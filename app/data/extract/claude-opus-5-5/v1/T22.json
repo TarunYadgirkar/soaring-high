@@ -1,0 +1,41 @@
+{
+  "trip_id": "T22",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "QSQFNQ",
+    "original_itinerary": [
+      {
+        "flight_number": "AS 330",
+        "origin": "SEA",
+        "destination": "AUS",
+        "departure_local": "2026-11-02T10:15",
+        "arrival_local": "2026-11-02T16:20",
+        "cabin": "economy"
+      }
+    ],
+    "change": {
+      "email_id": "em-T22-change",
+      "kind": "schedule_change",
+      "initiated_by": "carrier",
+      "new_itinerary": [
+        {
+          "flight_number": "AS 330",
+          "origin": "SEA",
+          "destination": "AUS",
+          "departure_local": "2026-11-02T15:15",
+          "arrival_local": "2026-11-02T21:20",
+          "cabin": "economy"
+        }
+      ],
+      "alternative_offered": true,
+      "credit_offered": true,
+      "credit_issued": false
+    },
+    "traveler_action_in_email": null
+  },
+  "usage": {
+    "input_tokens": 2339,
+    "output_tokens": 261
+  },
+  "cost_usd": 0.014576
+}

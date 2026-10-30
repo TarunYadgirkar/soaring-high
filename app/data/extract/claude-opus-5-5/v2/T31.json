@@ -1,0 +1,24 @@
+{
+  "trip_id": "T31",
+  "model": "claude-opus-5-5",
+  "extracted": {
+    "record_locator": "YMFKWW",
+    "original_itinerary": [
+      {
+        "flight_number": "AC 742",
+        "origin": "YYZ",
+        "destination": "ORD",
+        "departure_local": "2026-08-27T08:00",
+        "arrival_local": "2026-08-27T08:50",
+        "cabin": "economy"
+      }
+    ],
+    "change": null,
+    "traveler_action_in_email": "flew"
+  },
+  "usage": {
+    "input_tokens": 2241,
+    "output_tokens": 121
+  },
+  "cost_usd": 0.011384
+}
