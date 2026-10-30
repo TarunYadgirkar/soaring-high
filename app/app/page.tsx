@@ -7,7 +7,7 @@ const VIEWS = {
   live: { label: "Live disruptions", test: (c: Claim) => c.decision.verdict === "hold_credit_alert" },
   progress: {
     label: "In progress",
-    test: (c: Claim) => ["refund_pending", "refund_overdue", "refund_refused", "dot_filed", "disputed", "alerted", "recovered"].includes(c.stage),
+    test: (c: Claim) => ["refund_pending", "refund_overdue", "refund_refused", "dot_filed", "dispute_ready", "alerted", "recovered"].includes(c.stage),
   },
   ramp: { label: "Ramp sandbox", test: (c: Claim) => c.trip.source === "ramp_sandbox" },
   all: { label: "All trips", test: () => true },

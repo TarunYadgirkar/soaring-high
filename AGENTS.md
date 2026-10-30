@@ -73,7 +73,7 @@ How Soaring High plugs into Ramp:
 | Decide and cite entitlement | Our rules engine, in Policy Agent's cite-the-rule format |
 | Attach proof to the charge | `receipts upload` / `receipts attach` (refund confirmation, flight-status record) |
 | Confirm the money came back | The refund posts to the original Ramp card; match it to the original charge |
-| Dispute if refused | Ramp has no disputes API, so the demo uses Stripe Issuing test mode. In production the packet would go into Ramp's dispute form. |
+| Dispute if refused | Ramp has no disputes API. The demo prepares the evidence package for Ramp's dispute form; Stripe Issuing test mode needs sales approval (Oct 30). |
 
 ### Ramp tooling (from github.com/ramp-public)
 
@@ -209,7 +209,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - [x] Escalation rules (`app/lib/escalation/escalation.ts`): fixed order, refund request then DOT complaint then dispute. A dispute is blocked while a refund request is inside its 7-business-day window. Unit-tested
   - [x] Deterministic drafts: traveler alert, refund request, DOT complaint, dispute evidence. Each cites the clauses and lists the proof
   - [x] UI (`pnpm build && pnpm start`): claims board, claim page (boarding-pass header with the amount owed, the deciding clause quoted, evidence table, escalation steps with drafts and one-click approval), and an accuracy page that reads the eval output. Demo clock ("Skip 8 business days") and "Reset demo" make the overdue path showable. State lives in `app/.data/` (gitignored). Checked in a browser on Oct 22
-  - [ ] Stripe Issuing test-mode dispute: needs `STRIPE_SECRET_KEY=sk_test_...` from Tarun
+  - [x] Dispute step: after the DOT complaint, admin approves a dispute evidence package (`dispute_prepared` event, stage "Dispute package ready"). The app does not file it anywhere
+  - [ ] Stripe Issuing test-mode dispute: blocked. Sandbox account "BBS-Ramp Hack" exists and `STRIPE_SECRET_KEY` is in `app/.env`, but the API answers "Your account is not set up to use Issuing" and the dashboard shows only "Contact sales" (checked Oct 30)
   - [ ] AeroDataBox credit line in the UI once live flight data is shown (required by its free-plan terms)
   - [ ] Demo script (3 to 5 minutes) and screen recording for Nov 7
 
@@ -246,6 +247,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - Facts that come from outside the inbox stay as joined: card charge ids, a traveler's reply, a second airline charge.
 - The demo app has no login. Server actions re-check the escalation rules on every POST, so a crafted request can't skip a step. Add auth before anything leaves localhost.
 - UI type: Barlow Condensed (airport codes, amounts), Public Sans (interface), Source Serif 4 (quoted regulation only). Palette: ink navy, ticket paper, taxiway yellow only for money owed, stamp red only for blocked or refused. The board's "What happened" column comes from the engine's triggers, never from the eval labels.
+- Dispute step prepares the package and files nothing. Stripe Issuing is gated behind sales even in a sandbox, and for Ramp cards the issuer is Ramp anyway. No fake dispute ids.
 - Out of scope for now: disability-specific changes (§260.6(b)), bag and ancillary-only refunds (§260.4, §260.5), refundable fares, multi-ticket round trips (one trip record is one direction of one ticket).
 
 ## Open questions
@@ -262,6 +264,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - "Isn't this AirHelp?" Answer: AirHelp claims EU compensation for individual travelers; Soaring High claims US cash refunds owed to the company, found from card data. The same answer covers Service and Gyro Autopilot.
 - "Doesn't Ramp already do this?" Answer: Ramp Intelligence prevents bad spend and catches hotel price drops, but nothing in Ramp recovers money an airline owes (see **Ramp Intelligence** above).
 - How many corporate trips are called off or rebooked on another airline, rather than flown on the rebooked flight? That is the real size of the refund pool.
+- Ask Stripe sales for Issuing sandbox access, or ask Ramp whether judges can see a dispute filed in the Ramp sandbox? Either would make the last step real.
 - Should the brief mention Ramp Intelligence? It is at 248 of 250 words, so a line would have to replace one.
 
 ## Writing rules for copy (brief, slides, UI)
@@ -286,3 +289,4 @@ Put your name next to a part to claim it.
 
 - Oct 18 (Claude, session for siddrrsh): added **Ramp Intelligence** and **Risks** sections and Q&A answers. The brief text is unchanged. Next: decide whether a Ramp Intelligence line should replace one in the brief, and add rebooked-flight cases to the seeded trips.
 - Oct 22 (Claude, session for Tarun, on taruns-macbook): built pieces 1 and 2 in `app/` (seeded trips, rules engine, tests, eval). Toolchain on this server: node 22 via nvm (`~/.nvm`), pnpm 11 via corepack, uv and gh from Homebrew. Next: piece 3. Get the demo MCP OAuth working, pick a flight-status API (compare free tiers, ask Tarun before anything paid), then Claude extraction of `emails` into `facts` with an end-to-end eval against the seeded gold facts.
+- Oct 30 (Claude, session for Tarun): Stripe sandbox set up; Issuing blocked (see Status). Dispute step now prepares the evidence package instead. Tarun pasted the `sk_test_` key in chat, so roll it in the Stripe dashboard (Developers, API keys) when convenient. Next: AeroDataBox key, demo script and recording before Nov 10.

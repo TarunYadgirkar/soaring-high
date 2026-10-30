@@ -192,14 +192,14 @@ const STEP_TITLE: Record<ActionKind, string> = {
   alert_traveler: "Alert the traveler",
   request_refund: "Request the refund",
   file_dot_complaint: "File a DOT complaint",
-  open_dispute: "Open a card dispute",
+  prepare_dispute: "Prepare the card dispute",
 };
 
 const STEP_BUTTON: Record<ActionKind, string> = {
   alert_traveler: "Approve and send alert",
   request_refund: "Approve and send request",
   file_dot_complaint: "Approve and file complaint",
-  open_dispute: "Approve and open dispute",
+  prepare_dispute: "Approve dispute package",
 };
 
 function draftFor(c: Claim, kind: ActionKind): Draft {
@@ -214,7 +214,7 @@ function draftFor(c: Claim, kind: ActionKind): Draft {
       return refundRequest(c.trip, c.decision);
     case "file_dot_complaint":
       return dotComplaint(c.trip, c.decision, requested?.at ?? c.decision.refund_due_by ?? "", refused ? "The payee refused." : `No refund by ${due}.`);
-    case "open_dispute":
+    case "prepare_dispute":
       return disputeEvidence(c.trip, c.decision, requested?.at ?? "", filed?.at ?? "");
   }
 }
@@ -231,9 +231,9 @@ function Escalation({ c }: { c: Claim }) {
     alert_traveler: "traveler_alerted",
     request_refund: "refund_requested",
     file_dot_complaint: "dot_complaint_filed",
-    open_dispute: "dispute_opened",
+    prepare_dispute: "dispute_prepared",
   };
-  const canRecordReply = ["refund_pending", "refund_overdue", "dot_filed", "disputed"].includes(c.stage);
+  const canRecordReply = ["refund_pending", "refund_overdue", "dot_filed", "dispute_ready"].includes(c.stage);
 
   if (steps.length === 0) {
     return (
@@ -255,7 +255,6 @@ function Escalation({ c }: { c: Claim }) {
         {steps.map((a, i) => {
           const isDone = done.has(doneFor[a.kind]);
           const draft = draftFor(c, a.kind);
-          const disputeBlocked = a.kind === "open_dispute" && a.allowed;
           return (
             <li key={a.kind} className="relative pl-9">
               <span
@@ -268,21 +267,18 @@ function Escalation({ c }: { c: Claim }) {
               <p className={`text-sm ${!a.allowed && !isDone && a.reason.startsWith("Blocked") ? "text-stamp" : "text-ink-soft"}`}>{a.reason}</p>
               {(a.allowed || isDone) && (
                 <details className="mt-2 rounded-md bg-card p-3 text-sm shadow-[0_0_0_1px_var(--grid)]">
-                  <summary className="cursor-pointer font-medium">{isDone ? "What was sent" : "Read the draft"}</summary>
+                  <summary className="cursor-pointer font-medium">{isDone ? (a.kind === "prepare_dispute" ? "The dispute package" : "What was sent") : "Read the draft"}</summary>
                   <p className="mt-2 text-xs text-ink-soft">{draft.channel}</p>
                   <p className="mt-1 font-medium">{draft.subject}</p>
                   <pre className="mt-2 whitespace-pre-wrap font-sans text-[0.8rem] leading-relaxed">{draft.body}</pre>
                 </details>
               )}
-              {a.allowed && !disputeBlocked && (
+              {a.allowed && (
                 <form action={approve} className="mt-3">
                   <input type="hidden" name="tripId" value={c.trip.id} />
                   <input type="hidden" name="kind" value={a.kind} />
                   <button className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-ink/90">{STEP_BUTTON[a.kind]}</button>
                 </form>
-              )}
-              {disputeBlocked && (
-                <p className="mt-3 text-sm text-ink-soft">Stripe Issuing test mode isn&apos;t connected yet. Add a test key to open the dispute.</p>
               )}
             </li>
           );

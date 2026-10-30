@@ -11,23 +11,22 @@ const TripId = z.string().refine((id) => tripIds().includes(id), "Unknown trip")
 
 const ApproveInput = z.object({
   tripId: TripId,
-  kind: z.enum(["alert_traveler", "request_refund", "file_dot_complaint"]),
+  kind: z.enum(["alert_traveler", "request_refund", "file_dot_complaint", "prepare_dispute"]),
 });
+
+const EVENT_FOR = {
+  alert_traveler: "traveler_alerted",
+  request_refund: "refund_requested",
+  file_dot_complaint: "dot_complaint_filed",
+  prepare_dispute: "dispute_prepared",
+} as const;
 
 export async function approve(formData: FormData): Promise<void> {
   const { tripId, kind } = ApproveInput.parse({ tripId: formData.get("tripId"), kind: formData.get("kind") });
   const c = claim(tripId);
   const action = c?.actions.find((a) => a.kind === kind);
   if (!action?.allowed) throw new Error(`Not allowed: ${action?.reason ?? kind}`);
-  const at = now();
-  appendEvent(
-    tripId,
-    kind === "alert_traveler"
-      ? { type: "traveler_alerted", at }
-      : kind === "request_refund"
-        ? { type: "refund_requested", at }
-        : { type: "dot_complaint_filed", at },
-  );
+  appendEvent(tripId, { type: EVENT_FOR[kind], at: now() });
   revalidatePath("/", "layout");
 }
 
@@ -39,7 +38,7 @@ const ReplyInput = z.object({
 export async function recordReply(formData: FormData): Promise<void> {
   const { tripId, outcome } = ReplyInput.parse({ tripId: formData.get("tripId"), outcome: formData.get("outcome") });
   const c = claim(tripId);
-  if (!c || !["refund_pending", "refund_overdue", "dot_filed", "disputed"].includes(c.stage)) {
+  if (!c || !["refund_pending", "refund_overdue", "dot_filed", "dispute_ready"].includes(c.stage)) {
     throw new Error("Record a reply only after the refund was requested");
   }
   const at = now();

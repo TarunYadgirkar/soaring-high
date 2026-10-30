@@ -21,7 +21,7 @@ export function stageLabel(stage: ClaimStage, verdict: Verdict): string {
     refund_overdue: "Refund overdue",
     refund_refused: "Refund refused",
     dot_filed: "DOT complaint filed",
-    disputed: "Card dispute open",
+    dispute_ready: "Dispute package ready",
     recovered: "Recovered",
     closed: verdict === "excluded" ? "Excluded by DOT notice" : "No refund owed",
   };
@@ -32,7 +32,7 @@ export type Tone = "owed" | "stamp" | "cleared" | "muted" | "ink";
 
 export function stageTone(stage: ClaimStage): Tone {
   if (stage === "alert_ready" || stage === "ready_to_request") return "owed";
-  if (stage === "refund_overdue" || stage === "refund_refused" || stage === "disputed") return "stamp";
+  if (stage === "refund_overdue" || stage === "refund_refused" || stage === "dispute_ready") return "stamp";
   if (stage === "recovered") return "cleared";
   if (stage === "closed" || stage === "watching") return "muted";
   return "ink";

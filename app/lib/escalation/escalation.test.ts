@@ -22,14 +22,17 @@ describe("escalation order", () => {
   it("never allows a dispute while the refund request is pending", () => {
     expect(stage(decisionFor("T01"), [requested], "2026-10-30T12:00:00Z")).toBe("refund_pending");
     expect(allowed("T01", [requested], "2026-10-30T12:00:00Z")).toEqual([]);
-    const dispute = actions(decisionFor("T01"), [requested], "2026-10-30T12:00:00Z").find((a) => a.kind === "open_dispute");
+    const dispute = actions(decisionFor("T01"), [requested], "2026-10-30T12:00:00Z").find((a) => a.kind === "prepare_dispute");
     expect(dispute?.reason).toMatch(/pending until Nov 2/);
   });
 
   it("allows the DOT complaint once the request is overdue, then the dispute", () => {
     expect(allowed("T01", [requested], "2026-11-03T12:00:00Z")).toEqual(["file_dot_complaint"]);
     const filed: ClaimEvent = { type: "dot_complaint_filed", at: "2026-11-03T12:00:00Z" };
-    expect(allowed("T01", [requested, filed], "2026-11-03T12:00:00Z")).toEqual(["open_dispute"]);
+    expect(allowed("T01", [requested, filed], "2026-11-03T12:00:00Z")).toEqual(["prepare_dispute"]);
+    const prepared: ClaimEvent = { type: "dispute_prepared", at: "2026-11-04T12:00:00Z" };
+    expect(stage(decisionFor("T01"), [requested, filed, prepared], "2026-11-04T13:00:00Z")).toBe("dispute_ready");
+    expect(allowed("T01", [requested, filed, prepared], "2026-11-04T13:00:00Z")).toEqual([]);
   });
 
   it("allows the DOT complaint right away when the payee refuses", () => {

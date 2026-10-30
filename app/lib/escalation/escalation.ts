@@ -7,9 +7,9 @@ export type ClaimEvent =
   | { type: "refund_received"; at: string; amount_cents: number }
   | { type: "refund_refused"; at: string; note: string }
   | { type: "dot_complaint_filed"; at: string }
-  | { type: "dispute_opened"; at: string; dispute_id: string };
+  | { type: "dispute_prepared"; at: string };
 
-export type ActionKind = "alert_traveler" | "request_refund" | "file_dot_complaint" | "open_dispute";
+export type ActionKind = "alert_traveler" | "request_refund" | "file_dot_complaint" | "prepare_dispute";
 
 export type Action = {
   kind: ActionKind;
@@ -26,7 +26,7 @@ export type ClaimStage =
   | "refund_overdue"
   | "refund_refused"
   | "dot_filed"
-  | "disputed"
+  | "dispute_ready"
   | "recovered"
   | "closed";
 
@@ -46,7 +46,7 @@ export function stage(decision: Decision, events: ClaimEvent[], asOf: string): C
   if (decision.verdict === "hold_credit_alert") return last(events, "traveler_alerted") ? "alerted" : "alert_ready";
   if (decision.verdict !== "refund_owed") return decision.verdict === "needs_info" ? "watching" : "closed";
   if (last(events, "refund_received")) return "recovered";
-  if (last(events, "dispute_opened")) return "disputed";
+  if (last(events, "dispute_prepared")) return "dispute_ready";
   if (last(events, "dot_complaint_filed")) return "dot_filed";
   if (last(events, "refund_refused")) return "refund_refused";
   const due = requestDueBy(events);
@@ -87,20 +87,20 @@ export function actions(decision: Decision, events: ClaimEvent[], asOf: string):
           : `No refund by ${due}.`
         : s === "refund_pending"
           ? `Wait: refund request pending until ${due}.`
-          : s === "dot_filed" || s === "disputed"
+          : s === "dot_filed" || s === "dispute_ready"
             ? "DOT complaint already filed."
             : "Request the refund first.",
     },
     {
-      kind: "open_dispute",
+      kind: "prepare_dispute",
       allowed: s === "dot_filed",
       reason:
         s === "dot_filed"
           ? "Refund request and DOT complaint went unanswered."
           : s === "refund_pending"
             ? `Blocked: a refund request is pending until ${due}. Disputing now could recover the money twice.`
-            : s === "disputed"
-              ? "Dispute already opened."
+            : s === "dispute_ready"
+              ? "Dispute package already prepared."
               : s === "recovered"
                 ? "Refund received."
                 : "File the DOT complaint first.",

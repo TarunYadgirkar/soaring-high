@@ -120,7 +120,7 @@ export function dotComplaint(t: Trip, d: Decision, requestedAt: string, outcome:
 export function disputeEvidence(t: Trip, d: Decision, requestedAt: string, dotFiledAt: string): Draft {
   return {
     kind: "dispute_evidence",
-    channel: "Card dispute (Stripe Issuing test mode in the demo; Ramp's dispute form in production)",
+    channel: "Card dispute, filed with the card issuer (Ramp for Ramp cards). The demo prepares this package; it does not file it.",
     subject: `Service not provided: ${route(t)}`,
     body: [
       `The merchant did not provide the flight and has not refunded ${d.amount_cents !== null ? formatUsd(d.amount_cents) : "the fare"} owed under federal rules.`,
