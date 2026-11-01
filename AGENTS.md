@@ -189,14 +189,14 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - The joined trip shows "Not proven yet": with no flight-status record, the engine won't claim anything.
 - [ ] Flight data for sandbox trips: the sandbox flight numbers look synthetic (UA 8565 DCA-DEN), so AeroDataBox may have no record of them. If so, demo the sandbox trip as "joined from Ramp, waiting for proof" and keep the seeded trips for the full refund flow
 - [ ] Remove `inputs/` from history, then make the repo public (or share it with the judges): Round 2 submission is the GitHub repository
-- [ ] Pick a flight-status API
+- [x] Pick a flight-status API: AeroDataBox via RapidAPI Basic (see Decisions)
 - [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
 - [x] Piece 1: 50 seeded trips (26 positive, 24 negative) with near misses: 2h50m and 2h59m late, 2h59m earlier, 5h and 5h59m international, cabin upgrade, voluntary changes, renumbered flights (with and without a significant change), flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
 - [x] Piece 2: rules engine with cited clauses and proof, unit tests (boundaries, holidays, the July 7, 2027 date), and `pnpm eval`. On the seeded set: precision 100%, recall 100%, verdict and cited-clause match 100% (seeded, author-labeled; see Decisions). An independent agent re-labeled all 50 cases from the regulation text without seeing the engine: it agreed with every verdict, and its four basis corrections (T04, T05, T46, T49) and four missing near misses are applied. A mutation check (threshold 180 to 181 minutes) makes the eval fail on T08, so the eval does catch boundary bugs.
 - [ ] Teammate review of the 50 labels in `app/data/seed/cases.ts`
 - [ ] Piece 3: data join
   - [x] Ramp demo MCP OAuth client (`pnpm ramp:login`): dynamic client registration, PKCE, tokens in `app/.ramp/` (gitignored), read-only scopes
-  - [ ] Tarun approves the Ramp login in a browser on taruns-macbook, then pull real demo transactions and bookings and align `RampTransaction` with them
+  - [x] Tarun approved the Ramp login (Oct 29); real demo transactions and bookings pulled and `RampTransaction` aligned with them
   - [x] Claude email extraction (`pnpm extract`, cached per trip, budget cap) and end-to-end eval (`pnpm eval:e2e`). The merge is unit-tested: a perfect extraction reproduces every gold fact and decision
   - [x] End-to-end eval run Oct 29 with `claude-opus-5-5` at effort `low` (Claude reads the emails, the engine decides). Results in `app/data/eval/e2e-claude-opus-5-5-v1.json` and `-v2.json`; extractions cached in `app/data/extract/claude-opus-5-5/v1|v2/`
     - **Prompt v1** (first run, $0.69): precision 96.3%, recall 100%, verdict and clause accuracy 98%. One miss: T40, a renumbered flight Claude labeled "schedule change", so the engine treated it as a cancellation and called the refund owed. Claude also put delay estimates in as a new itinerary (10 trips, no verdict changed). Cause: the prompt never defined the change kinds
@@ -212,7 +212,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - [x] Dispute step: after the DOT complaint, admin approves a dispute evidence package (`dispute_prepared` event, stage "Dispute package ready"). The app does not file it anywhere
   - [ ] Stripe Issuing test-mode dispute: blocked. Sandbox account "BBS-Ramp Hack" exists and `STRIPE_SECRET_KEY` is in `app/.env`, but the API answers "Your account is not set up to use Issuing" and the dashboard shows only "Contact sales" (checked Oct 30)
   - [ ] AeroDataBox credit line in the UI once live flight data is shown (required by its free-plan terms)
-  - [ ] Demo script (3 to 5 minutes) and screen recording for Nov 7
+  - [ ] Demo script (3 to 5 minutes) and screen recording. Tarun said on Nov 1 not to start this yet
 
 ## Decisions
 
@@ -290,3 +290,47 @@ Put your name next to a part to claim it.
 - Oct 18 (Claude, session for siddrrsh): added **Ramp Intelligence** and **Risks** sections and Q&A answers. The brief text is unchanged. Next: decide whether a Ramp Intelligence line should replace one in the brief, and add rebooked-flight cases to the seeded trips.
 - Oct 22 (Claude, session for Tarun, on taruns-macbook): built pieces 1 and 2 in `app/` (seeded trips, rules engine, tests, eval). Toolchain on this server: node 22 via nvm (`~/.nvm`), pnpm 11 via corepack, uv and gh from Homebrew. Next: piece 3. Get the demo MCP OAuth working, pick a flight-status API (compare free tiers, ask Tarun before anything paid), then Claude extraction of `emails` into `facts` with an end-to-end eval against the seeded gold facts.
 - Oct 30 (Claude, session for Tarun): Stripe sandbox set up; Issuing blocked (see Status). Dispute step now prepares the evidence package instead. Tarun pasted the `sk_test_` key in chat and chose not to rotate it (test mode only). Next: AeroDataBox key, demo script and recording before Nov 10.
+
+### Handoff, Nov 1 (Claude, session for Tarun)
+
+Latest work is pushed to main. 33 tests pass, typecheck and build are clean. Nothing is running.
+
+**Run the app** (in `app/`, node 22 via nvm, pnpm 11):
+
+- `pnpm build && pnpm start`, then open http://localhost:3000. "Skip 8 business days" and "Reset demo" in the header drive the overdue path.
+- `pnpm test`, `pnpm typecheck`, `pnpm eval` (seeded eval, free).
+- `pnpm ramp:sync` rebuilds `app/.data/ramp-trips.json` from the Ramp demo MCP. If the token in `app/.ramp/` has expired, run `pnpm ramp:login` first.
+- `pnpm extract` and `pnpm eval:e2e` call the Anthropic API and cost money (about $0.70 per 50-trip run with `claude-opus-5-5`). Check `uv run sim/generate.py spend` first.
+
+**What Tarun needs to do next**
+
+1. AeroDataBox: sign in to RapidAPI, open https://rapidapi.com/aedbx-aedbx/api/aerodatabox/pricing, subscribe to the Basic plan ($0; stop if it asks for a card), copy the `X-RapidAPI-Key` from the Endpoints page, and paste it after `AERODATABOX_RAPIDAPI_KEY=` on line 7 of `app/.env`. Then tell the next session.
+2. Nothing else is blocking the build.
+
+**Next build steps once the AeroDataBox key is in**
+
+1. Check one real, recent flight against the adapter (time format, diversions, `CanceledUncertain`) and fix `mapFlight` if the live shape differs from the published schema.
+2. Run `pnpm ramp:sync` with the key. Expect no records for the synthetic sandbox flight numbers; the sandbox trip then stays "Not proven yet", which is the honest result.
+3. Add the AeroDataBox credit line to the UI wherever live flight data appears (free-plan terms).
+
+**Other open build work (no Tarun action needed)**
+
+- Held-out eval set with new email templates, so the end-to-end number isn't tuned on the same 50 trips.
+- Multi-segment seeded cases (see Open questions).
+- Teammate review of the 50 labels.
+
+**Wait for Tarun's go before**
+
+- Demo script, recording, or anything on the submission form. Tarun said on Nov 1 there is plenty of time and not to start these.
+- Removing `inputs/` from git history or making the repo public (history rewrite).
+- Anything paid, including a non-free AeroDataBox plan.
+
+**Notes for the next agent session**
+
+- The Claude session runs on the build machine (taruns-macbook). Tarun often works from another Mac, so commands he types in his own Terminal land on the wrong machine. Use the app's Terminal panel, which runs on the build machine.
+- Keys: Tarun pastes them into `app/.env` himself (open `nano +<line> .env` in a Terminal panel tab in `app/`). He rejected hidden-prompt scripts, so don't use them. Never print a key; check it by length and prefix only. `app/.env` is gitignored and mode 0600.
+- `app/.env` holds `ANTHROPIC_API_KEY` (set), `STRIPE_SECRET_KEY` (set, test mode, not used by the code) and `AERODATABOX_RAPIDAPI_KEY` (empty).
+- Ramp OAuth: the callback listens on localhost:8765 on the build machine. When Tarun approves in Chrome on his other Mac, he pastes the callback URL into chat and the session relays it with `curl`.
+- The Claude in Chrome extension was flaky on Oct 30 (tab group lost, screenshots timed out). After two failed tries, stop and give Tarun the link to do it himself.
+- Claude can't create accounts or type passwords. Tarun signs up and signs in; the session drives the dashboard after that.
+- Stripe: a sandbox account exists, but Issuing is gated behind sales, so the dispute step prepares an evidence package and files nothing (see Decisions).
