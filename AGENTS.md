@@ -212,7 +212,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - [x] Dispute step: after the DOT complaint, admin approves a dispute evidence package (`dispute_prepared` event, stage "Dispute package ready"). The app does not file it anywhere
   - [ ] Stripe Issuing test-mode dispute: blocked. Sandbox account "BBS-Ramp Hack" exists and `STRIPE_SECRET_KEY` is in `app/.env`, but the API answers "Your account is not set up to use Issuing" and the dashboard shows only "Contact sales" (checked Oct 30)
   - [ ] AeroDataBox credit line in the UI once live flight data is shown (required by its free-plan terms)
-  - [ ] Demo script (3 to 5 minutes) and screen recording for Nov 10
+  - [ ] Demo script (3 to 5 minutes) and screen recording. Tarun said on Nov 1 not to start this yet
 
 ## Decisions
 
@@ -288,7 +288,7 @@ Done:
 - Piece 4: escalation rules, drafts, claims board, claim page with approvals, accuracy page (5a048ec); dispute step prepares an evidence package (9529214).
 
 In flight:
-- AeroDataBox key: a build session is waiting for Tarun to sign up (see Next, step 1). Nothing else is running.
+- Nothing is running. Latest work is pushed to main; 33 tests pass, typecheck and build are clean. The build session is waiting on the AeroDataBox key (Next, step 1).
 
 Blocked:
 - Stripe Issuing test-mode dispute: Stripe gates Issuing behind sales even in a sandbox. The app prepares the evidence package instead. Only unblock if Stripe or Ramp gives access.
@@ -297,15 +297,32 @@ Blocked:
 ### Next (in order)
 
 1. **Tarun: AeroDataBox key (optional but makes the demo live).** Sign in at rapidapi.com, subscribe to AeroDataBox **Basic** ($0; if it asks for a card, stop). Copy `X-RapidAPI-Key` from the API's Endpoints page into `AERODATABOX_RAPIDAPI_KEY` in `app/.env`. Then an agent checks real responses (time format, diversions) against `app/lib/flightstatus/aerodatabox.ts` and adds the required "AeroDataBox" credit link (no `noreferrer`) wherever live flight data shows.
-2. **Write the demo script (3 to 5 minutes).** Suggested path: claims board, then one `refund_owed` trip (deciding clause, evidence table), approve the refund request, "Skip 8 business days" to show it overdue, approve the DOT complaint, then the dispute package; end on the accuracy page and quote the **v1** end-to-end number (96.3% precision, 100% recall), since v2 was tuned on the same 50 trips. Show the Ramp sandbox trip as "joined from Ramp, waiting for proof".
-3. **Team: record the demo.** Run `pnpm build && pnpm start` in `app/`, press "Reset demo" first. Put the recording on Drive (anyone with the link) like Round 1.
+2. **Write the demo script (3 to 5 minutes). Wait for Tarun's go** (on Nov 1 he said there's plenty of time and not to start the script, recording or form yet). Suggested path: claims board, then one `refund_owed` trip (deciding clause, evidence table), approve the refund request, "Skip 8 business days" to show it overdue, approve the DOT complaint, then the dispute package; end on the accuracy page and quote the **v1** end-to-end number (96.3% precision, 100% recall), since v2 was tuned on the same 50 trips. Show the Ramp sandbox trip as "joined from Ramp, waiting for proof".
+3. **Team: record the demo** (after Tarun's go). Run `pnpm build && pnpm start` in `app/`, press "Reset demo" first. Put the recording on Drive (anyone with the link) like Round 1.
 4. **Tarun: approve making the repo visible to judges.** Before that, an agent removes `inputs/` (the organizers' deck and email) from git history with `git filter-repo`, which rewrites history and needs a force push, so every teammate must re-clone afterwards. Ask Tarun first; then make the repo public or add the judges as collaborators, whichever the form asks for.
-5. **Team: fill the Round 2 form.** Each member adds their own name, major and contribution. Check every page before submitting, and let Tarun press Submit.
+5. **Team: fill the Round 2 form** (after Tarun's go). Each member adds their own name, major and contribution. Check every page before submitting, and let Tarun press Submit.
 6. **Before the Nov 19 final (if we're a finalist):** teammate review of the 50 labels in `app/data/seed/cases.ts`; a held-out set of new email templates so the extraction number isn't tuned on its own test set; recheck DOT "Refund III"; Q&A prep from **Risks** and **Open questions**.
+
+Build work an agent can do now, no Tarun action needed, once the key is in: check one real recent flight against the adapter (time format, diversions, `CanceledUncertain`) and fix `mapFlight` if the live shape differs; run `pnpm ramp:sync` with the key (expect no records for the synthetic sandbox flight numbers, so that trip stays "Not proven yet"); add the AeroDataBox credit line. Without the key: held-out eval set, multi-segment seeded cases (see Open questions).
+
+Wait for Tarun's go before: demo script, recording, anything on the submission form, rewriting git history or changing repo visibility, anything paid (including a non-free AeroDataBox plan).
+
+### Run the app
+
+In `app/` (node 22 via nvm, pnpm 11):
+- `pnpm build && pnpm start`, then open http://localhost:3000. "Skip 8 business days" and "Reset demo" in the header drive the overdue path.
+- `pnpm test`, `pnpm typecheck`, `pnpm eval` (seeded eval, free).
+- `pnpm ramp:sync` rebuilds `app/.data/ramp-trips.json` from the Ramp demo MCP. If the token in `app/.ramp/` has expired, run `pnpm ramp:login` first.
+- `pnpm extract` and `pnpm eval:e2e` call the Anthropic API (about $0.70 per 50-trip run with `claude-opus-5-5`). Check `uv run sim/generate.py spend` first.
+- `app/.env` (gitignored, mode 0600) holds `ANTHROPIC_API_KEY` (set), `STRIPE_SECRET_KEY` (set, test mode, unused by the code) and `AERODATABOX_RAPIDAPI_KEY` (empty).
 
 ### How work runs
 
 - Heavy builds run on Tarun's second Mac over SSH (the Claude app connection `taruns-macbook`), clone at `~/TarunsCode/bbs-ramp`. Use `git@github.com:` remotes there, since HTTPS git can't reach the Keychain over SSH. One dev server at a time (8 GB RAM). Toolchain: node 22 via nvm, pnpm 11 via corepack, uv and gh from Homebrew.
+- Tarun often works from a different Mac than the build machine, so commands he types in his own Terminal can land on the wrong machine. Use the app's Terminal panel on the build session.
+- Keys: Tarun pastes them into `app/.env` himself (`nano +<line> .env` in a Terminal panel tab in `app/`). He rejected hidden-prompt scripts. Never print a key; check it by length and prefix only.
+- Ramp OAuth: the callback listens on localhost:8765 on the build machine. When Tarun approves in his browser, he pastes the callback URL into chat and the session relays it with `curl`.
+- Claude in Chrome was flaky on Oct 30. After two failed tries, stop and give Tarun the link to do it himself.
 - Anything Tarun must type himself (passwords, sign-ins, approvals in his browser) is called out as "Tarun:" above. Agents don't sign in, pay or submit forms for him.
 - Scripts that call the Anthropic API cost money: check `uv run sim/generate.py spend` and use `--max-usd` on `pnpm extract`.
 - Keep personal info out of this repo (it will be public): no personal emails, phone numbers, IPs or keys. Write "Tarun's Berkeley email" rather than the address.
@@ -315,4 +332,4 @@ Blocked:
 - Oct 18 (Claude, for a teammate): added **Ramp Intelligence** and **Risks** sections and Q&A answers.
 - Oct 21–22 (Claude, for Tarun): Round 1 brief and video script, video edit in `video/`, form checked page by page; Tarun submitted. Built pieces 1 and 2 on the build Mac.
 - Oct 29–30 (Claude, build session): pieces 3 and 4, Ramp demo MCP and sandbox join, Stripe sandbox (Issuing blocked).
-- Nov 1 (Claude, main session): handoff written; real email addresses removed from **Status**. They are still in git history, so scrub them in the same `filter-repo` pass as `inputs/` (Next, step 4).
+- Nov 1 (Claude, build session and main session): both wrote handoffs; merged here. Main session; real email addresses removed from **Status**. They are still in git history, so scrub them in the same `filter-repo` pass as `inputs/` (Next, step 4).
