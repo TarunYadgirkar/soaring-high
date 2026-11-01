@@ -332,4 +332,4 @@ In `app/` (node 22 via nvm, pnpm 11):
 - Oct 18 (Claude, for a teammate): added **Ramp Intelligence** and **Risks** sections and Q&A answers.
 - Oct 21–22 (Claude, for Tarun): Round 1 brief and video script, video edit in `video/`, form checked page by page; Tarun submitted. Built pieces 1 and 2 on the build Mac.
 - Oct 29–30 (Claude, build session): pieces 3 and 4, Ramp demo MCP and sandbox join, Stripe sandbox (Issuing blocked).
-- Nov 1 (Claude, build session and main session): both wrote handoffs; merged here. Main session; real email addresses removed from **Status**. They are still in git history, so scrub them in the same `filter-repo` pass as `inputs/` (Next, step 4).
+- Nov 1 (Claude, build session and main session): both wrote handoffs; merged here. Real email addresses removed from **Status**. They are still in git history, so scrub them in the same `filter-repo` pass as `inputs/` (Next, step 4).
