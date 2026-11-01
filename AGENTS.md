@@ -171,8 +171,8 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - [x] Edit the video: Remotion project in `video/` (split-flap title, lower thirds, word captions, timed callouts). Render with `pnpm render` in `video/`; source clips and renders are gitignored, output copied to `assets/generated/video/`
 - [x] Upload the video (Drive, anyone with the link) and paste the link into the form
 - [x] Form checked page by page on Oct 21; ready to submit
-- [x] Submit Round 1. Soaring advanced to the build round (email from [email removed], Oct 29)
-- [x] Request Ramp developer API sandbox access: submitted Oct 29 under [email removed] (sandbox "Soaring High (BBS x Ramp Hackathon)"); Ramp says it goes live by email. Reply sent to BBS ([email removed]) asking for help getting it approved. The demo MCP login needs a Ramp account email, so use the sandbox login once it arrives
+- [x] Submit Round 1. Soaring advanced to the build round (email from the BBS organizers, Oct 29)
+- [x] Request Ramp developer API sandbox access: submitted Oct 29 under Tarun's Berkeley email (sandbox "Soaring High (BBS x Ramp Hackathon)"); Ramp says it goes live by email. Reply sent to the BBS organizers asking for help getting it approved. The demo MCP login needs a Ramp account email, so use the sandbox login once it arrives
 - [x] Ramp demo MCP connected Oct 29 (`pnpm ramp:login`; Tarun approved in his Chrome and the one-time code was relayed to the build machine). 132 tools. `pnpm exec tsx scripts/ramp-probe.ts` saves samples to `app/data/ramp/sample-*.json` (gitignored)
   - What the sandbox returns, compared with the seeds:
     - Amounts are display strings (`"$1,446.13"`, `"-$259.49"`). `toCents` now parses them and the seeds use the same format.
@@ -189,14 +189,14 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - The joined trip shows "Not proven yet": with no flight-status record, the engine won't claim anything.
 - [ ] Flight data for sandbox trips: the sandbox flight numbers look synthetic (UA 8565 DCA-DEN), so AeroDataBox may have no record of them. If so, demo the sandbox trip as "joined from Ramp, waiting for proof" and keep the seeded trips for the full refund flow
 - [ ] Remove `inputs/` from history, then make the repo public (or share it with the judges): Round 2 submission is the GitHub repository
-- [ ] Pick a flight-status API
-- [x] Plan the build sprint (Oct 28 – Nov 7): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
+- [x] Pick a flight-status API (AeroDataBox, see Decisions)
+- [x] Plan the build sprint (Oct 28 – Nov 10): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
 - [x] Piece 1: 50 seeded trips (26 positive, 24 negative) with near misses: 2h50m and 2h59m late, 2h59m earlier, 5h and 5h59m international, cabin upgrade, voluntary changes, renumbered flights (with and without a significant change), flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
 - [x] Piece 2: rules engine with cited clauses and proof, unit tests (boundaries, holidays, the July 7, 2027 date), and `pnpm eval`. On the seeded set: precision 100%, recall 100%, verdict and cited-clause match 100% (seeded, author-labeled; see Decisions). An independent agent re-labeled all 50 cases from the regulation text without seeing the engine: it agreed with every verdict, and its four basis corrections (T04, T05, T46, T49) and four missing near misses are applied. A mutation check (threshold 180 to 181 minutes) makes the eval fail on T08, so the eval does catch boundary bugs.
 - [ ] Teammate review of the 50 labels in `app/data/seed/cases.ts`
 - [ ] Piece 3: data join
   - [x] Ramp demo MCP OAuth client (`pnpm ramp:login`): dynamic client registration, PKCE, tokens in `app/.ramp/` (gitignored), read-only scopes
-  - [ ] Tarun approves the Ramp login in a browser on taruns-macbook, then pull real demo transactions and bookings and align `RampTransaction` with them
+  - [x] Tarun approved the Ramp demo MCP login; real demo transactions and bookings pulled and `RampTransaction` aligned (Oct 29)
   - [x] Claude email extraction (`pnpm extract`, cached per trip, budget cap) and end-to-end eval (`pnpm eval:e2e`). The merge is unit-tested: a perfect extraction reproduces every gold fact and decision
   - [x] End-to-end eval run Oct 29 with `claude-opus-5-5` at effort `low` (Claude reads the emails, the engine decides). Results in `app/data/eval/e2e-claude-opus-5-5-v1.json` and `-v2.json`; extractions cached in `app/data/extract/claude-opus-5-5/v1|v2/`
     - **Prompt v1** (first run, $0.69): precision 96.3%, recall 100%, verdict and clause accuracy 98%. One miss: T40, a renumbered flight Claude labeled "schedule change", so the engine treated it as a cancellation and called the refund owed. Claude also put delay estimates in as a new itinerary (10 trips, no verdict changed). Cause: the prompt never defined the change kinds
@@ -212,7 +212,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - [x] Dispute step: after the DOT complaint, admin approves a dispute evidence package (`dispute_prepared` event, stage "Dispute package ready"). The app does not file it anywhere
   - [ ] Stripe Issuing test-mode dispute: blocked. Sandbox account "BBS-Ramp Hack" exists and `STRIPE_SECRET_KEY` is in `app/.env`, but the API answers "Your account is not set up to use Issuing" and the dashboard shows only "Contact sales" (checked Oct 30)
   - [ ] AeroDataBox credit line in the UI once live flight data is shown (required by its free-plan terms)
-  - [ ] Demo script (3 to 5 minutes) and screen recording for Nov 7
+  - [ ] Demo script (3 to 5 minutes) and screen recording for Nov 10
 
 ## Decisions
 
@@ -255,9 +255,9 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 - Tickets bought through a travel agency or booking site may refund through that seller rather than the airline. How does Soaring High handle each case?
 - DOT's "Refund III" may narrow the definition of a cancelled flight. Recheck before the Nov 19 final.
 - Can Soaring High act for the company when the ticket is in an employee's name? Who files the DOT complaint?
-- Which flight-status API, and what does historical data cost?
+- ~~Which flight-status API?~~ AeroDataBox Basic, free (see Decisions).
 - How do we get Ramp sandbox access as students?
-- Does the demo MCP OAuth login work without a Ramp account? Needed for piece 3.
+- ~~Does the demo MCP OAuth login work without a Ramp account?~~ It worked with Tarun's login on Oct 29.
 - If an airline offers a credit without the §260.6(c) notice (no statement of the refund right, or valid less than 5 years) and the traveler accepts it, does the acceptance still forfeit the refund? Not modeled yet.
 - Multi-segment itineraries are not seeded yet: a domestic leg of an international trip (the 6h threshold should apply to the whole itinerary) and a London to Paris leg on a single ticket from the US (a covered flight, unlike T47). Add them once the builder supports connections in the original booking.
 - When a traveler doesn't respond to a cancellation and the airline offered both a rebooking and a credit, the engine uses §260.6(a)(2)(iii)(A) (the rebooked flight left without them). (iii)(B) applies only when only a credit was offered. Confirm this reading.
@@ -275,18 +275,44 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 
 ## Ongoing
 
-_Use this section for handoffs: who is working on what, what's in flight, blockers, next steps._
+Updated: 2026-11-01 by Claude session (Tarun's main session; it is closing now, so pick up from here).
 
-### Work split (proposed, owners not yet assigned)
+### Where things stand
 
-Put your name next to a part to claim it.
+The MVP is built and on `main`. Round 2 (GitHub repo plus a 3 to 5 minute demo) is due **Nov 10, 11:59 p.m. PT** at https://forms.gle/FxUVTm6Z75f121ov5. Finalists are announced Nov 12; the live final is Nov 19 at Ramp's SF office.
 
-| Part | Owner | Owns | Round 1 job (by Oct 22) | Build sprint (Oct 28 – Nov 7) |
-|---|---|---|---|---|
-| 1. Data | _open_ | Ramp sandbox and demo MCP, a seeded Gmail inbox, Claude reading airline emails into trip records, the flight-status API | Request Ramp sandbox access today (it may take days). Pick the flight-status API. | Card charge, email and flight record joined into one trip |
-| 2. Rules engine | _open_ | The 14 CFR 260 rules engine with cited clauses, and the eval on 50 seeded trips | Write the seeded trip cases, including near misses, rebooked flights and renumbered flights | The engine, plus precision and recall numbers to replace the placeholders in the video |
-| 3. Product and pitch | _open_ | Traveler alert, claim cards, admin approval screen, the escalation flow (refund request, DOT complaint, Stripe test-mode dispute), and the pitch | Record the video, fill in the roster, submit the form | UI, demo script and Q&A prep for the live final |
+Done:
+- Round 1 submitted (technical track) with the brief in `round1-brief.md` and the animated video cut (source in `video/`, final render on the team Drive). Soaring advanced.
+- Pieces 1 and 2: 50 seeded trips, the 14 CFR 260 rules engine with cited clauses, unit tests, `pnpm eval` (5a048ec and earlier).
+- Piece 3: Claude email extraction and end-to-end eval (cd27af3), AeroDataBox adapter, Ramp demo MCP login and sandbox join (eced530, 122f170).
+- Piece 4: escalation rules, drafts, claims board, claim page with approvals, accuracy page (5a048ec); dispute step prepares an evidence package (9529214).
 
-- Oct 18 (Claude, session for siddrrsh): added **Ramp Intelligence** and **Risks** sections and Q&A answers. The brief text is unchanged. Next: decide whether a Ramp Intelligence line should replace one in the brief, and add rebooked-flight cases to the seeded trips.
-- Oct 22 (Claude, session for Tarun, on taruns-macbook): built pieces 1 and 2 in `app/` (seeded trips, rules engine, tests, eval). Toolchain on this server: node 22 via nvm (`~/.nvm`), pnpm 11 via corepack, uv and gh from Homebrew. Next: piece 3. Get the demo MCP OAuth working, pick a flight-status API (compare free tiers, ask Tarun before anything paid), then Claude extraction of `emails` into `facts` with an end-to-end eval against the seeded gold facts.
-- Oct 30 (Claude, session for Tarun): Stripe sandbox set up; Issuing blocked (see Status). Dispute step now prepares the evidence package instead. Tarun pasted the `sk_test_` key in chat and chose not to rotate it (test mode only). Next: AeroDataBox key, demo script and recording before Nov 10.
+In flight:
+- AeroDataBox key: a build session is waiting for Tarun to sign up (see Next, step 1). Nothing else is running.
+
+Blocked:
+- Stripe Issuing test-mode dispute: Stripe gates Issuing behind sales even in a sandbox. The app prepares the evidence package instead. Only unblock if Stripe or Ramp gives access.
+- Ramp developer API sandbox: requested Oct 29, waiting on Ramp's approval email. The demo MCP works meanwhile.
+
+### Next (in order)
+
+1. **Tarun: AeroDataBox key (optional but makes the demo live).** Sign in at rapidapi.com, subscribe to AeroDataBox **Basic** ($0; if it asks for a card, stop). Copy `X-RapidAPI-Key` from the API's Endpoints page into `AERODATABOX_RAPIDAPI_KEY` in `app/.env`. Then an agent checks real responses (time format, diversions) against `app/lib/flightstatus/aerodatabox.ts` and adds the required "AeroDataBox" credit link (no `noreferrer`) wherever live flight data shows.
+2. **Write the demo script (3 to 5 minutes).** Suggested path: claims board, then one `refund_owed` trip (deciding clause, evidence table), approve the refund request, "Skip 8 business days" to show it overdue, approve the DOT complaint, then the dispute package; end on the accuracy page and quote the **v1** end-to-end number (96.3% precision, 100% recall), since v2 was tuned on the same 50 trips. Show the Ramp sandbox trip as "joined from Ramp, waiting for proof".
+3. **Team: record the demo.** Run `pnpm build && pnpm start` in `app/`, press "Reset demo" first. Put the recording on Drive (anyone with the link) like Round 1.
+4. **Tarun: approve making the repo visible to judges.** Before that, an agent removes `inputs/` (the organizers' deck and email) from git history with `git filter-repo`, which rewrites history and needs a force push, so every teammate must re-clone afterwards. Ask Tarun first; then make the repo public or add the judges as collaborators, whichever the form asks for.
+5. **Team: fill the Round 2 form.** Each member adds their own name, major and contribution. Check every page before submitting, and let Tarun press Submit.
+6. **Before the Nov 19 final (if we're a finalist):** teammate review of the 50 labels in `app/data/seed/cases.ts`; a held-out set of new email templates so the extraction number isn't tuned on its own test set; recheck DOT "Refund III"; Q&A prep from **Risks** and **Open questions**.
+
+### How work runs
+
+- Heavy builds run on Tarun's second Mac over SSH (the Claude app connection `taruns-macbook`), clone at `~/TarunsCode/bbs-ramp`. Use `git@github.com:` remotes there, since HTTPS git can't reach the Keychain over SSH. One dev server at a time (8 GB RAM). Toolchain: node 22 via nvm, pnpm 11 via corepack, uv and gh from Homebrew.
+- Anything Tarun must type himself (passwords, sign-ins, approvals in his browser) is called out as "Tarun:" above. Agents don't sign in, pay or submit forms for him.
+- Scripts that call the Anthropic API cost money: check `uv run sim/generate.py spend` and use `--max-usd` on `pnpm extract`.
+- Keep personal info out of this repo (it will be public): no personal emails, phone numbers, IPs or keys. Write "Tarun's Berkeley email" rather than the address.
+
+### Log
+
+- Oct 18 (Claude, for a teammate): added **Ramp Intelligence** and **Risks** sections and Q&A answers.
+- Oct 21–22 (Claude, for Tarun): Round 1 brief and video script, video edit in `video/`, form checked page by page; Tarun submitted. Built pieces 1 and 2 on the build Mac.
+- Oct 29–30 (Claude, build session): pieces 3 and 4, Ramp demo MCP and sandbox join, Stripe sandbox (Issuing blocked).
+- Nov 1 (Claude, main session): handoff written; real email addresses removed from **Status**. They are still in git history, so scrub them in the same `filter-repo` pass as `inputs/` (Next, step 4).
