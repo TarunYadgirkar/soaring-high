@@ -12,7 +12,7 @@ Context for any agent or teammate working in this repo. Read this first. Keep it
 |---|---|
 | Oct 22, 11:59 p.m. PT | Round 1 due: roster, 150–250 word idea brief, 1–2 min video pitch |
 | Oct 28 | Build sprint starts for teams that advance |
-| Nov 10, 11:59 p.m. PT | Round 2 due (moved from Nov 7 per the Oct 29 email from BBS): GitHub repository plus demo, submitted at https://forms.gle/FxUVTm6Z75f121ov5 |
+| Nov 10, 11:59 p.m. PT | Round 2 due (moved from Nov 7 per the Oct 29 email from BBS), submitted at https://forms.gle/FxUVTm6Z75f121ov5. The form (read Nov 10) asks for: a **public** GitHub repo with no API keys, a demo video link of **2 to 3 minutes** (Drive, Loom or unlisted YouTube, viewable without signing in), and a 200 to 300 word architecture answer. Answers and demo script are in [round2-submission.md](round2-submission.md) |
 | Nov 12 | Finalists announced |
 | Nov 19 | Live final for Ramp engineers at Ramp's SF office |
 
@@ -275,7 +275,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 
 ## Ongoing
 
-Updated: 2026-11-01 by Claude session (Tarun's main session; it is closing now, so pick up from here).
+Updated: 2026-11-10 by Claude session on Tarun's main Mac (deadline day).
 
 ### Where things stand
 
@@ -328,6 +328,8 @@ In `app/` (node 22 via nvm, pnpm 11):
 - Keep personal info out of this repo (it will be public): no personal emails, phone numbers, IPs or keys. Write "Tarun's Berkeley email" rather than the address.
 
 ### Log
+
+- Nov 10 (Claude, Tarun's main Mac): read the Round 2 form (public repo, 2 to 3 minute demo, 200 to 300 word architecture answer). App installed and built on this Mac (node 24 works; 33 tests pass). Tarun approved the Ramp demo MCP login here; `pnpm ramp:sync` joined 1 of 4 bookings (AC 1521), same as Oct 29. Rewrote README for judges and added round2-submission.md. History scan: no API keys ever committed; `inputs/` and teammates' emails are still in history. Still open: scrub history and make the repo public, AeroDataBox key, demo video, form.
 
 - Oct 18 (Claude, for a teammate): added **Ramp Intelligence** and **Risks** sections and Q&A answers.
 - Oct 21–22 (Claude, for Tarun): Round 1 brief and video script, video edit in `video/`, form checked page by page; Tarun submitted. Built pieces 1 and 2 on the build Mac.
