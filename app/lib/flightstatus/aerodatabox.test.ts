@@ -49,6 +49,18 @@ describe("AeroDataBox mapping", () => {
     expect(mapFlight(FlightsResponse.parse(twoLegs), "UA 1182", "2026-09-14", "SFO")?.origin).toBe("SFO");
   });
 
+  it("picks the departure on the requested date when an overnight flight returns two days", () => {
+    const dayBefore = {
+      ...arrived[0],
+      departure: {
+        ...arrived[0].departure,
+        scheduledTime: { utc: "2026-09-13 15:05Z", local: "2026-09-13 08:05-07:00" },
+      },
+    };
+    const s = mapFlight(FlightsResponse.parse([dayBefore, arrived[0]]), "UA 1182", "2026-09-14", "SFO");
+    expect(s?.scheduled_departure).toBe("2026-09-14T08:05:00-07:00");
+  });
+
   it("keeps an upcoming delayed flight's revised times as estimates", () => {
     const delayed = [{ ...arrived[0], status: "Delayed" }];
     const s = mapFlight(FlightsResponse.parse(delayed), "UA 1182", "2026-09-14", "SFO");

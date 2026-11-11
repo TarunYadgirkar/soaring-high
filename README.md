@@ -28,7 +28,7 @@ Other commands in `app/`:
 
 | Command | What it does | Cost |
 |---|---|---|
-| `pnpm test` | 33 unit tests: rule boundaries, federal holidays, escalation order, the Ramp join | Free |
+| `pnpm test` | 34 unit tests: rule boundaries, federal holidays, escalation order, the Ramp join | Free |
 | `pnpm eval` | Precision and recall of the rules engine on the 50 seeded trips | Free |
 | `pnpm ramp:login`, `pnpm ramp:sync` | Log in to Ramp's demo MCP server (read-only scopes) and join sandbox bookings to card charges | Free, needs a Ramp sandbox login |
 | `pnpm extract`, `pnpm eval:e2e` | Claude reads the airline emails, then the engine decides | About $0.70 per run, needs `ANTHROPIC_API_KEY` in `app/.env` |

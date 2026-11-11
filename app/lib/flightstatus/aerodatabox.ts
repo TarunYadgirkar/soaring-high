@@ -46,7 +46,12 @@ function state(status: string): FlightStatusState | null {
 }
 
 export function mapFlight(flights: Flight[], flightNumber: string, date: string, origin: string): FlightStatus | null {
-  const f = flights.find((x) => x.departure.airport.iata === origin) ?? (flights.length === 1 ? flights[0] : undefined);
+  const fromOrigin = flights.filter((x) => x.departure.airport.iata === origin);
+  const candidates = fromOrigin.length > 0 || flights.length !== 1 ? fromOrigin : flights;
+  // A lookup by date also returns a departure from the day before when that flight lands on the date.
+  const f =
+    candidates.find((x) => x.departure.scheduledTime?.local?.startsWith(date)) ??
+    (candidates.length === 1 ? candidates[0] : undefined);
   if (!f) return null;
   const st = state(f.status);
   const schedDep = toIso(f.departure.scheduledTime?.local);

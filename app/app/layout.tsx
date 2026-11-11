@@ -48,7 +48,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </div>
           <p className="mx-auto max-w-6xl px-5 pb-3 text-xs text-ink-soft">
-            Sample data: 50 seeded trips with Ramp-style card charges, airline emails and flight-status records, plus trips joined from Ramp&apos;s demo sandbox. Not real travelers.
+            Sample data: 50 seeded trips with Ramp-style card charges, airline emails and flight-status records, plus trips joined from Ramp&apos;s demo sandbox. Not real travelers. Live flight status for sandbox trips is powered by{" "}
+            {/* AeroDataBox's free plan requires a credit link that sends a referrer, so no noreferrer. */}
+            <a href="https://aerodatabox.com/" target="_blank" rel="noopener" className="underline hover:text-ink">AeroDataBox</a>.
           </p>
         </header>
         <main className="mx-auto max-w-6xl px-5 py-8">{children}</main>
