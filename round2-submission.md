@@ -9,7 +9,7 @@ Form: https://forms.gle/FxUVTm6Z75f121ov5. Due Nov 10, 11:59 p.m. PT. One submis
 | Team name | Soaring |
 | Submission path | Technical build: working code and demo |
 | Project name | Soaring High |
-| GitHub repo link | https://github.com/TarunYadgirkar/BBS-RAMP-Hack (must be public first) |
+| GitHub repo link | https://github.com/TarunYadgirkar/BBS-RAMP-Hack |
 | Live demo link | Drive, Loom or unlisted YouTube link, 2 to 3 minutes, viewable by anyone with the link |
 | Can attend Nov 19 | Team confirms |
 

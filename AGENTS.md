@@ -16,7 +16,7 @@ Context for any agent or teammate working in this repo. Read this first. Keep it
 | Nov 12 | Finalists announced |
 | Nov 19 | Live final for Ramp engineers at Ramp's SF office |
 
-Source files: [inputs/info.pdf](inputs/info.pdf) (info-session deck), [inputs/email.png](inputs/email.png) (announcement email).
+Source files: the info-session deck and the announcement email from BBS. They are the organizers' material, so they were removed from this repo and its history on Nov 10 before it went public. Tarun has copies.
 
 ## The idea: Soaring High
 
@@ -188,7 +188,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
   - Result on Oct 29: 1 of 4 bookings joined (AC 1521 LGA to YYZ, the $435.56 Air Canada charge with memo "Flight to Toronto"). The other three have no route-matching ticket charge (B6 2153 has only $10 wifi charges; AA 6020's only candidate memo is "Flight for work trip"), so the join reports them instead of guessing.
   - The joined trip shows "Not proven yet": with no flight-status record, the engine won't claim anything.
 - [ ] Flight data for sandbox trips: the sandbox flight numbers look synthetic (UA 8565 DCA-DEN), so AeroDataBox may have no record of them. If so, demo the sandbox trip as "joined from Ramp, waiting for proof" and keep the seeded trips for the full refund flow
-- [ ] Remove `inputs/` from history, then make the repo public (or share it with the judges): Round 2 submission is the GitHub repository
+- [x] Remove `inputs/` from history, then make the repo public (done Nov 10 with `git filter-repo`; emails scrubbed in the same pass)
 - [x] Pick a flight-status API (AeroDataBox, see Decisions)
 - [x] Plan the build sprint (Oct 28 – Nov 10): pieces 1 to 4 below, plan confirmed by Tarun on Oct 22
 - [x] Piece 1: 50 seeded trips (26 positive, 24 negative) with near misses: 2h50m and 2h59m late, 2h59m earlier, 5h and 5h59m international, cabin upgrade, voluntary changes, renumbered flights (with and without a significant change), flew the rebooked flight, credit accepted, booking-site purchases, non-US flight, already refunded, missing flight data
@@ -218,7 +218,7 @@ Running the `sim/` scripts needs [uv](https://docs.astral.sh/uv/) and your own A
 
 - Names: project **Soaring High**, team **Soaring** (chosen by the team, Oct 21). Earlier working names "Owed", "Part 260" and "Soaring Away" were dropped.
 - Submit in the **technical** track. The rules engine, data join and eval are the differentiators, and technical execution is 35% of the score.
-- Keep the repo **private until Round 1 closes (Oct 22)** so other teams can't copy the idea. Then make it public and remove `inputs/` (the organizers' deck and email) first, including from git history.
+- The repo stayed private until Round 1 closed (Oct 22) so other teams couldn't copy the idea. It went public on Nov 10 for Round 2, after `inputs/` (the organizers' deck and email) was removed from git history.
 - Lead with airline refunds. SaaS renewals after cancellation and duplicate charges are secondary detectors.
 - Entitlement comes from a rules engine with cited clauses, not an LLM judgment.
 - No voice call in the core pitch. It read as a gimmick.
@@ -299,7 +299,7 @@ Blocked:
 1. **Tarun: AeroDataBox key (optional but makes the demo live).** Sign in at rapidapi.com, subscribe to AeroDataBox **Basic** ($0; if it asks for a card, stop). Copy `X-RapidAPI-Key` from the API's Endpoints page into `AERODATABOX_RAPIDAPI_KEY` in `app/.env`. Then an agent checks real responses (time format, diversions) against `app/lib/flightstatus/aerodatabox.ts` and adds the required "AeroDataBox" credit link (no `noreferrer`) wherever live flight data shows.
 2. **Write the demo script (3 to 5 minutes). Wait for Tarun's go** (on Nov 1 he said there's plenty of time and not to start the script, recording or form yet). Suggested path: claims board, then one `refund_owed` trip (deciding clause, evidence table), approve the refund request, "Skip 8 business days" to show it overdue, approve the DOT complaint, then the dispute package; end on the accuracy page and quote the **v1** end-to-end number (96.3% precision, 100% recall), since v2 was tuned on the same 50 trips. Show the Ramp sandbox trip as "joined from Ramp, waiting for proof".
 3. **Team: record the demo** (after Tarun's go). Run `pnpm build && pnpm start` in `app/`, press "Reset demo" first. Put the recording on Drive (anyone with the link) like Round 1.
-4. **Tarun: approve making the repo visible to judges.** Before that, an agent removes `inputs/` (the organizers' deck and email) from git history with `git filter-repo`, which rewrites history and needs a force push, so every teammate must re-clone afterwards. Ask Tarun first; then make the repo public or add the judges as collaborators, whichever the form asks for.
+4. Done Nov 10: Tarun approved; `inputs/` and email addresses were removed from git history with `git filter-repo`, main was force-pushed, and the repo is public. **Aadi and Dhruv: delete your old clone and clone again.** Do not push from an old clone, because that brings the removed files back.
 5. **Team: fill the Round 2 form** (after Tarun's go). Each member adds their own name, major and contribution. Check every page before submitting, and let Tarun press Submit.
 6. **Before the Nov 19 final (if we're a finalist):** teammate review of the 50 labels in `app/data/seed/cases.ts`; a held-out set of new email templates so the extraction number isn't tuned on its own test set; recheck DOT "Refund III"; Q&A prep from **Risks** and **Open questions**.
 
@@ -329,9 +329,9 @@ In `app/` (node 22 via nvm, pnpm 11):
 
 ### Log
 
-- Nov 10 (Claude, Tarun's main Mac): read the Round 2 form (public repo, 2 to 3 minute demo, 200 to 300 word architecture answer). App installed and built on this Mac (node 24 works; 33 tests pass). Tarun approved the Ramp demo MCP login here; `pnpm ramp:sync` joined 1 of 4 bookings (AC 1521), same as Oct 29. Rewrote README for judges and added round2-submission.md. History scan: no API keys ever committed; `inputs/` and teammates' emails are still in history. Still open: scrub history and make the repo public, AeroDataBox key, demo video, form.
+- Nov 10 (Claude, Tarun's main Mac): read the Round 2 form (public repo, 2 to 3 minute demo, 200 to 300 word architecture answer). App installed and built on this Mac (node 24 works; 33 tests pass). Tarun approved the Ramp demo MCP login here; `pnpm ramp:sync` joined 1 of 4 bookings (AC 1521), same as Oct 29. Rewrote README for judges and added round2-submission.md. History scan: no API keys ever committed; `inputs/` and teammates' emails are still in history. Later the same day, on Tarun's go: history rewritten with `git filter-repo` (`inputs/` removed, email addresses replaced, commit author email mapped to the GitHub noreply address), main force-pushed, repo made public. Old commit hashes no longer exist, so teammates must re-clone. Still open: AeroDataBox key, demo video, form.
 
 - Oct 18 (Claude, for a teammate): added **Ramp Intelligence** and **Risks** sections and Q&A answers.
 - Oct 21–22 (Claude, for Tarun): Round 1 brief and video script, video edit in `video/`, form checked page by page; Tarun submitted. Built pieces 1 and 2 on the build Mac.
 - Oct 29–30 (Claude, build session): pieces 3 and 4, Ramp demo MCP and sandbox join, Stripe sandbox (Issuing blocked).
-- Nov 1 (Claude, build session and main session): both wrote handoffs; merged here. Real email addresses removed from **Status**. They are still in git history, so scrub them in the same `filter-repo` pass as `inputs/` (Next, step 4).
+- Nov 1 (Claude, build session and main session): both wrote handoffs; merged here. Real email addresses removed from **Status**. They were scrubbed from git history on Nov 10.
