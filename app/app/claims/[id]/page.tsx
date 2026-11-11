@@ -53,57 +53,34 @@ function BoardingPass({ c }: { c: Claim }) {
   const d = c.decision;
   const isOwed = d.verdict === "refund_owed" || d.verdict === "hold_credit_alert";
   return (
-    <section aria-label="Trip" className="flex flex-col overflow-hidden rounded-xl bg-card shadow-[0_1px_0_var(--grid),0_12px_32px_-20px_rgba(19,35,63,0.35)] md:flex-row">
-      <div className="flex-1 space-y-5 p-6 md:p-8">
-        <div className="flex items-center justify-between gap-4 text-sm text-ink-soft">
+    <section aria-label="Trip" className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6 border-b border-grid pb-8">
+      <div className="space-y-3">
+        <p className="flex flex-wrap items-center gap-3 text-sm text-ink-soft">
           <span>
             {c.trip.traveler}, {c.trip.source === "ramp_sandbox" ? `Ramp sandbox booking ${c.trip.facts.record_locator.slice(0, 8)}` : `confirmation ${c.trip.facts.record_locator}`}
           </span>
           <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${toneClass[stageTone(c.stage)]}`}>{stageLabel(c.stage, d.verdict)}</span>
-        </div>
-        <div className="flex items-end gap-6">
-          <div>
-            <p className="font-sign text-7xl font-bold leading-none tracking-wide">{first.origin}</p>
-            <p className="mt-1 text-sm text-ink-soft">
-              {airport(first.origin).city}, {time(first.departure, first.origin)}
-            </p>
-          </div>
-          <svg aria-hidden viewBox="0 0 24 24" className="mb-7 h-7 w-7 shrink-0 fill-ink-soft">
-            <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" transform="rotate(90 12 12)" />
-          </svg>
-          <div>
-            <p className="font-sign text-7xl font-bold leading-none tracking-wide">{last.destination}</p>
-            <p className="mt-1 text-sm text-ink-soft">
-              {airport(last.destination).city}, {time(last.arrival, last.destination)}
-            </p>
-          </div>
-        </div>
-        <dl className="grid grid-cols-3 gap-4 border-t border-dashed border-grid pt-4 text-sm">
-          <div>
-            <dt className="text-ink-soft">Flight</dt>
-            <dd className="font-sign text-xl font-semibold">{segs.map((s) => s.flight_number).join(", ")}</dd>
-          </div>
-          <div>
-            <dt className="text-ink-soft">Date</dt>
-            <dd className="font-sign text-xl font-semibold">{shortDate(first.departure)}</dd>
-          </div>
-          <div>
-            <dt className="text-ink-soft">Cabin</dt>
-            <dd className="font-sign text-xl font-semibold capitalize">{first.cabin.replace("_", " ")}</dd>
-          </div>
-        </dl>
+        </p>
+        <h1 className="font-sign text-4xl font-semibold tracking-tight">
+          {airport(first.origin).city} <span className="text-ink-soft">to</span> {airport(last.destination).city}
+        </h1>
+        <p className="text-sm text-ink-soft">
+          <span className="font-mono">{segs.map((s) => s.flight_number).join(", ")}</span>, {first.origin} {time(first.departure, first.origin)} to {last.destination}{" "}
+          {time(last.arrival, last.destination)}, <span className="capitalize">{first.cabin.replace("_", " ")}</span>
+        </p>
       </div>
-      <div aria-hidden className="perforation hidden w-6 bg-card md:block" />
-      <div className={`stub-in flex flex-col justify-between gap-4 p-6 md:w-72 md:p-8 ${isOwed ? "bg-owed" : "bg-paper"}`}>
-        <div>
-          <p className="text-sm">{d.verdict === "hold_credit_alert" ? "Refundable if the traveler declines" : isOwed ? `Owed to the card by ${d.payee?.name}` : "Refund"}</p>
-          <p className="font-sign text-5xl font-bold">{isOwed ? usd(d.amount_cents) : d.verdict === "needs_info" ? "Not proven yet" : "Not owed"}</p>
-        </div>
-        <div className="text-sm">
-          <p>{ruleLabel(d.basis)}</p>
-          {d.refund_due_by && <p>Due by {shortDate(d.refund_due_by)}{d.overdue ? ", overdue" : ""}</p>}
-          {d.payee?.kind === "ticket_agent" && <p>Seller refunds on request</p>}
-        </div>
+      <div className="text-right">
+        <p className="text-sm text-ink-soft">
+          {d.verdict === "hold_credit_alert" ? "Refundable if the traveler declines" : isOwed ? `Owed to the card by ${d.payee?.name}` : "Refund"}
+        </p>
+        <p className="font-sign text-5xl font-semibold tracking-tight tabular-nums">
+          <span className={isOwed ? "rounded bg-owed-soft px-2" : ""}>{isOwed ? usd(d.amount_cents) : d.verdict === "needs_info" ? "Not proven yet" : "Not owed"}</span>
+        </p>
+        <p className="mt-1 text-sm text-ink-soft">
+          {ruleLabel(d.basis)}
+          {d.refund_due_by && `, due by ${shortDate(d.refund_due_by)}${d.overdue ? ", overdue" : ""}`}
+          {d.payee?.kind === "ticket_agent" && ", seller refunds on request"}
+        </p>
       </div>
     </section>
   );
@@ -112,7 +89,7 @@ function BoardingPass({ c }: { c: Claim }) {
 function Quote({ cite }: { cite: Citation }) {
   return (
     <figure className="max-w-[68ch] border-l-2 border-ink pl-4">
-      <blockquote className="font-law text-[1.05rem] leading-relaxed">“{cite.excerpt}”</blockquote>
+      <blockquote className="border-l-2 border-ink pl-4 text-base leading-relaxed">“{cite.excerpt}”</blockquote>
       <figcaption className="mt-1 text-sm text-ink-soft">
         <a href={cite.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">
           {cite.label}
@@ -266,7 +243,7 @@ function Escalation({ c }: { c: Claim }) {
               <h3 className="font-medium">{STEP_TITLE[a.kind]}</h3>
               <p className={`text-sm ${!a.allowed && !isDone && a.reason.startsWith("Blocked") ? "text-stamp" : "text-ink-soft"}`}>{a.reason}</p>
               {(a.allowed || isDone) && (
-                <details className="mt-2 rounded-md bg-card p-3 text-sm shadow-[0_0_0_1px_var(--grid)]">
+                <details className="mt-2 rounded-md bg-paper p-3 text-sm">
                   <summary className="cursor-pointer font-medium">{isDone ? (a.kind === "prepare_dispute" ? "The dispute package" : "What was sent") : "Read the draft"}</summary>
                   <p className="mt-2 text-xs text-ink-soft">{draft.channel}</p>
                   <p className="mt-1 font-medium">{draft.subject}</p>

@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f5f7fa;
+  --paper: #f5f5f7;
   --card: #ffffff;
-  --ink: #13233f;
-  --ink-soft: #4a5873;
-  --grid: #d6dce6;
-  --owed: #f2c230;
-  --owed-soft: #fdf3cf;
-  --stamp: #b8342a;
-  --cleared: #1c7c54;
+  --ink: #1d1d1f;
+  --ink-soft: #6e6e73;
+  --grid: #e3e3e8;
+  --owed: #f5c542;
+  --owed-soft: #fff4cf;
+  --stamp: #c4281c;
+  --cleared: #1a7f4b;
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-figures: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+  --font-code: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 @theme inline {
@@ -22,39 +25,21 @@
   --color-owed-soft: var(--owed-soft);
   --color-stamp: var(--stamp);
   --color-cleared: var(--cleared);
-  --font-sans: var(--font-public-sans);
-  --font-sign: var(--font-barlow);
-  --font-law: var(--font-source-serif);
+  --font-sans: var(--font-ui);
+  --font-sign: var(--font-figures);
+  --font-law: var(--font-ui);
+  --font-mono: var(--font-code);
 }
 
 body {
-  background: var(--paper);
+  background: var(--card);
   color: var(--ink);
-  font-family: var(--font-public-sans), system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-feature-settings: "tnum" 1;
+  -webkit-font-smoothing: antialiased;
 }
 
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
-}
-
-/* The boarding-pass tear line between the trip and the stub. */
-.perforation {
-  background-image: radial-gradient(circle, var(--paper) 5px, transparent 5.5px);
-  background-size: 100% 18px;
-  background-repeat: repeat-y;
-  background-position: center;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .stub-in {
-    animation: stub-in 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  }
-  @keyframes stub-in {
-    from {
-      transform: translateX(14px) rotate(1.5deg);
-      opacity: 0;
-    }
-  }
 }

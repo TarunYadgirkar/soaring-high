@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Public_Sans, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { advanceClock, reset } from "./actions";
 import { now } from "@/lib/store/claims";
 import "./globals.css";
-
-const publicSans = Public_Sans({ variable: "--font-public-sans", subsets: ["latin"] });
-const barlow = Barlow_Condensed({ variable: "--font-barlow", subsets: ["latin"], weight: ["500", "600", "700"] });
-const sourceSerif = Source_Serif_4({ variable: "--font-source-serif", subsets: ["latin"], style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
   title: "Soaring High",
@@ -19,11 +14,11 @@ export const dynamic = "force-dynamic";
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const clock = new Date(now()).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
   return (
-    <html lang="en" className={`${publicSans.variable} ${barlow.variable} ${sourceSerif.variable} antialiased`}>
+    <html lang="en">
       <body className="min-h-screen">
-        <header className="border-b border-grid bg-card">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-4">
-            <Link href="/" className="font-sign text-2xl font-bold tracking-wide text-ink">
+        <header className="border-b border-grid">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-3">
+            <Link href="/" className="text-base font-semibold text-ink">
               Soaring High
             </Link>
             <nav className="flex gap-6 text-sm text-ink-soft">
@@ -51,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </div>
           <p className="mx-auto max-w-6xl px-5 pb-3 text-xs text-ink-soft">
-            Sample data: 50 seeded trips with Ramp-style card charges, airline emails and flight-status records, plus trips joined from Ramp&apos;s demo sandbox. Not real travelers. Live flight status for sandbox trips is powered by{" "}
+            Sample data: 50 seeded trips and one joined from Ramp&apos;s demo sandbox. Not real travelers. Flight status for sandbox trips by{" "}
             {/* AeroDataBox's free plan requires a credit link that sends a referrer, so no noreferrer. */}
             <a href="https://aerodatabox.com/" target="_blank" rel="noopener" className="underline hover:text-ink">AeroDataBox</a>.
           </p>

@@ -41,6 +41,8 @@ Each member fills in their own name and email.
 
 Before recording: `pnpm build && pnpm start` in `app/`, then press "Reset demo".
 
+The submitted video (2:14) was recorded on Nov 10 by a Playwright script that walks this table, with captions and a synthetic voice reading the lines. The file is `assets/generated/soaring-high-demo.mp4` on Tarun's Mac and is not in git. Timings below are the outline, and the recording runs a little faster.
+
 | Time | On screen | Say |
 |---|---|---|
 | 0:00 | Claims board | "When an airline cancels or significantly changes a flight, it owes a cash refund to the original card. Travelers take the credit instead, and the company's money is gone. Soaring High checks every flight on a company's Ramp cards and gets that cash back." |
@@ -52,5 +54,6 @@ Before recording: `pnpm build && pnpm start` in `app/`, then press "Reset demo".
 | 1:35 | Skip 8 business days, approve DOT complaint, approve dispute package | "The deadline passes. Now the DOT complaint unlocks, and after it, the evidence package for Ramp's dispute form." |
 | 1:55 | Live disruptions tab, open SFO to NRT | "This one is live. The flight moved 7 hours earlier and the traveler hasn't answered. Soaring High tells them not to accept the credit, because accepting it gives up $1,876." |
 | 2:15 | Ramp sandbox tab | "This trip is joined from Ramp's demo sandbox: a real booking matched to its card charge. With no flight record yet, the engine claims nothing." |
+| 2:20 | Recovery report | "The recovery report shows finance which airlines owe the most and why. It also lists credits travelers already accepted, which is cash the rule can no longer get back." |
 | 2:30 | Accuracy page | "On 50 labeled trips with near misses, the engine scores 100% precision and recall. End to end with Claude reading the emails, the first run scored 96.3% precision and 100% recall." |
 | 2:45 | Board | "Ramp already catches a hotel price drop after you book. Soaring High catches the airfare refund after the airline cancels." |

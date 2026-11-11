@@ -38,8 +38,8 @@ export default function ReportPage() {
       <section className="space-y-3">
         <h2 className="text-lg font-semibold">Who owes what</h2>
         <div className="overflow-x-auto">
-          <table className="w-full border-separate border-spacing-y-2">
-            <thead className="text-left text-xs text-ink-soft">
+          <table className="w-full border-collapse">
+            <thead className="border-b border-grid text-left text-xs text-ink-soft [&_th]:pb-2">
               <tr>
                 <th className="px-4 font-medium">Payee</th>
                 <th className="w-2/5 px-4 font-medium">Share of open money</th>
@@ -67,8 +67,8 @@ export default function ReportPage() {
           </p>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full border-separate border-spacing-y-2">
-            <thead className="text-left text-xs text-ink-soft">
+          <table className="w-full border-collapse">
+            <thead className="border-b border-grid text-left text-xs text-ink-soft [&_th]:pb-2">
               <tr>
                 <th className="px-4 font-medium">Traveler</th>
                 <th className="px-4 font-medium">Bought from</th>
@@ -78,15 +78,15 @@ export default function ReportPage() {
             </thead>
             <tbody>
               {credits.map((c) => (
-                <tr key={c.tripId} className="bg-card shadow-[0_1px_0_var(--grid)]">
-                  <td className="rounded-l-md px-4 py-3 text-sm">{c.traveler}</td>
+                <tr key={c.tripId} className="border-b border-grid">
+                  <td className="px-4 py-3 text-sm">{c.traveler}</td>
                   <td className="px-4 py-3 text-sm">{c.airline}</td>
                   <td className="px-4 py-3 text-sm">
                     <Link href={`/claims/${c.tripId}`} className="underline hover:text-ink">
                       {c.route}, {shortDate(c.date)}
                     </Link>
                   </td>
-                  <td className="rounded-r-md px-4 py-3 text-right font-sign text-xl font-semibold tabular-nums">{usd(c.amountCents)}</td>
+                  <td className="px-4 py-3 text-right text-base font-semibold tabular-nums">{usd(c.amountCents)}</td>
                 </tr>
               ))}
             </tbody>
@@ -101,7 +101,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <dt className="text-sm text-ink-soft">{label}</dt>
-      <dd className="font-sign text-4xl font-semibold tabular-nums">{value}</dd>
+      <dd className="font-sign text-4xl font-semibold tracking-tight tabular-nums">{value}</dd>
     </div>
   );
 }
@@ -109,8 +109,8 @@ function Stat({ label, value }: { label: string; value: string }) {
 function PayeeLine({ p, largest }: { p: PayeeRow; largest: number }) {
   const pct = (cents: number) => `${(cents / largest) * 100}%`;
   return (
-    <tr className="bg-card shadow-[0_1px_0_var(--grid)]">
-      <td className="rounded-l-md px-4 py-3">
+    <tr className="border-b border-grid">
+      <td className="px-4 py-3">
         <span className="font-semibold">{p.name}</span>
         <span className="block text-xs text-ink-soft">
           {p.kind === "ticket_agent" ? "Booking site" : "Airline"}, {p.owedTrips + p.liveTrips} {p.owedTrips + p.liveTrips === 1 ? "trip" : "trips"}
@@ -122,10 +122,10 @@ function PayeeLine({ p, largest }: { p: PayeeRow; largest: number }) {
           <div className="bg-ink" style={{ width: pct(p.liveCents) }} />
         </div>
       </td>
-      <td className="px-4 py-3 text-right font-sign text-xl font-semibold tabular-nums">{usd(p.owedCents)}</td>
-      <td className="px-4 py-3 text-right font-sign text-xl tabular-nums text-ink-soft">{p.liveCents ? usd(p.liveCents) : "none"}</td>
+      <td className="px-4 py-3 text-right text-base font-semibold tabular-nums">{usd(p.owedCents)}</td>
+      <td className="px-4 py-3 text-right text-base tabular-nums text-ink-soft">{p.liveCents ? usd(p.liveCents) : "none"}</td>
       <td className="hidden px-4 py-3 text-sm md:table-cell">{p.topCause ? CAUSE[p.topCause] : "None recorded"}</td>
-      <td className="rounded-r-md px-4 py-3 text-sm">
+      <td className="px-4 py-3 text-sm">
         {p.overdueTrips > 0 ? (
           <span className="inline-block whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-xs font-medium text-stamp ring-1 ring-stamp">
             {p.overdueTrips} overdue
