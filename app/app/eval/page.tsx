@@ -66,7 +66,7 @@ function Result({ title, s }: { title: string; s: EvalSummary }) {
         <table className="text-sm">
           <caption className="pb-3 text-left text-ink-soft">Label against prediction</caption>
           <thead>
-            <tr className="font-mono text-xs text-ink-soft">
+            <tr className="meta">
               <th />
               <th className="px-5 py-1 font-normal">flagged</th>
               <th className="px-5 py-1 font-normal">not flagged</th>
@@ -74,12 +74,12 @@ function Result({ title, s }: { title: string; s: EvalSummary }) {
           </thead>
           <tbody className="figure text-3xl">
             <tr>
-              <th className="pr-4 text-left font-mono text-xs font-normal text-ink-soft">owed</th>
+              <th className="meta pr-4 text-left font-normal">owed</th>
               <td className="bg-owed-soft px-5 py-3 text-center text-owed">{tp}</td>
               <td className="px-5 py-3 text-center text-ink-soft">{fn}</td>
             </tr>
             <tr>
-              <th className="pr-4 text-left font-mono text-xs font-normal text-ink-soft">not owed</th>
+              <th className="meta pr-4 text-left font-normal">not owed</th>
               <td className="px-5 py-3 text-center text-ink-soft">{fp}</td>
               <td className="bg-card px-5 py-3 text-center">{tn}</td>
             </tr>
@@ -93,7 +93,7 @@ function Result({ title, s }: { title: string; s: EvalSummary }) {
               .map(([cat, c]) => (
                 <tr key={cat} className="border-t border-grid">
                   <td className="py-1.5 pr-10">{CATEGORY[cat] ?? cat}</td>
-                  <td className={`py-1.5 text-right font-mono text-xs ${c.correct === c.n ? "text-ink-soft" : "text-stamp"}`}>
+                  <td className={`py-1.5 text-right tabular-nums ${c.correct === c.n ? "text-ink-soft" : "text-stamp"}`}>
                     {c.correct}/{c.n}
                   </td>
                 </tr>

@@ -47,7 +47,7 @@ export default async function ClaimsPage({ searchParams }: PageProps<"/">) {
               aria-current={v === view ? "page" : undefined}
               className={v === view ? "text-ink underline decoration-owed decoration-2 underline-offset-8" : "text-ink-soft hover:text-ink"}
             >
-              {VIEWS[v].label} <span className="font-mono text-xs text-ink-soft">{all.filter(VIEWS[v].test).length}</span>
+              {VIEWS[v].label} <span className="text-ink-soft">{all.filter(VIEWS[v].test).length}</span>
             </Link>
           ))}
         </nav>
@@ -62,6 +62,7 @@ export default async function ClaimsPage({ searchParams }: PageProps<"/">) {
             <thead className="sr-only">
               <tr>
                 <th>Route</th>
+                <th>Traveler</th>
                 <th>What happened</th>
                 <th>Amount</th>
                 <th>Status</th>
@@ -88,18 +89,20 @@ function BoardRow({ c }: { c: Claim }) {
     <tr className="border-t border-grid align-baseline hover:bg-card">
       <td className="py-4 pr-6">
         <Link href={`/claims/${c.trip.id}`} className="block">
-          <span className="font-sign text-2xl">
+          <span className="font-sign text-2xl font-medium">
             {first.origin} <span aria-hidden className="text-ink-soft">→</span>
             <span className="sr-only">to</span> {last.destination}
           </span>
-          <span className="mt-1 block font-mono text-xs text-ink-soft">
-            {first.flight_number} · {shortDate(first.departure)} · {c.trip.traveler}
-          </span>
+          <span className="code mt-1 block">{first.flight_number}</span>
         </Link>
+      </td>
+      <td className="hidden py-4 pr-6 text-sm sm:table-cell">
+        {c.trip.traveler}
+        <span className="meta mt-1 block">{shortDate(first.departure)}</span>
       </td>
       <td className="hidden max-w-sm py-4 pr-6 text-sm md:table-cell">
         {whatHappened(c.decision)}
-        <span className="mt-1 block font-mono text-xs text-ink-soft">{ruleLabel(c.decision.basis)}</span>
+        <span className="code mt-1 block">{ruleLabel(c.decision.basis)}</span>
       </td>
       <td className={`figure py-4 pr-8 text-right text-2xl ${isOwed ? "text-owed" : "text-ink-soft"}`}>{isOwed ? usd(c.decision.amount_cents) : "none"}</td>
       <td className="w-44 py-4 text-sm">

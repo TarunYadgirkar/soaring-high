@@ -53,7 +53,7 @@ export default function ReportPage() {
             ))}
           </tbody>
         </table>
-        <p className="flex gap-6 font-mono text-xs text-ink-soft">
+        <p className="meta flex gap-6">
           <span className="before:mr-2 before:inline-block before:h-2 before:w-2 before:bg-owed before:content-['']">owed now</span>
           <span className="before:mr-2 before:inline-block before:h-2 before:w-2 before:bg-ink before:content-['']">live alert</span>
         </p>
@@ -61,7 +61,7 @@ export default function ReportPage() {
 
       <section className="space-y-4">
         <h2 className="text-sm text-ink-soft">Credits travelers already accepted</h2>
-        <p className="max-w-xl font-sign text-2xl leading-snug">The refund rule no longer applies to these. The cash sits in each traveler&apos;s own airline account.</p>
+        <p className="max-w-xl text-xl leading-snug">The refund rule no longer applies to these. The cash sits in each traveler&apos;s own airline account.</p>
         <table className="w-full border-collapse">
           <thead className="sr-only">
             <tr>
@@ -75,7 +75,7 @@ export default function ReportPage() {
               <tr key={c.tripId} className="border-t border-grid align-baseline">
                 <td className="py-4 pr-6">
                   {c.traveler}
-                  <span className="mt-1 block font-mono text-xs text-ink-soft">{c.airline}</span>
+                  <span className="meta mt-1 block">{c.airline}</span>
                 </td>
                 <td className="py-4 pr-6 text-sm">
                   <Link href={`/claims/${c.tripId}`} className="underline decoration-grid underline-offset-4 hover:decoration-ink">
@@ -99,8 +99,9 @@ function PayeeLine({ p, largest }: { p: PayeeRow; largest: number }) {
     <tr className="border-t border-grid align-baseline">
       <td className="w-56 py-4 pr-6">
         {p.name}
-        <span className="mt-1 block font-mono text-xs text-ink-soft">
-          {trips} {trips === 1 ? "trip" : "trips"} · {p.topCause ? CAUSE[p.topCause].toLowerCase() : "no cause recorded"}
+        <span className="meta mt-1 block">
+          {trips} {trips === 1 ? "trip" : "trips"}
+          {p.topCause && `, mostly ${CAUSE[p.topCause].toLowerCase()}`}
         </span>
       </td>
       <td className="py-4 pr-6 align-middle">

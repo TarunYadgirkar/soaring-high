@@ -48,31 +48,39 @@ function TripHeader({ c }: { c: Claim }) {
   const isOwed = d.verdict === "refund_owed" || d.verdict === "hold_credit_alert";
   const amount = isOwed ? usd(d.amount_cents) : d.verdict === "needs_info" ? "Not proven" : "Not owed";
   const owedLine = d.verdict === "hold_credit_alert" ? "refundable if the traveler declines the credit" : isOwed ? `owed to the card by ${d.payee?.name}` : "";
-  const meta = [
-    segs.map((s) => s.flight_number).join(", "),
-    `${first.origin} ${time(first.departure, first.origin)}`,
-    `${last.destination} ${time(last.arrival, last.destination)}`,
-    shortDate(first.departure),
-    c.trip.traveler,
+  const facts = [
+    ["Flight", segs.map((s) => s.flight_number).join(", ")],
+    ["Departs", `${first.origin}, ${shortDate(first.departure)} at ${time(first.departure, first.origin)}`],
+    ["Arrives", `${last.destination} at ${time(last.arrival, last.destination)}`],
+    ["Traveler", c.trip.traveler],
   ];
-  const terms = [ruleLabel(d.basis), d.refund_due_by ? `due ${shortDate(d.refund_due_by)}${d.overdue ? ", overdue" : ""}` : null, d.payee?.kind === "ticket_agent" ? "seller refunds on request" : null];
+  const due = d.refund_due_by ? `Due ${shortDate(d.refund_due_by)}${d.overdue ? ", overdue" : ""}` : null;
   return (
     <section aria-label="Trip" className="space-y-8">
-      <Link href="/" className="font-mono text-xs text-ink-soft hover:text-ink">
+      <Link href="/" className="meta hover:text-ink">
         ← Claims
       </Link>
       <div className="flex flex-wrap items-end justify-between gap-x-16 gap-y-8">
         <div>
-          <h1 className="font-sign text-5xl leading-tight sm:text-6xl">
+          <h1 className="font-sign text-5xl font-medium leading-tight sm:text-6xl">
             {airport(first.origin).city} <span aria-hidden className="text-ink-soft">→</span>
             <span className="sr-only">to</span> {airport(last.destination).city}
           </h1>
-          <p className="mt-3 font-mono text-xs text-ink-soft">{meta.join(" · ")}</p>
+          <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-3 text-sm">
+            {facts.map(([label, value]) => (
+              <div key={label}>
+                <dt className="meta">{label}</dt>
+                <dd className="mt-0.5">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
         <div className="text-right">
           <p className={`figure text-6xl sm:text-7xl ${isOwed ? "text-owed" : "text-ink-soft"}`}>{amount}</p>
           {owedLine && <p className="mt-3 text-sm text-ink-soft">{owedLine}</p>}
-          <p className="mt-1 font-mono text-xs text-ink-soft">{terms.filter(Boolean).join(" · ")}</p>
+          <p className="code mt-1">{ruleLabel(d.basis)}</p>
+          {due && <p className={`mt-1 text-sm ${d.overdue ? "text-stamp" : "text-ink-soft"}`}>{due}</p>}
+          {d.payee?.kind === "ticket_agent" && <p className="meta mt-1">The seller refunds on request.</p>}
         </div>
       </div>
       <p className={`text-sm ${toneClass[stageTone(c.stage)]}`}>{stageLabel(c.stage, d.verdict)}</p>
@@ -83,8 +91,8 @@ function TripHeader({ c }: { c: Claim }) {
 function Quote({ cite }: { cite: Citation }) {
   return (
     <figure className="max-w-2xl">
-      <blockquote className="font-sign text-2xl leading-snug">“{cite.excerpt}”</blockquote>
-      <figcaption className="mt-3 font-mono text-xs text-ink-soft">
+      <blockquote className="rounded-lg bg-card p-6 text-lg leading-relaxed">“{cite.excerpt}”</blockquote>
+      <figcaption className="code mt-3">
         <a href={cite.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink">
           {cite.label}
         </a>
@@ -104,7 +112,7 @@ function Why({ c }: { c: Claim }) {
       {basis && <Quote cite={basis} />}
       {others.length > 0 && (
         <details className="max-w-2xl text-sm">
-          <summary className="cursor-pointer font-mono text-xs text-ink-soft hover:text-ink">{others.length} more rules cited</summary>
+          <summary className="meta cursor-pointer hover:text-ink">{others.length} more rules cited</summary>
           <div className="mt-6 space-y-8">
             {others.map((cite) => (
               <Quote key={cite.clause} cite={cite} />
@@ -141,10 +149,11 @@ function Evidence({ proof }: { proof: Proof[] }) {
               <td className="w-32 py-3 pr-6 whitespace-nowrap">{SOURCE_LABEL[p.source]}</td>
               <td className="py-3 pr-6">
                 {p.note}
-                <span className="mt-1 block font-mono text-xs text-ink-soft">
-                  {p.field} = {p.value} · {p.ref}
+                <span className="code mt-1 block">
+                  {p.field} = {p.value}
                 </span>
               </td>
+              <td className="code hidden py-3 text-right sm:table-cell">{p.ref}</td>
             </tr>
           ))}
         </tbody>
@@ -224,7 +233,7 @@ function Escalation({ c }: { c: Claim }) {
             <li key={a.kind} className="relative pl-9">
               <span
                 aria-hidden
-                className={`absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full font-mono text-xs ${isDone ? "bg-cleared text-paper" : a.allowed ? "bg-owed text-paper" : "bg-card text-ink-soft"}`}
+                className={`absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium ${isDone ? "bg-cleared text-paper" : a.allowed ? "bg-ink text-paper" : "bg-card text-ink-soft"}`}
               >
                 {isDone ? "✓" : i + 1}
               </span>
@@ -232,8 +241,8 @@ function Escalation({ c }: { c: Claim }) {
               <p className={`text-sm ${!a.allowed && !isDone && a.reason.startsWith("Blocked") ? "text-stamp" : "text-ink-soft"}`}>{a.reason}</p>
               {(a.allowed || isDone) && (
                 <details className="mt-3 text-sm">
-                  <summary className="cursor-pointer font-mono text-xs text-ink-soft hover:text-ink">{isDone ? (a.kind === "prepare_dispute" ? "The dispute package" : "What was sent") : "Read the draft"}</summary>
-                  <p className="mt-3 font-mono text-xs text-ink-soft">{draft.channel}</p>
+                  <summary className="meta cursor-pointer hover:text-ink">{isDone ? (a.kind === "prepare_dispute" ? "The dispute package" : "What was sent") : "Read the draft"}</summary>
+                  <p className="meta mt-3">{draft.channel}</p>
                   <p className="mt-1 font-medium">{draft.subject}</p>
                   <pre className="mt-2 whitespace-pre-wrap rounded-md bg-card p-4 font-sans text-[0.8rem] leading-relaxed">{draft.body}</pre>
                 </details>
@@ -242,7 +251,7 @@ function Escalation({ c }: { c: Claim }) {
                 <form action={approve} className="mt-3">
                   <input type="hidden" name="tripId" value={c.trip.id} />
                   <input type="hidden" name="kind" value={a.kind} />
-                  <button className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-paper hover:bg-owed">{STEP_BUTTON[a.kind]}</button>
+                  <button className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-paper hover:bg-ink/85">{STEP_BUTTON[a.kind]}</button>
                 </form>
               )}
             </li>
@@ -266,8 +275,8 @@ function Escalation({ c }: { c: Claim }) {
         </div>
       )}
       {c.events.length > 0 && (
-        <div className="space-y-1 border-t border-grid pt-4 font-mono text-xs text-ink-soft">
-          <p className="font-sans text-sm">History</p>
+        <div className="meta space-y-1 border-t border-grid pt-4">
+          <p>History</p>
           {c.events.map((e, i) => (
             <p key={`${e.type}-${i}`}>
               {shortDate(e.at)}: {e.type.replaceAll("_", " ")}

@@ -23,7 +23,7 @@
   --color-stamp: var(--stamp);
   --color-cleared: var(--cleared);
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
-  --font-sign: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sign: var(--font-schibsted), var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
 }
 
@@ -44,10 +44,26 @@ body {
   outline-offset: 3px;
 }
 
+/* Text styles. Components use these instead of restating size, family and color. */
 .figure {
-  font-family: var(--font-newsreader), ui-serif, Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-schibsted), var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
   line-height: 1;
-  font-variant-numeric: lining-nums tabular-nums;
+  /* Headline figures stand alone, so they use proportional digits. Columns of amounts opt back in with tabular-nums. */
+  font-feature-settings: "tnum" 0;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+.meta {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-soft);
+}
+
+/* Mono is only for identifiers a person might copy or match: flight numbers, rule citations, record ids. */
+.code {
+  font-family: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--ink-soft);
 }
