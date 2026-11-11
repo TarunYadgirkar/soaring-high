@@ -10,7 +10,8 @@ Built by team Soaring for the BBS × Ramp Hackathon (technical track). The promp
 2. **Decides with a rules engine, not an LLM opinion.** The engine encodes 14 CFR 260 and 399.80(l). Every claim quotes the clause it relies on and points at the records that prove it. Claude only reads messy airline emails into structured facts.
 3. **Alerts in real time.** When a disruption qualifies and the traveler hasn't answered, it tells them not to accept the credit, because accepting it gives up the refund.
 4. **Gets the cash back in a fixed order:** refund request, then DOT complaint, then a card dispute package. Each step needs one admin approval, and a dispute is blocked while a refund request is still inside its 7-business-day window.
-5. **Measures itself** on 50 seeded trips that include near misses (2h59m late, renumbered flights, voluntary changes).
+5. **Reports to finance.** The recovery report shows which airlines and booking sites owe the most, why, and which are past their deadline. It also lists credits travelers already accepted, which is company cash the refund rule can no longer recover.
+6. **Measures itself** on 50 seeded trips that include near misses (2h59m late, renumbered flights, voluntary changes).
 
 ## Run it
 
@@ -28,7 +29,7 @@ Other commands in `app/`:
 
 | Command | What it does | Cost |
 |---|---|---|
-| `pnpm test` | 34 unit tests: rule boundaries, federal holidays, escalation order, the Ramp join | Free |
+| `pnpm test` | 37 unit tests: rule boundaries, federal holidays, escalation order, the Ramp join, the recovery report | Free |
 | `pnpm eval` | Precision and recall of the rules engine on the 50 seeded trips | Free |
 | `pnpm ramp:login`, `pnpm ramp:sync` | Log in to Ramp's demo MCP server (read-only scopes) and join sandbox bookings to card charges | Free, needs a Ramp sandbox login |
 | `pnpm extract`, `pnpm eval:e2e` | Claude reads the airline emails, then the engine decides | About $0.70 per run, needs `ANTHROPIC_API_KEY` in `app/.env` |
@@ -50,7 +51,8 @@ Flight status (AeroDataBox) ───────┘          (14 CFR 260)    + 
 | Flight status | [app/lib/flightstatus/](app/lib/flightstatus/) | AeroDataBox adapter with a cache and a quota guard. No record means no claim |
 | Escalation | [app/lib/escalation/](app/lib/escalation/) | Fixed order, deterministic drafts, no double recovery |
 | Seeded trips and labels | [app/data/seed/](app/data/seed/) | 26 owed, 24 not owed, each with a written rationale |
-| UI | [app/app/](app/app/) | Next.js 16: claims board, claim page, accuracy page |
+| Recovery report | [app/lib/report/](app/lib/report/) | Totals per payee and the accepted-credit list, computed from the same decisions as the board |
+| UI | [app/app/](app/app/) | Next.js 16: claims board, claim page, recovery report, accuracy page |
 
 ## Accuracy
 
@@ -69,6 +71,14 @@ Prompt v2 was fixed after seeing v1's one miss on the same 50 trips, so treat 96
 - **Real:** the rules engine, the escalation rules, the Claude extraction and its eval, the Ramp demo MCP login and the booking-to-charge join against Ramp's sandbox data.
 - **Seeded:** the 50 trips (Ramp-shaped charges, airline emails, flight-status records). Ramp's sandbox has four flight bookings and none of them is disrupted, so the refund flow runs on seeded trips.
 - **Not sent anywhere:** approving a step records it and shows the draft. The app does not email airlines, file DOT complaints or file disputes. Ramp has no disputes API, so the last step prepares the evidence package for Ramp's dispute form.
+
+## What's next
+
+- Write the proof back to Ramp: attach the evidence to the card charge as a receipt and memo.
+- Refunds on flights that did operate: bag fees when the bag arrives 12 or more hours late, and paid Wi-Fi or seats that were not provided.
+- A credit ledger with expiry dates, so finance can reuse accepted credits before they lapse.
+- EU261 and Canada's APPR, which add fixed cash compensation on top of the refund.
+- A real inbox connection instead of seeded emails.
 
 ## More
 

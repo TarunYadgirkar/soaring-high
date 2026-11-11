@@ -30,6 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <Link href="/" className="hover:text-ink">
                 Claims
               </Link>
+              <Link href="/report" className="hover:text-ink">
+                Recovery report
+              </Link>
               <Link href="/eval" className="hover:text-ink">
                 Accuracy
               </Link>
