@@ -135,7 +135,7 @@ Everyone asks Claude for hackathon ideas, so we simulated 2,500 Claude sessions 
 
 ## Repo map
 
-Repo: https://github.com/TarunYadgirkar/BBS-RAMP-Hack (private). Default branch `main`.
+Repo: https://github.com/TarunYadgirkar/soaring-high (public since Nov 10). Default branch `main`. The old private repo `BBS-RAMP-Hack` is a frozen archive: GitHub still serves its pre-scrub commits by hash, so it stays private. Do not push there.
 
 | Path | What |
 |---|---|
@@ -299,7 +299,7 @@ Blocked:
 1. **Tarun: AeroDataBox key (optional but makes the demo live).** Sign in at rapidapi.com, subscribe to AeroDataBox **Basic** ($0; if it asks for a card, stop). Copy `X-RapidAPI-Key` from the API's Endpoints page into `AERODATABOX_RAPIDAPI_KEY` in `app/.env`. Then an agent checks real responses (time format, diversions) against `app/lib/flightstatus/aerodatabox.ts` and adds the required "AeroDataBox" credit link (no `noreferrer`) wherever live flight data shows.
 2. **Write the demo script (3 to 5 minutes). Wait for Tarun's go** (on Nov 1 he said there's plenty of time and not to start the script, recording or form yet). Suggested path: claims board, then one `refund_owed` trip (deciding clause, evidence table), approve the refund request, "Skip 8 business days" to show it overdue, approve the DOT complaint, then the dispute package; end on the accuracy page and quote the **v1** end-to-end number (96.3% precision, 100% recall), since v2 was tuned on the same 50 trips. Show the Ramp sandbox trip as "joined from Ramp, waiting for proof".
 3. **Team: record the demo** (after Tarun's go). Run `pnpm build && pnpm start` in `app/`, press "Reset demo" first. Put the recording on Drive (anyone with the link) like Round 1.
-4. Done Nov 10: Tarun approved; `inputs/` and email addresses were removed from git history with `git filter-repo`, main was force-pushed, and the repo is public. **Aadi and Dhruv: delete your old clone and clone again.** Do not push from an old clone, because that brings the removed files back.
+4. Done Nov 10: Tarun approved; `inputs/` and email addresses were removed from git history with `git filter-repo`, and the clean history was pushed to the new public repo `soaring-high`. **Aadi and Dhruv: delete your old clone and clone `soaring-high`.** Do not push from an old clone, because that brings the removed files back.
 5. **Team: fill the Round 2 form** (after Tarun's go). Each member adds their own name, major and contribution. Check every page before submitting, and let Tarun press Submit.
 6. **Before the Nov 19 final (if we're a finalist):** teammate review of the 50 labels in `app/data/seed/cases.ts`; a held-out set of new email templates so the extraction number isn't tuned on its own test set; recheck DOT "Refund III"; Q&A prep from **Risks** and **Open questions**.
 
@@ -329,7 +329,7 @@ In `app/` (node 22 via nvm, pnpm 11):
 
 ### Log
 
-- Nov 10 (Claude, Tarun's main Mac): read the Round 2 form (public repo, 2 to 3 minute demo, 200 to 300 word architecture answer). App installed and built on this Mac (node 24 works; 33 tests pass). Tarun approved the Ramp demo MCP login here; `pnpm ramp:sync` joined 1 of 4 bookings (AC 1521), same as Oct 29. Rewrote README for judges and added round2-submission.md. History scan: no API keys ever committed; `inputs/` and teammates' emails are still in history. Later the same day, on Tarun's go: history rewritten with `git filter-repo` (`inputs/` removed, email addresses replaced, commit author email mapped to the GitHub noreply address), main force-pushed, repo made public. Old commit hashes no longer exist, so teammates must re-clone. Still open: AeroDataBox key, demo video, form.
+- Nov 10 (Claude, Tarun's main Mac): read the Round 2 form (public repo, 2 to 3 minute demo, 200 to 300 word architecture answer). App installed and built on this Mac (node 24 works; 33 tests pass). Tarun approved the Ramp demo MCP login here; `pnpm ramp:sync` joined 1 of 4 bookings (AC 1521), same as Oct 29. Rewrote README for judges and added round2-submission.md. History scan: no API keys ever committed; `inputs/` and teammates' emails are still in history. Later the same day, on Tarun's go: history rewritten with `git filter-repo` (`inputs/` removed, email addresses replaced, commit author email mapped to the GitHub noreply address), main force-pushed. GitHub still served the old commits by hash, so the clean history went to a new public repo, `soaring-high`, and `BBS-RAMP-Hack` stays private. Old commit hashes no longer exist, so teammates must re-clone. Still open: AeroDataBox key, demo video, form.
 
 - Oct 18 (Claude, for a teammate): added **Ramp Intelligence** and **Risks** sections and Q&A answers.
 - Oct 21–22 (Claude, for Tarun): Round 1 brief and video script, video edit in `video/`, form checked page by page; Tarun submitted. Built pieces 1 and 2 on the build Mac.
