@@ -38,12 +38,14 @@ export function stageTone(stage: ClaimStage): Tone {
   return "ink";
 }
 
+const DOT = "before:mr-2 before:inline-block before:h-1.5 before:w-1.5 before:rounded-full before:bg-current before:align-middle before:content-['']";
+
 export const toneClass: Record<Tone, string> = {
-  owed: "bg-owed-soft text-ink ring-1 ring-owed",
-  stamp: "bg-white text-stamp ring-1 ring-stamp",
-  cleared: "bg-white text-cleared ring-1 ring-cleared",
-  muted: "bg-transparent text-ink-soft ring-1 ring-grid",
-  ink: "bg-ink text-white",
+  owed: `text-owed ${DOT}`,
+  stamp: `text-stamp ${DOT}`,
+  cleared: `text-cleared ${DOT}`,
+  muted: "text-ink-soft",
+  ink: `text-ink ${DOT}`,
 };
 
 export function shortDate(iso: string): string {

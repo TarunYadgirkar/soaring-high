@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import { Geist_Mono, Hanken_Grotesk, Newsreader } from "next/font/google";
 import Link from "next/link";
 import { advanceClock, reset } from "./actions";
 import { now } from "@/lib/store/claims";
 import "./globals.css";
+
+const hanken = Hanken_Grotesk({ variable: "--font-hanken", subsets: ["latin"] });
+const newsreader = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], weight: ["400", "500"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Soaring High",
@@ -11,47 +16,48 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+const NAV = [
+  { href: "/", label: "Claims" },
+  { href: "/report", label: "Report" },
+  { href: "/eval", label: "Accuracy" },
+];
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const clock = new Date(now()).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
   return (
-    <html lang="en">
-      <body className="min-h-screen">
-        <header className="border-b border-grid">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-3">
-            <Link href="/" className="text-base font-semibold text-ink">
-              Soaring High
-            </Link>
-            <nav className="flex gap-6 text-sm text-ink-soft">
-              <Link href="/" className="hover:text-ink">
-                Claims
+    <html lang="en" className={`${hanken.variable} ${newsreader.variable} ${geistMono.variable}`}>
+      <body className="flex min-h-screen flex-col">
+        <header className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-10 gap-y-3 px-6 py-6">
+          <Link href="/" className="font-sign text-xl text-ink">
+            Soaring High
+          </Link>
+          <nav className="flex gap-7 text-sm text-ink-soft">
+            {NAV.map((n) => (
+              <Link key={n.href} href={n.href} className="hover:text-ink">
+                {n.label}
               </Link>
-              <Link href="/report" className="hover:text-ink">
-                Recovery report
-              </Link>
-              <Link href="/eval" className="hover:text-ink">
-                Accuracy
-              </Link>
-            </nav>
-            <div className="ml-auto flex flex-wrap items-center gap-3 text-sm text-ink-soft">
-              <span>
-                Demo clock: <span className="font-semibold text-ink">{clock}</span>
-              </span>
-              <form action={advanceClock}>
-                <input type="hidden" name="days" value="8" />
-                <button className="rounded border border-grid px-2.5 py-1 hover:border-ink hover:text-ink">Skip 8 business days</button>
-              </form>
-              <form action={reset}>
-                <button className="rounded px-2.5 py-1 hover:text-ink">Reset demo</button>
-              </form>
-            </div>
+            ))}
+          </nav>
+          <div className="ml-auto flex items-center gap-5 font-mono text-xs text-ink-soft">
+            <span>{clock}</span>
+            <form action={advanceClock}>
+              <input type="hidden" name="days" value="8" />
+              <button className="hover:text-ink">Skip 8 business days</button>
+            </form>
+            <form action={reset}>
+              <button className="hover:text-ink">Reset demo</button>
+            </form>
           </div>
-          <p className="mx-auto max-w-6xl px-5 pb-3 text-xs text-ink-soft">
-            Sample data: 50 seeded trips and one joined from Ramp&apos;s demo sandbox. Not real travelers. Flight status for sandbox trips by{" "}
-            {/* AeroDataBox's free plan requires a credit link that sends a referrer, so no noreferrer. */}
-            <a href="https://aerodatabox.com/" target="_blank" rel="noopener" className="underline hover:text-ink">AeroDataBox</a>.
-          </p>
         </header>
-        <main className="mx-auto max-w-6xl px-5 py-8">{children}</main>
+        <main className="mx-auto w-full max-w-6xl flex-1 px-6 pb-24 pt-10">{children}</main>
+        <footer className="mx-auto w-full max-w-6xl px-6 pb-8 font-mono text-xs text-ink-soft">
+          Seeded sample data, not real travelers. Flight status by{" "}
+          {/* AeroDataBox's free plan requires a credit link that sends a referrer, so no noreferrer. */}
+          <a href="https://aerodatabox.com/" target="_blank" rel="noopener" className="underline hover:text-ink">
+            AeroDataBox
+          </a>
+          .
+        </footer>
       </body>
     </html>
   );
